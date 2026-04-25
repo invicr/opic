@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OPIC Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3f4f6;
+        --panel: #ffffff;
+        --ink: #111827;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --line-strong: #d1d5db;
+        --brand: #111827;
+        --brand-soft: #f3f4f6;
+        --accent-soft: #eef2ff;
+        --radius-lg: 16px;
+        --radius-md: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Manrope", "Noto Sans KR", sans-serif;
+      }
+
+      .app-shell {
+        width: min(100% - 20px, 100%);
+        margin: 10px auto 24px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+      }
+
+      .sidebar,
+      .detail,
+      .player {
+        padding: 14px;
+      }
+
+      .detail {
+        background: transparent;
+        border: 0;
+        padding: 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--brand-soft);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .section-label {
+        margin: 0 0 10px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .theme-list,
+      .story-list,
+      .tip-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .theme-card,
+      .segment button,
+      .chip,
+      .nav-button {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .theme-card {
+        width: 100%;
+        text-align: left;
+        border-radius: 999px;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: border-color 160ms ease, background 160ms ease;
+      }
+
+      .theme-card:hover,
+      .segment button:hover,
+      .nav-button:hover {
+        border-color: var(--line-strong);
+      }
+
+      .theme-card.active,
+      .segment button.active {
+        background: var(--brand);
+        color: #fff;
+        border-color: var(--brand);
+      }
+
+      .theme-card.active {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--line-strong);
+      }
+
+      .theme-card.coming-soon {
+        opacity: 0.6;
+      }
+
+      .card-title {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .badge-row {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        padding: 5px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .detail-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: start;
+        padding: 4px 2px 0;
+      }
+
+      .header-copy {
+        font-size: 22px;
+        line-height: 1.45;
+        color: var(--ink);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .toolbar {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .segment {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        padding: 4px;
+        border-radius: 10px;
+        background: #f9fafb;
+        border: 1px solid var(--line);
+        width: 100%;
+      }
+
+      .segment button,
+      .nav-button {
+        border-radius: 8px;
+        padding: 11px 10px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .segment button {
+        color: var(--muted);
+        background: transparent;
+        border-color: transparent;
+      }
+
+      .transport {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .script-block {
+        margin-top: 16px;
+      }
+
+      .section-block,
+      .fold-section {
+        margin-top: 14px;
+      }
+
+      .section-block h3,
+      .fold-summary {
+        margin-bottom: 8px;
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .story-item,
+      .tip-item {
+        display: flex;
+        gap: 12px;
+        align-items: start;
+        padding: 10px 12px;
+        border-radius: var(--radius-md);
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+
+      .story-item-number {
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: var(--brand-soft);
+        color: var(--ink);
+        font-weight: 700;
+        flex: none;
+      }
+
+      .story-item p,
+      .tip-item p {
+        line-height: 1.55;
+      }
+
+      .script-list {
+        display: grid;
+        gap: 0;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      .line-card {
+        padding: 18px 18px 20px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .line-card:last-child {
+        border-bottom: 0;
+      }
+
+      .line-card .en {
+        font-size: 21px;
+        line-height: 1.72;
+        letter-spacing: -0.01em;
+      }
+
+      .line-card .ko {
+        margin-top: 10px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 21px;
+      }
+
+      .line-card .mix {
+        font-size: 18px;
+        line-height: 1.85;
+      }
+
+      .line-card .mix-en {
+        font-weight: 600;
+      }
+
+      .line-card .mix-ko {
+        color: var(--muted);
+        display: inline-block;
+        margin-top: 8px;
+        font-size: inherit;
+      }
+
+      .player {
+        position: sticky;
+        bottom: 0;
+        top: auto;
+        z-index: 20;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -10px 30px rgba(17, 24, 39, 0.12);
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+      }
+
+      .player-panel {
+        padding: 0;
+        color: var(--ink);
+      }
+
+      .player-top {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .audio-visual {
+        margin-top: 0;
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+      }
+
+      .track-name {
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .time-row,
+      .slider-row,
+      .toggle-row {
+        margin-top: 8px;
+      }
+
+      .time-row {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--brand);
+      }
+
+      .toggle-row,
+      .speed-row {
+        display: grid;
+        gap: 10px;
+      }
+
+      .toggle-row {
+        display: none;
+      }
+
+      .switch {
+        appearance: none;
+        width: 52px;
+        height: 30px;
+        border-radius: 999px;
+        background: #d1d5db;
+        position: relative;
+        cursor: pointer;
+        transition: background 180ms ease;
+      }
+
+      .switch::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: #fff;
+        transition: transform 180ms ease;
+      }
+
+      .switch:checked {
+        background: var(--brand);
+      }
+
+      .switch:checked::after {
+        transform: translateX(22px);
+      }
+
+      .speed-row {
+        margin-top: 8px;
+      }
+
+      .speed-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      audio {
+        width: 100%;
+        margin-top: 6px;
+      }
+
+      .empty {
+        padding: 16px;
+        border-radius: var(--radius-md);
+        background: #fafafa;
+        border: 1px dashed var(--line-strong);
+        color: var(--muted);
+      }
+
+      .sidebar {
+        order: 1;
+      }
+
+      .detail {
+        order: 2;
+      }
+
+      .player {
+        order: 3;
+      }
+
+      .theme-list {
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(120px, auto);
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+      }
+
+      .theme-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .theme-card {
+        scroll-snap-align: start;
+      }
+
+      .compact-meta {
+        display: flex;
+        justify-content: flex-start;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .compact-actions {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .compact-actions .nav-button {
+        flex: 1;
+      }
+
+      .script-actions {
+        margin-top: 12px;
+      }
+
+      .player-mini {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .player-mini-meta {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .player-mini-label {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .segment button.active {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+        box-shadow: 0 1px 2px rgba(17, 24, 39, 0.18);
+      }
+
+      .fold-section {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      .fold-section[open] .fold-summary {
+        margin-bottom: 8px;
+      }
+
+      .fold-summary {
+        list-style: none;
+        cursor: pointer;
+        margin-bottom: 0;
+      }
+
+      .fold-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .fold-summary::after {
+        content: "열기";
+        float: right;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .fold-section[open] .fold-summary::after {
+        content: "닫기";
+      }
+
+      .mobile-safe-space {
+        height: 132px;
+      }
+
+      @media (min-width: 981px) {
+        .app-shell {
+          width: min(1240px, calc(100% - 32px));
+          margin: 24px auto 40px;
+          grid-template-columns: 240px minmax(0, 1fr) 300px;
+          gap: 16px;
+        }
+
+        .sidebar,
+        .player {
+          padding: 22px;
+        }
+
+        .detail {
+          padding: 0;
+        }
+
+        .sidebar {
+          order: 1;
+        }
+
+        .player {
+          order: 3;
+          position: sticky;
+          top: 24px;
+          bottom: auto;
+          border-radius: var(--radius-lg);
+          box-shadow: none;
+        }
+
+        .detail {
+          order: 2;
+        }
+
+        .theme-list {
+          grid-auto-flow: row;
+          grid-auto-columns: auto;
+          overflow: visible;
+          scroll-snap-type: none;
+        }
+
+        .detail-header {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .toolbar {
+          margin-top: 18px;
+          flex-direction: row;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .segment {
+          width: auto;
+          display: inline-flex;
+          grid-template-columns: none;
+        }
+
+        .segment button,
+        .nav-button {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+
+        .transport {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .section-block {
+          margin-top: 28px;
+        }
+
+        .script-block {
+          margin-top: 22px;
+        }
+
+        .script-actions {
+          margin-top: 16px;
+        }
+
+        .fold-section {
+          margin-top: 20px;
+          padding-top: 16px;
+        }
+
+        .fold-section[open] .fold-summary {
+          margin-bottom: 12px;
+        }
+
+        .line-card .en {
+          font-size: 24px;
+        }
+
+        .line-card .ko {
+          font-size: 24px;
+        }
+
+        .line-card .mix {
+          font-size: 20px;
+        }
+
+        .player-title {
+          font-size: 14px;
+        }
+
+        audio {
+          margin-top: 18px;
+        }
+
+        .mobile-safe-space {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="panel sidebar">
+        <div class="theme-list" id="themeList"></div>
+      </aside>
+
+      <section class="panel detail">
+        <div class="detail-header">
+          <div class="compact-meta">
+            <span class="eyebrow" id="detailTag">Theme</span>
+            <div class="badge-row" id="detailBadges"></div>
+          </div>
+          <p class="header-copy" id="actualPrompt">질문을 불러오는 중입니다.</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="compact-actions">
+            <button class="nav-button" id="prevQuestion">이전 문제</button>
+            <button class="nav-button" id="nextQuestion">다음 문제</button>
+          </div>
+        </div>
+
+        <details class="fold-section" open>
+          <summary class="fold-summary">Storyline</summary>
+          <div class="story-list" id="storyList"></div>
+        </details>
+
+        <div class="script-block">
+          <div class="segment" id="viewMode"></div>
+          <div class="script-list" id="scriptList"></div>
+          <div class="compact-actions script-actions">
+            <button class="nav-button" id="prevQuestionBottom">이전 문제</button>
+            <button class="nav-button" id="nextQuestionBottom">다음 문제</button>
+          </div>
+        </div>
+
+        <details class="fold-section">
+          <summary class="fold-summary">Expression Focus</summary>
+          <div class="tip-list" id="tipList"></div>
+        </details>
+
+        <div class="mobile-safe-space"></div>
+      </section>
+
+      <aside class="panel player">
+        <div class="player-panel">
+          <div class="audio-visual">
+            <div class="player-mini">
+              <div class="player-mini-meta">
+                <div class="player-mini-label">Loop Player</div>
+                <div class="track-name" id="trackName">오디오 준비 중...</div>
+              </div>
+              <input class="switch" id="loopToggle" type="checkbox" checked />
+            </div>
+            <div class="time-row">
+              <span id="currentTime">0:00</span>
+              <span id="duration">0:00</span>
+            </div>
+            <div class="slider-row">
+              <input id="progress" type="range" min="0" max="100" value="0" />
+            </div>
+            <audio id="audio" controls preload="metadata"></audio>
+          </div>
+
+          <div class="speed-row">
+            <div class="speed-label">
+              <span>Playback Speed</span>
+              <strong id="speedValue">1.0x</strong>
+            </div>
+            <input id="speedControl" type="range" min="0.7" max="1.2" step="0.05" value="1.0" />
+          </div>
+
+          <input id="autoplayToggle" type="checkbox" checked hidden />
+
+        </div>
+      </aside>
+    </main>
+
+    <script>
+      const studyLibrary = [
+        {
+          id: "public-transportation",
+          title: "대중교통",
+          questions: [
+            {
+              id: "city-transit-description",
+              title: "도시 대중교통 묘사",
+              badge: "묘사형",
+              scriptFile: "themes/transportation/describe/q1/script.txt",
+              audioFile: "themes/transportation/describe/q1/audio.wav",
+              scriptInline: `## 대중교통 묘사형 - 최종 정리
+
+---
+
+### 📋 실제 시험 질문
+**"당신이 사는 도시의 대중교통에 대해 말해보시오."**
+
+---
+
+### 🗂️ 스토리라인
+1. 집 근처 버스 있고 걸어서 15분에 지하철역
+2. 보통은 버스, 시간 맞춰야 할 땐 지하철
+3. 회사 갈 땐 셔틀버스 이용
+4. 전반적으로 편리하지만 사람 많을 땐 복잡함
+
+---
+
+### 🗣️ 답변
+
+Um, so I live in a city where public transportation is pretty convenient, like, overall.
+음, 저는 대중교통이 전반적으로 꽤 편리한 도시에 살고 있어요.
+
+There's a bus stop right near my house, and you know, the subway station is about a 15-minute walk away.
+집 근처에 버스 정류장이 있고, 지하철역은 걸어서 15분 정도 거리에 있어요.
+
+I usually take the bus, but like, when I really need to be on time, I take the subway instead.
+보통은 버스를 타는 편인데, 시간을 딱 맞춰야 할 때는 지하철을 타요.
+
+And for work, you know, I actually take a company shuttle bus — which is honestly the best part of my commute!
+그리고 회사 갈 때는 셔틀버스를 타는데, 솔직히 그게 출퇴근에서 제일 좋은 부분이에요!
+
+But honestly, the only downside is that it gets really crowded sometimes, and that can be pretty overwhelming.
+근데 솔직히 가끔 사람이 너무 많으면 좀 힘들긴 해요.
+
+So yeah, it's not perfect, but I'd say it's pretty good overall!
+완벽하진 않지만, 전반적으로 꽤 좋은 것 같아요!
+
+---
+
+### 💡 추가된 감정 표현
+- **the best part of my commute** → 출퇴근에서 제일 좋은 부분 감정 강조
+- **pretty overwhelming** → 힘들다는 감정 자연스러운 표현
+- **it's not perfect, but** → 균형잡힌 마무리로 자연스럽게 👍`
+            }
+          ]
+        },
+        {
+          id: "home-neighborhood",
+          title: "집 / 동네",
+          comingSoon: true,
+          questions: []
+        },
+        {
+          id: "travel-leisure",
+          title: "여행 / 여가",
+          comingSoon: true,
+          questions: []
+        }
+      ];
+
+      const state = {
+        themeIndex: 0,
+        questionIndex: 0,
+        viewMode: "mixed",
+        scriptCache: new Map(),
+        hasInteracted: false
+      };
+
+      const themeList = document.getElementById("themeList");
+      const detailTag = document.getElementById("detailTag");
+      const detailBadges = document.getElementById("detailBadges");
+      const actualPrompt = document.getElementById("actualPrompt");
+      const storyList = document.getElementById("storyList");
+      const scriptList = document.getElementById("scriptList");
+      const tipList = document.getElementById("tipList");
+      const viewMode = document.getElementById("viewMode");
+      const prevQuestion = document.getElementById("prevQuestion");
+      const nextQuestion = document.getElementById("nextQuestion");
+      const prevQuestionBottom = document.getElementById("prevQuestionBottom");
+      const nextQuestionBottom = document.getElementById("nextQuestionBottom");
+      const audio = document.getElementById("audio");
+      const trackName = document.getElementById("trackName");
+      const currentTime = document.getElementById("currentTime");
+      const duration = document.getElementById("duration");
+      const progress = document.getElementById("progress");
+      const loopToggle = document.getElementById("loopToggle");
+      const autoplayToggle = document.getElementById("autoplayToggle");
+      const speedControl = document.getElementById("speedControl");
+      const speedValue = document.getElementById("speedValue");
+
+      const viewModes = [
+        { key: "en", label: "영문" },
+        { key: "ko", label: "국문" },
+        { key: "mixed", label: "영한 병기" }
+      ];
+
+      function getActiveTheme() {
+        return studyLibrary[state.themeIndex];
+      }
+
+      function getActiveQuestion() {
+        const theme = getActiveTheme();
+        return theme.questions[state.questionIndex];
+      }
+
+      function formatTime(seconds) {
+        if (!Number.isFinite(seconds)) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60)
+          .toString()
+          .padStart(2, "0");
+        return `${mins}:${secs}`;
+      }
+
+      function parseScript(raw) {
+        const lines = raw.split(/\r?\n/);
+        const data = {
+          title: "",
+          prompt: "",
+          storyline: [],
+          answerPairs: [],
+          tips: []
+        };
+
+        let currentSection = "";
+        let pendingEnglish = null;
+
+        for (const originalLine of lines) {
+          const line = originalLine.trim();
+          if (!line || line === "---") continue;
+
+          if (line.startsWith("## ")) {
+            data.title = line.replace(/^##\s*/, "").trim();
+            continue;
+          }
+
+          if (line.startsWith("### ")) {
+            if (line.includes("실제 시험 질문")) currentSection = "prompt";
+            else if (line.includes("스토리라인")) currentSection = "storyline";
+            else if (line.includes("답변")) currentSection = "answer";
+            else if (line.includes("감정 표현")) currentSection = "tips";
+            continue;
+          }
+
+          if (currentSection === "prompt" && line.startsWith("**") && line.endsWith("**")) {
+            data.prompt = line.replace(/\*\*/g, "").trim();
+            continue;
+          }
+
+          if (currentSection === "storyline" && /^\d+\./.test(line)) {
+            data.storyline.push(line.replace(/^\d+\.\s*/, "").trim());
+            continue;
+          }
+
+          if (currentSection === "answer") {
+            if (pendingEnglish === null) {
+              pendingEnglish = line;
+            } else {
+              data.answerPairs.push({ en: pendingEnglish, ko: line });
+              pendingEnglish = null;
+            }
+            continue;
+          }
+
+          if (currentSection === "tips" && line.startsWith("- ")) {
+            data.tips.push(line.replace(/^- /, "").trim());
+          }
+        }
+
+        if (pendingEnglish) {
+          data.answerPairs.push({ en: pendingEnglish, ko: "" });
+        }
+
+        return data;
+      }
+
+      async function loadScript(question) {
+        if (state.scriptCache.has(question.scriptFile)) {
+          return state.scriptCache.get(question.scriptFile);
+        }
+
+        try {
+          const response = await fetch(question.scriptFile);
+          if (!response.ok) {
+            throw new Error(`Failed to load ${question.scriptFile}`);
+          }
+
+          const parsed = parseScript(await response.text());
+          state.scriptCache.set(question.scriptFile, parsed);
+          return parsed;
+        } catch (error) {
+          if (!question.scriptInline) {
+            throw error;
+          }
+
+          const parsed = parseScript(question.scriptInline);
+          state.scriptCache.set(question.scriptFile, parsed);
+          return parsed;
+        }
+      }
+
+      function renderThemes() {
+        themeList.innerHTML = "";
+        studyLibrary.forEach((theme, index) => {
+          const button = document.createElement("button");
+          button.className = `theme-card${index === state.themeIndex ? " active" : ""}${theme.comingSoon ? " coming-soon" : ""}`;
+          button.type = "button";
+          button.disabled = Boolean(theme.comingSoon);
+          button.innerHTML = `<div class="card-title">${theme.title}</div>`;
+          button.addEventListener("click", () => {
+            state.themeIndex = index;
+            state.questionIndex = 0;
+            renderAll();
+          });
+          themeList.appendChild(button);
+        });
+      }
+
+      function renderViewMode() {
+        viewMode.innerHTML = "";
+        viewModes.forEach((mode) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = mode.label;
+          if (mode.key === state.viewMode) {
+            button.classList.add("active");
+          }
+          button.addEventListener("click", () => {
+            state.viewMode = mode.key;
+            renderViewMode();
+            renderScript(state.latestScript);
+          });
+          viewMode.appendChild(button);
+        });
+      }
+
+      function renderStoryline(items) {
+        storyList.innerHTML = "";
+        if (!items.length) {
+          storyList.innerHTML = `<div class="empty">스토리라인이 없습니다.</div>`;
+          return;
+        }
+
+        items.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.className = "story-item";
+          div.innerHTML = `
+            <div class="story-item-number">${index + 1}</div>
+            <p>${item}</p>
+          `;
+          storyList.appendChild(div);
+        });
+      }
+
+      function renderScript(script) {
+        scriptList.innerHTML = "";
+
+        if (!script.answerPairs.length) {
+          scriptList.innerHTML = `<div class="empty">답변 스크립트가 없습니다.</div>`;
+          return;
+        }
+
+        script.answerPairs.forEach((pair) => {
+          const card = document.createElement("article");
+          card.className = "line-card";
+
+          if (state.viewMode === "en") {
+            const en = document.createElement("p");
+            en.className = "en";
+            en.textContent = pair.en;
+            card.appendChild(en);
+          }
+
+          if (state.viewMode === "ko") {
+            const ko = document.createElement("p");
+            ko.className = "ko";
+            ko.textContent = pair.ko;
+            card.appendChild(ko);
+          }
+
+          if (state.viewMode === "mixed") {
+            const mixed = document.createElement("p");
+            mixed.className = "mix";
+            mixed.innerHTML = `<span class="mix-en">${pair.en}</span><br /><span class="mix-ko">${pair.ko}</span>`;
+            card.appendChild(mixed);
+          }
+
+          scriptList.appendChild(card);
+        });
+      }
+
+      function renderTips(items) {
+        tipList.innerHTML = "";
+        if (!items.length) {
+          tipList.innerHTML = `<div class="empty">표현 포인트가 없습니다.</div>`;
+          return;
+        }
+
+        items.forEach((item) => {
+          const div = document.createElement("div");
+          div.className = "tip-item";
+          div.innerHTML = `<p>${item}</p>`;
+          tipList.appendChild(div);
+        });
+      }
+
+      async function renderDetail() {
+        const theme = getActiveTheme();
+        const question = getActiveQuestion();
+
+        detailTag.textContent = theme.title;
+        detailBadges.innerHTML = `
+          <span class="chip">${question.badge}</span>
+        `;
+
+        try {
+          const script = await loadScript(question);
+          state.latestScript = script;
+          actualPrompt.textContent = (script.prompt || "질문 정보가 없습니다.").replace(/^"(.*)"$/, "$1");
+          renderStoryline(script.storyline);
+          renderScript(script);
+          renderTips(script.tips);
+        } catch (error) {
+          actualPrompt.textContent = "스크립트를 불러오지 못했습니다.";
+          storyList.innerHTML = `<div class="empty">${error.message}</div>`;
+          scriptList.innerHTML = `<div class="empty">${error.message}</div>`;
+          tipList.innerHTML = `<div class="empty">${error.message}</div>`;
+        }
+      }
+
+      async function renderPlayer() {
+        const question = getActiveQuestion();
+        trackName.textContent = question.audioFile;
+        audio.src = encodeURI(question.audioFile);
+        audio.loop = loopToggle.checked;
+        audio.playbackRate = Number(speedControl.value);
+        progress.value = 0;
+        currentTime.textContent = "0:00";
+        duration.textContent = "0:00";
+
+        if (autoplayToggle.checked && state.hasInteracted) {
+          try {
+            await audio.play();
+          } catch (_error) {
+            // Ignore autoplay failures caused by browser policy.
+          }
+        }
+      }
+
+      async function renderAll() {
+        renderThemes();
+        renderViewMode();
+        prevQuestion.disabled = state.questionIndex === 0;
+        prevQuestionBottom.disabled = state.questionIndex === 0;
+        nextQuestion.disabled =
+          state.questionIndex >= getActiveTheme().questions.length - 1;
+        nextQuestionBottom.disabled =
+          state.questionIndex >= getActiveTheme().questions.length - 1;
+        await renderDetail();
+        await renderPlayer();
+      }
+
+      function goToPreviousQuestion() {
+        if (state.questionIndex > 0) {
+          state.questionIndex -= 1;
+          renderAll();
+        }
+      }
+
+      function goToNextQuestion() {
+        const lastIndex = getActiveTheme().questions.length - 1;
+        if (state.questionIndex < lastIndex) {
+          state.questionIndex += 1;
+          renderAll();
+        }
+      }
+
+      prevQuestion.addEventListener("click", goToPreviousQuestion);
+      nextQuestion.addEventListener("click", goToNextQuestion);
+      prevQuestionBottom.addEventListener("click", goToPreviousQuestion);
+      nextQuestionBottom.addEventListener("click", goToNextQuestion);
+
+      loopToggle.addEventListener("change", () => {
+        audio.loop = loopToggle.checked;
+      });
+
+      autoplayToggle.addEventListener("change", () => {
+        state.hasInteracted = true;
+      });
+
+      speedControl.addEventListener("input", () => {
+        const speed = Number(speedControl.value);
+        audio.playbackRate = speed;
+        speedValue.textContent = `${speed.toFixed(2).replace(/\.00$/, ".0")}x`;
+      });
+
+      audio.addEventListener("timeupdate", () => {
+        currentTime.textContent = formatTime(audio.currentTime);
+        if (audio.duration) {
+          progress.value = `${(audio.currentTime / audio.duration) * 100}`;
+        }
+      });
+
+      audio.addEventListener("loadedmetadata", () => {
+        duration.textContent = formatTime(audio.duration);
+      });
+
+      progress.addEventListener("input", () => {
+        if (audio.duration) {
+          audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+        }
+      });
+
+      ["click", "touchstart", "keydown"].forEach((eventName) => {
+        document.addEventListener(
+          eventName,
+          () => {
+            state.hasInteracted = true;
+          },
+          { once: true }
+        );
+      });
+
+      renderAll();
+    </script>
+  </body>
+</html>
