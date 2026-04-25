@@ -47,10 +47,13 @@
         font-family: "Manrope", "Noto Sans KR", sans-serif;
       }
 
+      body {
+        padding: 10px 10px 24px;
+      }
+
       .app-shell {
-        width: calc(100vw - 20px);
-        max-width: 100%;
-        margin: 10px auto 24px;
+        width: 100%;
+        margin: 0;
         display: grid;
         grid-template-columns: 1fr;
         gap: 10px;
@@ -592,6 +595,10 @@
           margin: 24px auto 40px;
           grid-template-columns: 240px minmax(0, 1fr) 300px;
           gap: 16px;
+        }
+
+        body {
+          padding: 0;
         }
 
         .sidebar,
