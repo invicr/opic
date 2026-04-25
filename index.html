@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>OPIC Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,6 +29,11 @@
         box-sizing: border-box;
       }
 
+      html {
+        -webkit-text-size-adjust: none;
+        text-size-adjust: none;
+      }
+
       html,
       body {
         margin: 0;
@@ -36,8 +41,6 @@
         background: var(--bg);
         color: var(--ink);
         font-family: "Manrope", "Noto Sans KR", sans-serif;
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
       }
 
       .app-shell {
