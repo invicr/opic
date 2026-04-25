@@ -56,3 +56,27 @@ themes/
 ```
 
 그 구조로 가면 `studyLibrary`의 `scriptFile`과 `audioFile` 경로만 추가해서 문항을 계속 늘릴 수 있습니다.
+
+## Google AI Studio Prompt
+
+### Scene
+
+OPIc speaking practice for a beginner English learner.  
+The speaker is answering an OPIc question naturally, but at a very slow learner-friendly pace for shadowing practice.
+
+### Sample Context
+
+Read this very slowly and clearly for pronunciation shadowing practice.
+
+Speak at about 80-90% of normal conversational speed.  
+Use long pauses between sentences (1-2 seconds).  
+Pause naturally within long sentences by phrase chunks so I can repeat after each chunk.  
+Pronounce every word clearly and do not reduce sounds too much.  
+Use a warm, calm conversational voice.
+
+### Important
+
+- Much slower than normal conversation
+- Slower than typical audiobook narration
+- One thought group at a time
+- Leave enough silence for repetition practice
