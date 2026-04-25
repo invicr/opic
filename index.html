@@ -82,12 +82,15 @@
       .eyebrow {
         display: inline-flex;
         align-items: center;
-        padding: 6px 10px;
+        justify-content: center;
+        padding: 4px 9px;
         border-radius: 999px;
         background: var(--brand-soft);
         color: var(--muted);
-        font-size: 12px;
+        font-size: 11px;
+        line-height: 1.2;
         font-weight: 700;
+        white-space: nowrap;
       }
 
       h1,
@@ -126,9 +129,9 @@
 
       .theme-card {
         width: 100%;
-        text-align: left;
+        text-align: center;
         border-radius: 999px;
-        padding: 12px 16px;
+        padding: 8px 12px;
         cursor: pointer;
         transition: border-color 160ms ease, background 160ms ease;
       }
@@ -157,7 +160,7 @@
       }
 
       .card-title {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
         line-height: 1.4;
       }
@@ -166,13 +169,6 @@
         display: flex;
         gap: 6px;
         flex-wrap: wrap;
-      }
-
-      .chip {
-        padding: 5px 8px;
-        border-radius: 999px;
-        font-size: 11px;
-        font-weight: 600;
       }
 
       .detail-header {
@@ -634,9 +630,23 @@
           scroll-snap-type: none;
         }
 
+        .theme-card {
+          text-align: left;
+          padding: 12px 16px;
+        }
+
+        .card-title {
+          font-size: 14px;
+        }
+
         .detail-header {
           flex-direction: column;
           gap: 16px;
+        }
+
+        .eyebrow {
+          padding: 6px 10px;
+          font-size: 12px;
         }
 
         .header-copy {
@@ -735,7 +745,7 @@
         <div class="detail-header">
           <div class="compact-meta">
             <span class="eyebrow" id="detailTag">Theme</span>
-            <div class="badge-row" id="detailBadges"></div>
+            <span class="eyebrow" id="detailType">Type</span>
           </div>
           <p class="header-copy" id="actualPrompt">질문을 불러오는 중입니다.</p>
         </div>
@@ -1160,7 +1170,7 @@ So yeah, I never went back to that restaurant again — never!
 
       const themeList = document.getElementById("themeList");
       const detailTag = document.getElementById("detailTag");
-      const detailBadges = document.getElementById("detailBadges");
+      const detailType = document.getElementById("detailType");
       const actualPrompt = document.getElementById("actualPrompt");
       const questionNav = document.getElementById("questionNav");
       const storyList = document.getElementById("storyList");
@@ -1419,9 +1429,7 @@ So yeah, I never went back to that restaurant again — never!
         const question = getActiveQuestion();
 
         detailTag.textContent = theme.title;
-        detailBadges.innerHTML = `
-          <span class="chip">${question.badge}</span>
-        `;
+        detailType.textContent = question.badge;
 
         try {
           const script = await loadScript(question);
