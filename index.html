@@ -351,11 +351,12 @@
       }
 
       .player {
-        position: sticky;
-        bottom: 0;
-        top: auto;
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
         z-index: 20;
-        border-radius: 18px 18px 0 0;
+        border-radius: 18px;
         box-shadow: 0 -10px 30px rgba(17, 24, 39, 0.12);
         background: rgba(255, 255, 255, 0.94);
         backdrop-filter: blur(14px);
@@ -390,17 +391,8 @@
         text-overflow: ellipsis;
       }
 
-      .time-row,
-      .slider-row,
       .toggle-row {
         margin-top: 8px;
-      }
-
-      .time-row {
-        display: flex;
-        justify-content: space-between;
-        color: var(--muted);
-        font-size: 13px;
       }
 
       input[type="range"] {
@@ -451,6 +443,21 @@
 
       .speed-row {
         margin-top: 8px;
+      }
+
+      .player-fold {
+        margin-top: 10px;
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+      }
+
+      .player-fold .fold-summary {
+        margin-bottom: 0;
+        font-size: 12px;
+      }
+
+      .player-fold[open] .fold-summary {
+        margin-bottom: 10px;
       }
 
       .speed-label {
@@ -581,7 +588,7 @@
       }
 
       .mobile-safe-space {
-        height: 132px;
+        height: 170px;
       }
 
       @media (min-width: 981px) {
@@ -613,6 +620,8 @@
         .player {
           order: 3;
           position: sticky;
+          left: auto;
+          right: auto;
           top: 24px;
           bottom: auto;
           border-radius: var(--radius-lg);
@@ -785,28 +794,24 @@
           <div class="audio-visual">
             <div class="player-mini">
               <div class="player-mini-meta">
-                <div class="player-mini-label">Loop Player</div>
+                <div class="player-mini-label">Audio Player</div>
                 <div class="track-name" id="trackName">오디오 준비 중...</div>
               </div>
               <input class="switch" id="loopToggle" type="checkbox" checked />
             </div>
-            <div class="time-row">
-              <span id="currentTime">0:00</span>
-              <span id="duration">0:00</span>
-            </div>
-            <div class="slider-row">
-              <input id="progress" type="range" min="0" max="100" value="0" />
-            </div>
             <audio id="audio" controls preload="metadata"></audio>
           </div>
 
-          <div class="speed-row">
-            <div class="speed-label">
-              <span>Playback Speed</span>
-              <strong id="speedValue">1.0x</strong>
+          <details class="player-fold">
+            <summary class="fold-summary">Playback Speed</summary>
+            <div class="speed-row">
+              <div class="speed-label">
+                <span>Speed</span>
+                <strong id="speedValue">1.0x</strong>
+              </div>
+              <input id="speedControl" type="range" min="0.7" max="1.2" step="0.05" value="1.0" />
             </div>
-            <input id="speedControl" type="range" min="0.7" max="1.2" step="0.05" value="1.0" />
-          </div>
+          </details>
 
           <input id="autoplayToggle" type="checkbox" checked hidden />
 
@@ -973,12 +978,6 @@ So yeah, getting around the city is just way more convenient now than it used to
 - **it's kind of crazy** → 신기하다는 감정 자연스러운 표현 👍`
             }
           ]
-        },
-        {
-          id: "home-neighborhood",
-          title: "집 / 동네",
-          comingSoon: true,
-          questions: []
         },
         {
           id: "cafe",
@@ -1275,7 +1274,7 @@ So yeah, cafes have just become way more convenient than they used to be - I lov
         },
         {
           id: "korean-food",
-          title: "한국 음식",
+          title: "음식",
           questions: [
             {
               id: "famous-korean-food-chicken",
@@ -1444,12 +1443,6 @@ So yeah, I never went back to that restaurant again — never!
 - **never! 반복** → 강조하는 마무리 👍`
             }
           ]
-        },
-        {
-          id: "travel-leisure",
-          title: "여행 / 여가",
-          comingSoon: true,
-          questions: []
         }
       ];
 
@@ -1476,9 +1469,6 @@ So yeah, I never went back to that restaurant again — never!
       const nextQuestionBottom = document.getElementById("nextQuestionBottom");
       const audio = document.getElementById("audio");
       const trackName = document.getElementById("trackName");
-      const currentTime = document.getElementById("currentTime");
-      const duration = document.getElementById("duration");
-      const progress = document.getElementById("progress");
       const loopToggle = document.getElementById("loopToggle");
       const autoplayToggle = document.getElementById("autoplayToggle");
       const speedControl = document.getElementById("speedControl");
@@ -1497,15 +1487,6 @@ So yeah, I never went back to that restaurant again — never!
       function getActiveQuestion() {
         const theme = getActiveTheme();
         return theme.questions[state.questionIndex];
-      }
-
-      function formatTime(seconds) {
-        if (!Number.isFinite(seconds)) return "0:00";
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60)
-          .toString()
-          .padStart(2, "0");
-        return `${mins}:${secs}`;
       }
 
       function parseScript(raw) {
@@ -1754,9 +1735,6 @@ So yeah, I never went back to that restaurant again — never!
         audio.src = encodeURI(question.audioFile);
         audio.loop = loopToggle.checked;
         audio.playbackRate = Number(speedControl.value);
-        progress.value = 0;
-        currentTime.textContent = "0:00";
-        duration.textContent = "0:00";
 
         if (autoplayToggle.checked && state.hasInteracted) {
           try {
@@ -1813,23 +1791,6 @@ So yeah, I never went back to that restaurant again — never!
         const speed = Number(speedControl.value);
         audio.playbackRate = speed;
         speedValue.textContent = `${speed.toFixed(2).replace(/\.00$/, ".0")}x`;
-      });
-
-      audio.addEventListener("timeupdate", () => {
-        currentTime.textContent = formatTime(audio.currentTime);
-        if (audio.duration) {
-          progress.value = `${(audio.currentTime / audio.duration) * 100}`;
-        }
-      });
-
-      audio.addEventListener("loadedmetadata", () => {
-        duration.textContent = formatTime(audio.duration);
-      });
-
-      progress.addEventListener("input", () => {
-        if (audio.duration) {
-          audio.currentTime = (Number(progress.value) / 100) * audio.duration;
-        }
       });
 
       ["click", "touchstart", "keydown"].forEach((eventName) => {
