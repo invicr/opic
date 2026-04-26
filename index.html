@@ -1534,7 +1534,7 @@ So yeah, I never went back to that restaurant again — never!
             if (line.includes("실제 시험 질문")) currentSection = "prompt";
             else if (line.includes("스토리라인")) currentSection = "storyline";
             else if (line.includes("답변")) currentSection = "answer";
-            else if (line.includes("감정 표현")) currentSection = "tips";
+            else if (line.includes("감정 표현") || line.includes("포인트")) currentSection = "tips";
             continue;
           }
 
@@ -1570,6 +1570,10 @@ So yeah, I never went back to that restaurant again — never!
         return data;
       }
 
+      function hasRenderableContent(script) {
+        return Boolean(script.prompt || script.storyline.length || script.answerPairs.length || script.tips.length);
+      }
+
       async function loadScript(question) {
         if (state.scriptCache.has(question.scriptFile)) {
           return state.scriptCache.get(question.scriptFile);
@@ -1582,6 +1586,11 @@ So yeah, I never went back to that restaurant again — never!
           }
 
           const parsed = parseScript(await response.text());
+          if (!hasRenderableContent(parsed) && question.scriptInline) {
+            const fallback = parseScript(question.scriptInline);
+            state.scriptCache.set(question.scriptFile, fallback);
+            return fallback;
+          }
           state.scriptCache.set(question.scriptFile, parsed);
           return parsed;
         } catch (error) {
