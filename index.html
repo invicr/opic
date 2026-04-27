@@ -1451,7 +1451,8 @@ So yeah, I never went back to that restaurant again — never!
         questionIndex: 0,
         viewMode: "mixed",
         scriptCache: new Map(),
-        hasInteracted: false
+        hasInteracted: false,
+        userPausedAudio: false
       };
 
       const themeList = document.getElementById("themeList");
@@ -1731,12 +1732,20 @@ So yeah, I never went back to that restaurant again — never!
 
       async function renderPlayer() {
         const question = getActiveQuestion();
+        const nextAudioSrc = encodeURI(question.audioFile);
+        const sourceChanged = audio.dataset.source !== nextAudioSrc;
+
         trackName.textContent = question.audioFile;
-        audio.src = encodeURI(question.audioFile);
         audio.loop = loopToggle.checked;
         audio.playbackRate = Number(speedControl.value);
 
-        if (autoplayToggle.checked && state.hasInteracted) {
+        if (sourceChanged) {
+          audio.src = nextAudioSrc;
+          audio.dataset.source = nextAudioSrc;
+          state.userPausedAudio = false;
+        }
+
+        if (sourceChanged && autoplayToggle.checked && state.hasInteracted && !state.userPausedAudio) {
           try {
             await audio.play();
           } catch (_error) {
@@ -1791,6 +1800,20 @@ So yeah, I never went back to that restaurant again — never!
         const speed = Number(speedControl.value);
         audio.playbackRate = speed;
         speedValue.textContent = `${speed.toFixed(2).replace(/\.00$/, ".0")}x`;
+      });
+
+      audio.addEventListener("pause", () => {
+        if (!audio.ended) {
+          state.userPausedAudio = true;
+        }
+      });
+
+      audio.addEventListener("play", () => {
+        state.userPausedAudio = false;
+      });
+
+      audio.addEventListener("ended", () => {
+        state.userPausedAudio = false;
       });
 
       ["click", "touchstart", "keydown"].forEach((eventName) => {
