@@ -1452,7 +1452,8 @@ So yeah, I never went back to that restaurant again — never!
         viewMode: "mixed",
         scriptCache: new Map(),
         hasInteracted: false,
-        userPausedAudio: false
+        userPausedAudio: false,
+        audioShouldResume: false
       };
 
       const themeList = document.getElementById("themeList");
@@ -1734,6 +1735,7 @@ So yeah, I never went back to that restaurant again — never!
         const question = getActiveQuestion();
         const nextAudioSrc = encodeURI(question.audioFile);
         const sourceChanged = audio.dataset.source !== nextAudioSrc;
+        const shouldAutoplay = autoplayToggle.checked && state.hasInteracted && state.audioShouldResume;
 
         trackName.textContent = question.audioFile;
         audio.loop = loopToggle.checked;
@@ -1742,10 +1744,9 @@ So yeah, I never went back to that restaurant again — never!
         if (sourceChanged) {
           audio.src = nextAudioSrc;
           audio.dataset.source = nextAudioSrc;
-          state.userPausedAudio = false;
         }
 
-        if (sourceChanged && autoplayToggle.checked && state.hasInteracted && !state.userPausedAudio) {
+        if (sourceChanged && shouldAutoplay) {
           try {
             await audio.play();
           } catch (_error) {
@@ -1805,15 +1806,18 @@ So yeah, I never went back to that restaurant again — never!
       audio.addEventListener("pause", () => {
         if (!audio.ended) {
           state.userPausedAudio = true;
+          state.audioShouldResume = false;
         }
       });
 
       audio.addEventListener("play", () => {
         state.userPausedAudio = false;
+        state.audioShouldResume = true;
       });
 
       audio.addEventListener("ended", () => {
         state.userPausedAudio = false;
+        state.audioShouldResume = false;
       });
 
       ["click", "touchstart", "keydown"].forEach((eventName) => {
