@@ -1904,7 +1904,10 @@ So yeah, I never went back to that restaurant again — never!
         scriptCache: new Map(),
         hasInteracted: false,
         userPausedAudio: false,
-        audioShouldResume: false
+        audioShouldResume: false,
+        pausedAudioTime: null,
+        pausedAudioSource: "",
+        resumeSyncTime: null
       };
 
       const themeList = document.getElementById("themeList");
@@ -2195,6 +2198,9 @@ So yeah, I never went back to that restaurant again — never!
         if (sourceChanged) {
           audio.src = nextAudioSrc;
           audio.dataset.source = nextAudioSrc;
+          state.pausedAudioTime = null;
+          state.pausedAudioSource = "";
+          state.resumeSyncTime = null;
         }
 
         if (sourceChanged && shouldAutoplay) {
@@ -2203,6 +2209,19 @@ So yeah, I never went back to that restaurant again — never!
           } catch (_error) {
             // Ignore autoplay failures caused by browser policy.
           }
+        }
+      }
+
+      function syncResumePosition() {
+        const sameSource = state.pausedAudioSource && state.pausedAudioSource === audio.dataset.source;
+        const desiredTime = state.resumeSyncTime ?? state.pausedAudioTime;
+
+        if (!sameSource || !Number.isFinite(desiredTime)) {
+          return;
+        }
+
+        if (Math.abs(audio.currentTime - desiredTime) > 0.2) {
+          audio.currentTime = desiredTime;
         }
       }
 
@@ -2258,17 +2277,29 @@ So yeah, I never went back to that restaurant again — never!
         if (!audio.ended) {
           state.userPausedAudio = true;
           state.audioShouldResume = false;
+          state.pausedAudioTime = audio.currentTime;
+          state.pausedAudioSource = audio.dataset.source || "";
+          state.resumeSyncTime = audio.currentTime;
         }
       });
 
       audio.addEventListener("play", () => {
+        syncResumePosition();
         state.userPausedAudio = false;
         state.audioShouldResume = true;
+      });
+
+      audio.addEventListener("playing", () => {
+        syncResumePosition();
+        state.resumeSyncTime = null;
       });
 
       audio.addEventListener("ended", () => {
         state.userPausedAudio = false;
         state.audioShouldResume = false;
+        state.pausedAudioTime = null;
+        state.pausedAudioSource = "";
+        state.resumeSyncTime = null;
       });
 
       ["click", "touchstart", "keydown"].forEach((eventName) => {
