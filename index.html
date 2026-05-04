@@ -2294,6 +2294,17 @@ So yeah, I never went back to that restaurant again — never!
         state.resumeSyncTime = null;
       });
 
+      audio.addEventListener("seeking", () => {
+        state.resumeSyncTime = null;
+      });
+
+      audio.addEventListener("seeked", () => {
+        if (audio.paused) {
+          state.pausedAudioTime = audio.currentTime;
+          state.pausedAudioSource = audio.dataset.source || "";
+        }
+      });
+
       audio.addEventListener("ended", () => {
         state.userPausedAudio = false;
         state.audioShouldResume = false;
