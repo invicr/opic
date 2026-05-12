@@ -8,15 +8,8 @@
 
 ## 현재 구성
 
-- `index.html`: 학습 UI
-- `themes/transportation/describe/q1/script.txt`: 현재 문항 스크립트
-- `themes/transportation/describe/q1/audio.wav`: 현재 문항 오디오
-- `themes/restaurant/experience/q1/script.txt`: 새로 추가된 레스토랑 문항 스크립트
-- `themes/restaurant/experience/q1/audio.wav`: 새로 추가된 레스토랑 문항 오디오
-- `themes/restaurant/roleplay/q1/script.txt`: 새로 추가된 레스토랑 롤플레이 문항 스크립트
-- `themes/restaurant/roleplay/q1/audio.wav`: 새로 추가된 레스토랑 롤플레이 문항 오디오
-- `themes/restaurant/roleplay/q2/script.txt`: 새로 추가된 레스토랑 롤플레이 문항 스크립트
-- `themes/restaurant/roleplay/q2/audio.wav`: 새로 추가된 레스토랑 롤플레이 문항 오디오
+- `index.html`: 학습 UI와 문항 메타데이터(`studyLibrary`)
+- `themes/`: 문항별 스크립트와 오디오 리소스
 
 ## 다음 확장 방식
 
