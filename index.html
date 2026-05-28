@@ -2317,8 +2317,7 @@ So yeah, I only go when I really have to!
         userPausedAudio: false,
         audioShouldResume: false,
         pausedAudioTime: null,
-        pausedAudioSource: "",
-        resumeSyncTime: null
+        pausedAudioSource: ""
       };
 
       const themeList = document.getElementById("themeList");
@@ -2611,7 +2610,6 @@ So yeah, I only go when I really have to!
           audio.dataset.source = nextAudioSrc;
           state.pausedAudioTime = null;
           state.pausedAudioSource = "";
-          state.resumeSyncTime = null;
         }
 
         if (sourceChanged && shouldAutoplay) {
@@ -2620,19 +2618,6 @@ So yeah, I only go when I really have to!
           } catch (_error) {
             // Ignore autoplay failures caused by browser policy.
           }
-        }
-      }
-
-      function syncResumePosition() {
-        const sameSource = state.pausedAudioSource && state.pausedAudioSource === audio.dataset.source;
-        const desiredTime = state.resumeSyncTime ?? state.pausedAudioTime;
-
-        if (!sameSource || !Number.isFinite(desiredTime)) {
-          return;
-        }
-
-        if (Math.abs(audio.currentTime - desiredTime) > 0.2) {
-          audio.currentTime = desiredTime;
         }
       }
 
@@ -2690,23 +2675,12 @@ So yeah, I only go when I really have to!
           state.audioShouldResume = false;
           state.pausedAudioTime = audio.currentTime;
           state.pausedAudioSource = audio.dataset.source || "";
-          state.resumeSyncTime = audio.currentTime;
         }
       });
 
       audio.addEventListener("play", () => {
-        syncResumePosition();
         state.userPausedAudio = false;
         state.audioShouldResume = true;
-      });
-
-      audio.addEventListener("playing", () => {
-        syncResumePosition();
-        state.resumeSyncTime = null;
-      });
-
-      audio.addEventListener("seeking", () => {
-        state.resumeSyncTime = null;
       });
 
       audio.addEventListener("seeked", () => {
@@ -2721,7 +2695,6 @@ So yeah, I only go when I really have to!
         state.audioShouldResume = false;
         state.pausedAudioTime = null;
         state.pausedAudioSource = "";
-        state.resumeSyncTime = null;
       });
 
       ["click", "touchstart", "keydown"].forEach((eventName) => {
