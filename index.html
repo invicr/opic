@@ -317,6 +317,36 @@
         border-bottom: 1px solid var(--line);
       }
 
+      .line-card-header {
+        display: flex;
+        align-items: start;
+        gap: 10px;
+      }
+
+      .line-card-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .line-play {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--brand-soft);
+        color: var(--ink);
+        cursor: pointer;
+        flex: none;
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .line-play:hover {
+        border-color: var(--line-strong);
+        background: #fff;
+      }
+
       .line-card:last-child {
         border-bottom: 0;
       }
@@ -389,6 +419,22 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      .full-audio-button {
+        margin-top: 6px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--ink);
+        padding: 5px 9px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .full-audio-button:hover {
+        border-color: var(--line-strong);
       }
 
       .toggle-row {
@@ -796,6 +842,7 @@
               <div class="player-mini-meta">
                 <div class="player-mini-label">Audio Player</div>
                 <div class="track-name" id="trackName">오디오 준비 중...</div>
+                <button class="full-audio-button" id="fullAudioButton" type="button">전체 음성</button>
               </div>
               <input class="switch" id="loopToggle" type="checkbox" checked />
             </div>
@@ -1723,6 +1770,26 @@ Even now, that memory is still so vivid — I'll never forget it!
               badge: "문제형",
               scriptFile: "themes/park/issue/q1/script.txt",
               audioFile: "themes/park/issue/q1/audio.wav",
+              segmentTimes: [
+                { start: 0.28, end: 6.02 },
+                { start: 6.87, end: 12.29 },
+                { start: 13.08, end: 19.96 },
+                { start: 20.94, end: 26.67 },
+                { start: 27.68, end: 33.92 },
+                { start: 35.11, end: 41.0 },
+                { start: 42.12, end: 47.86 },
+                { start: 48.98, end: 57.84 }
+              ],
+              segmentFiles: [
+                "themes/park/issue/q1/segments/s1.wav",
+                "themes/park/issue/q1/segments/s2.wav",
+                "themes/park/issue/q1/segments/s3.wav",
+                "themes/park/issue/q1/segments/s4.wav",
+                "themes/park/issue/q1/segments/s5.wav",
+                "themes/park/issue/q1/segments/s6.wav",
+                "themes/park/issue/q1/segments/s7.wav",
+                "themes/park/issue/q1/segments/s8.wav"
+              ],
               scriptInline: `## 공원 이슈 문제형 - 최종 정리
 
 ---
@@ -2478,7 +2545,8 @@ So yeah, I only go when I really have to!
         userPausedAudio: false,
         audioShouldResume: false,
         pausedAudioTime: null,
-        pausedAudioSource: ""
+        pausedAudioSource: "",
+        segmentRequestId: 0
       };
 
       const themeList = document.getElementById("themeList");
@@ -2496,6 +2564,7 @@ So yeah, I only go when I really have to!
       const nextQuestionBottom = document.getElementById("nextQuestionBottom");
       const audio = document.getElementById("audio");
       const trackName = document.getElementById("trackName");
+      const fullAudioButton = document.getElementById("fullAudioButton");
       const loopToggle = document.getElementById("loopToggle");
       const autoplayToggle = document.getElementById("autoplayToggle");
       const speedControl = document.getElementById("speedControl");
@@ -2690,29 +2759,52 @@ So yeah, I only go when I really have to!
           return;
         }
 
-        script.answerPairs.forEach((pair) => {
+        const question = getActiveQuestion();
+        const segmentTimes = question.segmentTimes || [];
+        const segmentFiles = question.segmentFiles || [];
+
+        script.answerPairs.forEach((pair, index) => {
           const card = document.createElement("article");
           card.className = "line-card";
+          const body = document.createElement("div");
+          body.className = "line-card-body";
 
           if (state.viewMode === "en") {
             const en = document.createElement("p");
             en.className = "en";
             en.textContent = pair.en;
-            card.appendChild(en);
+            body.appendChild(en);
           }
 
           if (state.viewMode === "ko") {
             const ko = document.createElement("p");
             ko.className = "ko";
             ko.textContent = pair.ko;
-            card.appendChild(ko);
+            body.appendChild(ko);
           }
 
           if (state.viewMode === "mixed") {
             const mixed = document.createElement("p");
             mixed.className = "mix";
             mixed.innerHTML = `<span class="mix-en">${pair.en}</span><br /><span class="mix-ko">${pair.ko}</span>`;
-            card.appendChild(mixed);
+            body.appendChild(mixed);
+          }
+
+          if (segmentFiles[index]) {
+            const header = document.createElement("div");
+            const playButton = document.createElement("button");
+            header.className = "line-card-header";
+            playButton.className = "line-play";
+            playButton.type = "button";
+            playButton.textContent = "▶";
+            playButton.setAttribute("aria-label", `${index + 1}번 문장 재생`);
+            playButton.addEventListener("click", () => {
+              playSegmentFile(segmentFiles[index]);
+            });
+            header.append(playButton, body);
+            card.appendChild(header);
+          } else {
+            card.appendChild(body);
           }
 
           scriptList.appendChild(card);
@@ -2769,6 +2861,7 @@ So yeah, I only go when I really have to!
         if (sourceChanged) {
           audio.src = nextAudioSrc;
           audio.dataset.source = nextAudioSrc;
+          audio.dataset.mode = "full";
           state.pausedAudioTime = null;
           state.pausedAudioSource = "";
         }
@@ -2780,6 +2873,44 @@ So yeah, I only go when I really have to!
             // Ignore autoplay failures caused by browser policy.
           }
         }
+      }
+
+      async function playSegmentFile(segmentFile) {
+        state.hasInteracted = true;
+        state.segmentRequestId += 1;
+
+        audio.pause();
+        audio.src = encodeURI(segmentFile);
+        audio.dataset.source = encodeURI(segmentFile);
+        audio.dataset.mode = "segment";
+        audio.currentTime = 0;
+        audio.loop = false;
+        audio.playbackRate = Number(speedControl.value);
+        trackName.textContent = segmentFile;
+
+        try {
+          await audio.play();
+        } catch (_error) {
+          // Ignore play failures caused by browser policy.
+        }
+      }
+
+      async function restoreFullAudio() {
+        const question = getActiveQuestion();
+        const nextAudioSrc = encodeURI(question.audioFile);
+
+        state.audioShouldResume = false;
+        state.pausedAudioTime = null;
+        state.pausedAudioSource = "";
+
+        audio.pause();
+        audio.src = nextAudioSrc;
+        audio.dataset.source = nextAudioSrc;
+        audio.dataset.mode = "full";
+        audio.currentTime = 0;
+        audio.loop = loopToggle.checked;
+        audio.playbackRate = Number(speedControl.value);
+        trackName.textContent = question.audioFile;
       }
 
       async function renderAll() {
@@ -2824,6 +2955,11 @@ So yeah, I only go when I really have to!
         state.hasInteracted = true;
       });
 
+      fullAudioButton.addEventListener("click", () => {
+        state.hasInteracted = true;
+        restoreFullAudio();
+      });
+
       speedControl.addEventListener("input", () => {
         const speed = Number(speedControl.value);
         audio.playbackRate = speed;
@@ -2844,18 +2980,12 @@ So yeah, I only go when I really have to!
         state.audioShouldResume = true;
       });
 
-      audio.addEventListener("seeked", () => {
-        if (audio.paused) {
-          state.pausedAudioTime = audio.currentTime;
-          state.pausedAudioSource = audio.dataset.source || "";
-        }
-      });
-
       audio.addEventListener("ended", () => {
         state.userPausedAudio = false;
         state.audioShouldResume = false;
         state.pausedAudioTime = null;
         state.pausedAudioSource = "";
+        state.segmentRequestId += 1;
       });
 
       ["click", "touchstart", "keydown"].forEach((eventName) => {
