@@ -122,6 +122,49 @@
       text-align: center;
     }
 
+    .theme-player {
+      display: grid;
+      gap: 8px;
+      padding-top: 4px;
+    }
+
+    .control-row,
+    .audio-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .control-button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .control-button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .toggle {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     main {
       padding: 28px 0 48px;
     }
@@ -167,8 +210,10 @@
     }
 
     audio {
+      flex: 1 1 320px;
       width: 100%;
-      margin: 2px 0 14px;
+      min-width: 220px;
+      margin: 2px 0;
     }
 
     .script {
@@ -244,6 +289,19 @@
     <div class="wrap toolbar-inner">
       <div class="nav-row" id="themeNav" aria-label="Theme navigation"></div>
       <div class="nav-row" id="viewModeNav" aria-label="View mode"></div>
+      <div class="theme-player" aria-label="Theme audio controls">
+        <div class="control-row">
+          <span class="nav-label">Audio</span>
+          <button class="control-button" type="button" id="playTheme">테마 전체 듣기</button>
+          <button class="control-button" type="button" id="stopTheme">정지</button>
+          <label class="toggle">
+            <input type="checkbox" id="repeatTheme">
+            전체 반복
+          </label>
+          <span class="status" id="themePlayerStatus">대기 중</span>
+        </div>
+        <audio controls preload="metadata" id="themeAudio"></audio>
+      </div>
     </div>
   </nav>
 
@@ -405,11 +463,18 @@
     const state = {
       themeIndex: 0,
       viewMode: "both",
+      themeAudioIndex: 0,
+      isThemePlaying: false,
     };
 
     const themeNav = document.getElementById("themeNav");
     const viewModeNav = document.getElementById("viewModeNav");
     const practiceList = document.getElementById("practiceList");
+    const themeAudio = document.getElementById("themeAudio");
+    const playTheme = document.getElementById("playTheme");
+    const stopTheme = document.getElementById("stopTheme");
+    const repeatTheme = document.getElementById("repeatTheme");
+    const themePlayerStatus = document.getElementById("themePlayerStatus");
     const scriptCache = new Map();
 
     function escapeHtml(value) {
@@ -478,6 +543,81 @@
       }
     }
 
+    function getActiveTheme() {
+      return studyLibrary[state.themeIndex];
+    }
+
+    function stopQuestionAudios() {
+      document.querySelectorAll(".question-audio").forEach((audio) => {
+        audio.pause();
+      });
+    }
+
+    function playAudio(audio) {
+      const result = audio.play();
+      if (result && typeof result.catch === "function") {
+        result.catch(() => {});
+      }
+    }
+
+    function setThemeAudioStatus() {
+      const theme = getActiveTheme();
+      const question = theme.questions[state.themeAudioIndex];
+      if (!state.isThemePlaying || !question) {
+        themePlayerStatus.textContent = "대기 중";
+        return;
+      }
+
+      themePlayerStatus.textContent = `${theme.title} ${state.themeAudioIndex + 1}/${theme.questions.length}: ${question.title}`;
+    }
+
+    function playThemeAudioAt(index) {
+      const theme = getActiveTheme();
+      const question = theme.questions[index];
+      if (!question) return;
+
+      stopQuestionAudios();
+      state.themeAudioIndex = index;
+      state.isThemePlaying = true;
+      themeAudio.src = question.audioFile;
+      setThemeAudioStatus();
+      playAudio(themeAudio);
+    }
+
+    function stopThemeAudio() {
+      state.isThemePlaying = false;
+      themeAudio.pause();
+      themeAudio.removeAttribute("src");
+      themeAudio.load();
+      setThemeAudioStatus();
+    }
+
+    themeAudio.addEventListener("ended", () => {
+      const theme = getActiveTheme();
+      const nextIndex = state.themeAudioIndex + 1;
+
+      if (nextIndex < theme.questions.length) {
+        playThemeAudioAt(nextIndex);
+        return;
+      }
+
+      if (repeatTheme.checked) {
+        playThemeAudioAt(0);
+        return;
+      }
+
+      state.isThemePlaying = false;
+      setThemeAudioStatus();
+    });
+
+    playTheme.addEventListener("click", () => {
+      playThemeAudioAt(0);
+    });
+
+    stopTheme.addEventListener("click", () => {
+      stopThemeAudio();
+    });
+
     function renderViewModeNav() {
       const modes = [
         { id: "both", label: "한영" },
@@ -514,6 +654,7 @@
 
     function render() {
       const activeTheme = studyLibrary[state.themeIndex];
+      stopThemeAudio();
 
       themeNav.innerHTML = [
         '<span class="nav-label">Theme</span>',
@@ -540,7 +681,13 @@
               <h2>${escapeHtml(question.title)}</h2>
               <span class="tag">${escapeHtml(question.scriptFile)}</span>
             </div>
-            <audio controls preload="metadata" src="${escapeHtml(question.audioFile)}"></audio>
+            <div class="audio-row">
+              <audio class="question-audio" controls preload="metadata" src="${escapeHtml(question.audioFile)}"></audio>
+              <label class="toggle">
+                <input type="checkbox" class="repeat-question">
+                문항 반복
+              </label>
+            </div>
             <ul class="script"></ul>
           </article>
         `)
@@ -548,6 +695,21 @@
 
       activeTheme.questions.forEach((question, index) => {
         loadScript(question, document.getElementById(`q${index + 1}`));
+      });
+
+      document.querySelectorAll(".question-audio").forEach((audio) => {
+        audio.addEventListener("play", () => {
+          stopThemeAudio();
+        });
+
+        audio.addEventListener("ended", () => {
+          const article = audio.closest("article");
+          const repeat = article.querySelector(".repeat-question");
+          if (!repeat.checked) return;
+
+          audio.currentTime = 0;
+          playAudio(audio);
+        });
       });
     }
 
