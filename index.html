@@ -1,3004 +1,557 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>OPIC Study</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg: #f3f4f6;
-        --panel: #ffffff;
-        --ink: #111827;
-        --muted: #6b7280;
-        --line: #e5e7eb;
-        --line-strong: #d1d5db;
-        --brand: #111827;
-        --brand-soft: #f3f4f6;
-        --accent-soft: #eef2ff;
-        --radius-lg: 16px;
-        --radius-md: 12px;
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OPIC Practice</title>
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --panel: #ffffff;
+      --text: #202124;
+      --muted: #646762;
+      --line: #ddded8;
+      --accent: #246b5f;
+      --accent-2: #b64d2f;
+      --chip: #eef3f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top {
+      display: grid;
+      gap: 14px;
+      padding: 28px 0 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 247, 243, 0.94);
+      backdrop-filter: blur(10px);
+    }
+
+    .toolbar-inner {
+      display: grid;
+      gap: 8px;
+      padding: 10px 0;
+    }
+
+    .nav-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-button {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 14px;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .nav-button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-button.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .nav-label {
+      flex: 0 0 auto;
+      align-self: center;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      min-width: 54px;
+    }
+
+    .mode-button {
+      min-width: 64px;
+      text-align: center;
+    }
+
+    main {
+      padding: 28px 0 48px;
+    }
+
+    .practice-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    article {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px;
+    }
+
+    .question-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--accent);
+      padding: 4px 10px;
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    audio {
+      width: 100%;
+      margin: 2px 0 14px;
+    }
+
+    .script {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .script li {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      color: #30322f;
+    }
+
+    .english,
+    .korean {
+      margin: 0;
+    }
+
+    .english {
+      font-weight: 650;
+    }
+
+    .korean {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .chunk {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .error {
+      color: #9b2c1f;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 24px, 1100px);
       }
 
-      * {
-        box-sizing: border-box;
+      .top {
+        padding-top: 22px;
       }
 
-      html {
-        -webkit-text-size-adjust: none;
-        text-size-adjust: none;
-        width: 100%;
-        overflow-x: hidden;
-      }
-
-      html,
-      body {
-        margin: 0;
-        min-height: 100%;
-        width: 100%;
-        overflow-x: hidden;
-        background: var(--bg);
-        color: var(--ink);
-        font-family: "Manrope", "Noto Sans KR", sans-serif;
-      }
-
-      body {
-        padding: 10px 10px 24px;
-      }
-
-      .app-shell {
-        width: 100%;
-        margin: 0;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        align-items: start;
-      }
-
-      .panel {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: var(--radius-lg);
-        min-width: 0;
-      }
-
-      .sidebar,
-      .detail,
-      .player {
+      article {
         padding: 14px;
       }
 
-      .detail {
-        background: transparent;
-        border: 0;
-        padding: 0;
+      .question-head {
+        grid-template-columns: 1fr;
       }
 
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 4px 9px;
-        border-radius: 999px;
-        background: var(--brand-soft);
-        color: var(--muted);
-        font-size: 11px;
-        line-height: 1.2;
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      h1,
-      h2,
-      h3,
-      p {
-        margin: 0;
-      }
-
-      .section-label {
-        margin: 0 0 10px;
-        color: var(--muted);
-        font-size: 11px;
-        font-weight: 700;
-      }
-
-      .theme-list,
-      .story-list,
-      .tip-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      button {
-        font: inherit;
-      }
-
-      .theme-card,
-      .segment button,
-      .chip,
-      .nav-button {
-        border: 1px solid var(--line);
-        background: #fff;
-        color: var(--ink);
-      }
-
-      .theme-card {
-        width: 100%;
-        text-align: center;
-        border-radius: 999px;
-        padding: 8px 12px;
-        cursor: pointer;
-        transition: border-color 160ms ease, background 160ms ease;
-      }
-
-      .theme-card:hover,
-      .segment button:hover,
-      .nav-button:hover {
-        border-color: var(--line-strong);
-      }
-
-      .theme-card.active,
-      .segment button.active {
-        background: var(--brand);
-        color: #fff;
-        border-color: var(--brand);
-      }
-
-      .theme-card.active {
-        background: var(--ink);
-        color: #fff;
-        border-color: var(--line-strong);
-      }
-
-      .theme-card.coming-soon {
-        opacity: 0.6;
-      }
-
-      .card-title {
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 1.4;
-      }
-
-      .badge-row {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-
-      .detail-header {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: start;
-        padding: 4px 2px 0;
-      }
-
-      .header-copy {
-        font-size: 20px;
-        line-height: 1.5;
-        color: var(--ink);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-      }
-
-      .toolbar {
-        margin-top: 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .question-nav {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        scrollbar-width: none;
-      }
-
-      .question-nav::-webkit-scrollbar {
-        display: none;
-      }
-
-      .question-pill {
-        flex: none;
-        border: 1px solid var(--line);
-        background: #fff;
-        color: var(--muted);
-        border-radius: 999px;
-        padding: 8px 11px;
-        font-size: 12px;
-        font-weight: 700;
-        cursor: pointer;
-        white-space: nowrap;
-      }
-
-      .question-pill.active {
-        background: var(--ink);
-        color: #fff;
-        border-color: var(--ink);
-      }
-
-      .segment {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        padding: 4px;
-        border-radius: 10px;
-        background: #f9fafb;
-        border: 1px solid var(--line);
-        width: 100%;
-      }
-
-      .segment button,
-      .nav-button {
-        border-radius: 8px;
-        padding: 11px 10px;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 600;
-      }
-
-      .segment button {
-        color: var(--muted);
-        background: transparent;
-        border-color: transparent;
-      }
-
-      .transport {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-      }
-
-      .script-block {
-        margin-top: 16px;
-      }
-
-      .section-block,
-      .fold-section {
-        margin-top: 14px;
-      }
-
-      .section-block h3,
-      .fold-summary {
-        margin-bottom: 8px;
-        font-size: 13px;
-        color: var(--muted);
-        font-weight: 700;
-      }
-
-      .story-item,
-      .tip-item {
-        display: flex;
-        gap: 12px;
-        align-items: start;
-        padding: 9px 11px;
-        border-radius: var(--radius-md);
-        background: #fff;
-        border: 1px solid var(--line);
-      }
-
-      .story-item-number {
-        width: 28px;
-        height: 28px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        background: var(--brand-soft);
-        color: var(--ink);
-        font-weight: 700;
-        flex: none;
-      }
-
-      .story-item p,
-      .tip-item p {
-        line-height: 1.55;
-      }
-
-      .script-list {
-        display: grid;
-        gap: 0;
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        overflow: hidden;
-        min-width: 0;
-      }
-
-      .line-card {
-        padding: 15px 15px 17px;
-        background: #fff;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .line-card-header {
-        display: flex;
-        align-items: start;
-        gap: 10px;
-      }
-
-      .line-card-body {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .line-play {
-        width: 34px;
-        height: 34px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: var(--brand-soft);
-        color: var(--ink);
-        cursor: pointer;
-        flex: none;
-        font-size: 13px;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .line-play:hover {
-        border-color: var(--line-strong);
-        background: #fff;
-      }
-
-      .line-card:last-child {
-        border-bottom: 0;
-      }
-
-      .line-card .en {
-        font-size: 20px;
-        line-height: 1.68;
-        letter-spacing: -0.01em;
-      }
-
-      .line-card .ko {
-        margin-top: 8px;
-        color: var(--muted);
-        line-height: 1.68;
-        font-size: 20px;
-      }
-
-      .line-card .mix {
+      h2 {
         font-size: 19px;
-        line-height: 1.78;
       }
-
-      .line-card .mix-en {
-        font-weight: 600;
-      }
-
-      .line-card .mix-ko {
-        color: var(--muted);
-        display: inline-block;
-        margin-top: 8px;
-        font-size: inherit;
-      }
-
-      .player {
-        position: fixed;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        z-index: 20;
-        border-radius: 18px;
-        box-shadow: 0 -10px 30px rgba(17, 24, 39, 0.12);
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(14px);
-      }
-
-      .player-panel {
-        padding: 0;
-        color: var(--ink);
-      }
-
-      .player-top {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 10px;
-      }
-
-      .audio-visual {
-        margin-top: 0;
-        padding: 0;
-        border-radius: 0;
-        background: transparent;
-        border: 0;
-      }
-
-      .track-name {
-        font-size: 13px;
-        line-height: 1.5;
-        color: var(--muted);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .full-audio-button {
-        margin-top: 6px;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: #fff;
-        color: var(--ink);
-        padding: 5px 9px;
-        font-size: 12px;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .full-audio-button:hover {
-        border-color: var(--line-strong);
-      }
-
-      .toggle-row {
-        margin-top: 8px;
-      }
-
-      input[type="range"] {
-        width: 100%;
-        accent-color: var(--brand);
-      }
-
-      .toggle-row,
-      .speed-row {
-        display: grid;
-        gap: 10px;
-      }
-
-      .toggle-row {
-        display: none;
-      }
-
-      .switch {
-        appearance: none;
-        width: 52px;
-        height: 30px;
-        border-radius: 999px;
-        background: #d1d5db;
-        position: relative;
-        cursor: pointer;
-        transition: background 180ms ease;
-      }
-
-      .switch::after {
-        content: "";
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        width: 22px;
-        height: 22px;
-        border-radius: 999px;
-        background: #fff;
-        transition: transform 180ms ease;
-      }
-
-      .switch:checked {
-        background: var(--brand);
-      }
-
-      .switch:checked::after {
-        transform: translateX(22px);
-      }
-
-      .speed-row {
-        margin-top: 8px;
-      }
-
-      .player-fold {
-        margin-top: 10px;
-        border-top: 1px solid var(--line);
-        padding-top: 10px;
-      }
-
-      .player-fold .fold-summary {
-        margin-bottom: 0;
-        font-size: 12px;
-      }
-
-      .player-fold[open] .fold-summary {
-        margin-bottom: 10px;
-      }
-
-      .speed-label {
-        display: flex;
-        justify-content: space-between;
-        font-size: 13px;
-        color: var(--muted);
-      }
-
-      audio {
-        width: 100%;
-        margin-top: 6px;
-      }
-
-      .empty {
-        padding: 16px;
-        border-radius: var(--radius-md);
-        background: #fafafa;
-        border: 1px dashed var(--line-strong);
-        color: var(--muted);
-      }
-
-      .sidebar {
-        order: 1;
-      }
-
-      .detail {
-        order: 2;
-      }
-
-      .player {
-        order: 3;
-      }
-
-      .theme-list {
-        grid-auto-flow: column;
-        grid-auto-columns: minmax(120px, auto);
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding-bottom: 2px;
-        scroll-snap-type: x proximity;
-        scrollbar-width: none;
-      }
-
-      .theme-list::-webkit-scrollbar {
-        display: none;
-      }
-
-      .theme-card {
-        scroll-snap-align: start;
-      }
-
-      .compact-meta {
-        display: flex;
-        justify-content: flex-start;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .compact-actions {
-        display: flex;
-        gap: 8px;
-        width: 100%;
-      }
-
-      .compact-actions .nav-button {
-        flex: 1;
-      }
-
-      .script-actions {
-        margin-top: 12px;
-      }
-
-      .player-mini {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-      }
-
-      .player-mini-meta {
-        min-width: 0;
-        flex: 1;
-      }
-
-      .player-mini-label {
-        font-size: 11px;
-        color: var(--muted);
-        font-weight: 700;
-      }
-
-      .segment button.active {
-        background: var(--ink);
-        color: #fff;
-        border-color: var(--ink);
-        box-shadow: 0 1px 2px rgba(17, 24, 39, 0.18);
-      }
-
-      .fold-section {
-        border-top: 1px solid var(--line);
-        padding-top: 12px;
-      }
-
-      .fold-section[open] .fold-summary {
-        margin-bottom: 8px;
-      }
-
-      .fold-summary {
-        list-style: none;
-        cursor: pointer;
-        margin-bottom: 0;
-      }
-
-      .fold-summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .fold-summary::after {
-        content: "열기";
-        float: right;
-        color: var(--muted);
-        font-size: 11px;
-        font-weight: 600;
-      }
-
-      .fold-section[open] .fold-summary::after {
-        content: "닫기";
-      }
-
-      .mobile-safe-space {
-        height: 170px;
-      }
-
-      @media (min-width: 981px) {
-        .app-shell {
-          width: min(1240px, calc(100% - 32px));
-          max-width: 100%;
-          margin: 24px auto 40px;
-          grid-template-columns: 240px minmax(0, 1fr) 300px;
-          gap: 16px;
-        }
-
-        body {
-          padding: 0;
-        }
-
-        .sidebar,
-        .player {
-          padding: 22px;
-        }
-
-        .detail {
-          padding: 0;
-        }
-
-        .sidebar {
-          order: 1;
-        }
-
-        .player {
-          order: 3;
-          position: sticky;
-          left: auto;
-          right: auto;
-          top: 24px;
-          bottom: auto;
-          border-radius: var(--radius-lg);
-          box-shadow: none;
-        }
-
-        .detail {
-          order: 2;
-        }
-
-        .theme-list {
-          grid-auto-flow: row;
-          grid-auto-columns: auto;
-          overflow: visible;
-          scroll-snap-type: none;
-        }
-
-        .theme-card {
-          text-align: left;
-          padding: 12px 16px;
-        }
-
-        .card-title {
-          font-size: 14px;
-        }
-
-        .detail-header {
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .eyebrow {
-          padding: 6px 10px;
-          font-size: 12px;
-        }
-
-        .header-copy {
-          font-size: 22px;
-          line-height: 1.45;
-        }
-
-        .toolbar {
-          margin-top: 18px;
-          flex-direction: row;
-          justify-content: space-between;
-          gap: 12px;
-          flex-wrap: wrap;
-        }
-
-        .question-nav {
-          width: 100%;
-        }
-
-        .segment {
-          width: auto;
-          display: inline-flex;
-          grid-template-columns: none;
-        }
-
-        .segment button,
-        .nav-button {
-          padding: 10px 12px;
-          font-size: 13px;
-        }
-
-        .transport {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-
-        .section-block {
-          margin-top: 28px;
-        }
-
-        .script-block {
-          margin-top: 22px;
-        }
-
-        .script-actions {
-          margin-top: 16px;
-        }
-
-        .fold-section {
-          margin-top: 20px;
-          padding-top: 16px;
-        }
-
-        .fold-section[open] .fold-summary {
-          margin-bottom: 12px;
-        }
-
-        .line-card .en {
-          font-size: 24px;
-        }
-
-        .line-card .ko {
-          font-size: 24px;
-        }
-
-        .line-card .mix {
-          font-size: 20px;
-        }
-
-        .line-card {
-          padding: 18px 18px 20px;
-        }
-
-        .player-title {
-          font-size: 14px;
-        }
-
-        audio {
-          margin-top: 18px;
-        }
-
-        .mobile-safe-space {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="app-shell">
-      <aside class="panel sidebar">
-        <div class="theme-list" id="themeList"></div>
-      </aside>
-
-      <section class="panel detail">
-        <div class="detail-header">
-          <div class="compact-meta">
-            <span class="eyebrow" id="detailTag">Theme</span>
-            <span class="eyebrow" id="detailType">Type</span>
-          </div>
-          <p class="header-copy" id="actualPrompt">질문을 불러오는 중입니다.</p>
-        </div>
-
-        <div class="toolbar">
-          <div class="question-nav" id="questionNav"></div>
-          <div class="compact-actions">
-            <button class="nav-button" id="prevQuestion">이전 문제</button>
-            <button class="nav-button" id="nextQuestion">다음 문제</button>
-          </div>
-        </div>
-
-        <details class="fold-section" open>
-          <summary class="fold-summary">Storyline</summary>
-          <div class="story-list" id="storyList"></div>
-        </details>
-
-        <div class="script-block">
-          <div class="segment" id="viewMode"></div>
-          <div class="script-list" id="scriptList"></div>
-          <div class="compact-actions script-actions">
-            <button class="nav-button" id="prevQuestionBottom">이전 문제</button>
-            <button class="nav-button" id="nextQuestionBottom">다음 문제</button>
-          </div>
-        </div>
-
-        <details class="fold-section">
-          <summary class="fold-summary">Expression Focus</summary>
-          <div class="tip-list" id="tipList"></div>
-        </details>
-
-        <div class="mobile-safe-space"></div>
-      </section>
-
-      <aside class="panel player">
-        <div class="player-panel">
-          <div class="audio-visual">
-            <div class="player-mini">
-              <div class="player-mini-meta">
-                <div class="player-mini-label">Audio Player</div>
-                <div class="track-name" id="trackName">오디오 준비 중...</div>
-                <button class="full-audio-button" id="fullAudioButton" type="button">전체 음성</button>
-              </div>
-              <input class="switch" id="loopToggle" type="checkbox" checked />
-            </div>
-            <audio id="audio" controls preload="metadata"></audio>
-          </div>
-
-          <details class="player-fold">
-            <summary class="fold-summary">Playback Speed</summary>
-            <div class="speed-row">
-              <div class="speed-label">
-                <span>Speed</span>
-                <strong id="speedValue">1.0x</strong>
-              </div>
-              <input id="speedControl" type="range" min="0.7" max="1.2" step="0.05" value="1.0" />
-            </div>
-          </details>
-
-          <input id="autoplayToggle" type="checkbox" checked hidden />
-
-        </div>
-      </aside>
-    </main>
-
-    <script>
-      const studyLibrary = [
-        {
-          id: "public-transportation",
-          title: "대중교통",
-          questions: [
-            {
-              id: "city-transit-description",
-              title: "도시 대중교통 묘사",
-              badge: "묘사형",
-              scriptFile: "themes/transportation/describe/q1/script.txt",
-              audioFile: "themes/transportation/describe/q1/audio.wav",
-              scriptInline: `## 대중교통 묘사형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"당신이 사는 도시의 대중교통에 대해 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 집 근처 버스 있고 걸어서 15분에 지하철역
-2. 보통은 버스, 시간 맞춰야 할 땐 지하철
-3. 회사 갈 땐 셔틀버스 이용
-4. 전반적으로 편리하지만 사람 많을 땐 복잡함
-
----
-
-### 🗣️ 답변
-
-Um, so I live in a city where public transportation is pretty convenient, like, overall.
-음, 저는 대중교통이 전반적으로 꽤 편리한 도시에 살고 있어요.
-
-There's a bus stop right near my house, and you know, the subway station is about a 15-minute walk away.
-집 근처에 버스 정류장이 있고, 지하철역은 걸어서 15분 정도 거리에 있어요.
-
-I usually take the bus, but like, when I really need to be on time, I take the subway instead.
-보통은 버스를 타는 편인데, 시간을 딱 맞춰야 할 때는 지하철을 타요.
-
-And for work, you know, I actually take a company shuttle bus — which is honestly the best part of my commute!
-그리고 회사 갈 때는 셔틀버스를 타는데, 솔직히 그게 출퇴근에서 제일 좋은 부분이에요!
-
-But honestly, the only downside is that it gets really crowded sometimes, and that can be pretty overwhelming.
-근데 솔직히 가끔 사람이 너무 많으면 좀 힘들긴 해요.
-
-So yeah, it's not perfect, but I'd say it's pretty good overall!
-완벽하진 않지만, 전반적으로 꽤 좋은 것 같아요!
-
----
-
-### 💡 추가된 감정 표현
-- **the best part of my commute** → 출퇴근에서 제일 좋은 부분 감정 강조
-- **pretty overwhelming** → 힘들다는 감정 자연스러운 표현
-- **it's not perfect, but** → 균형잡힌 마무리로 자연스럽게 👍`
-            },
-            {
-              id: "public-transportation-experience",
-              title: "대중교통 이용 경험",
-              badge: "경험형",
-              scriptFile: "themes/transportation/experience/q1/script.txt",
-              audioFile: "themes/transportation/experience/q1/audio.wav",
-              scriptInline: `## 대중교통 경험형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"대중교통을 이용했던 경험에 대해 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 지난 겨울 폭설로 길이 다 얼어버림
-2. 회사 셔틀버스가 오지 않음
-3. 회사에 연락해서 상황 설명
-4. 결국 재택근무로 해결
-
----
-
-### 🗣️ 답변
-
-Um, so I have a pretty memorable experience from last winter.
-음, 지난 겨울에 꽤 기억에 남는 경험이 있어요.
-
-Like, there was a really heavy snowstorm, and honestly, the roads were completely frozen.
-폭설이 엄청 왔는데, 솔직히 길이 완전히 다 얼어버렸어요.
-
-And because of that, you know, my company shuttle bus just never showed up.
-그래서 회사 셔틀버스가 그냥 오질 않았어요.
-
-I waited for a while, but like, I could tell it wasn't coming — I was so frustrated.
-한참을 기다렸는데, 올 것 같지가 않아서 진짜 답답했어요.
-
-So I called the company and explained the situation, and thankfully, they were really understanding.
-그래서 회사에 전화해서 상황을 설명했는데, 다행히 이해해줬어요.
-
-I ended up working from home that day — and honestly, it turned out to be a pretty cozy day!
-그날은 재택근무를 하게 됐는데, 솔직히 생각보다 아늑하고 좋았어요!
-
----
-
-### 💡 추가된 감정 표현
-- **I was so frustrated** → 답답했다는 감정 표현
-- **I could tell it wasn't coming** → 직감적으로 느낌 자연스러운 표현
-- **thankfully** → 다행이라는 안도감
-- **pretty cozy day** → 유머러스한 마무리 👍`
-            },
-            {
-              id: "public-transportation-compare",
-              title: "대중교통 비교",
-              badge: "비교형",
-              scriptFile: "themes/transportation/compare/q1/script.txt",
-              audioFile: "themes/transportation/compare/q1/audio.wav",
-              scriptInline: `## 대중교통 비교형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"과거와 비교해서 대중교통이 어떻게 달라졌는지 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 과거엔 현금으로 교통비 냈음
-2. 지금은 교통카드로 훨씬 편리해짐
-3. 요즘은 킥보드, 공유자전거 같은 새로운 이동수단도 생김
-4. 전반적으로 이동이 훨씬 편하고 다양해짐
-
----
-
-### 🗣️ 답변
-
-Um, so I think public transportation has changed a lot, like, really a lot.
-음, 대중교통이 정말 많이 달라진 것 같아요, 진짜로요.
-
-Back in the day, you know, people had to pay with cash every single time they took the bus or subway.
-예전에는 버스나 지하철 탈 때마다 매번 현금으로 냈었잖아요.
-
-But now, like, we have transportation cards — you just tap and go, which is so much easier honestly.
-근데 지금은 교통카드가 있어서, 그냥 태그하고 타면 되니까 진짜 훨씬 편해요.
-
-And also, you know, another thing that really surprised me is how many electric scooters and shared bikes are everywhere now.
-그리고 요즘 전동 킥보드랑 공유자전거가 어디에나 있는 게 진짜 놀라워요.
-
-Like, back then those didn't even exist — it's kind of crazy how fast things changed!
-예전엔 그런 게 아예 없었는데, 이렇게 빨리 바뀐 게 좀 신기하죠!
-
-So yeah, getting around the city is just way more convenient now than it used to be!
-그래서 요즘 도시에서 이동하는 게 예전보다 훨씬 편해진 것 같아요!
-
----
-
-### 💡 추가된 감정 표현
-- **like, really a lot** → 강조하는 구어체
-- **every single time** → 매번이라는 강조 표현
-- **that really surprised me** → 놀랐다는 감정 표현
-- **it's kind of crazy** → 신기하다는 감정 자연스러운 표현 👍`
-            }
-          ]
-        },
-        {
-          id: "cafe",
-          title: "카페",
-          questions: [
-            {
-              id: "cafe-weekend-routine",
-              title: "주말에 가는 카페",
-              badge: "루틴형",
-              scriptFile: "themes/cafe/regular/q1/script.txt",
-              audioFile: "themes/cafe/regular/q1/audio.wav",
-              scriptInline: `## 카페 - IH 버전 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"보통 언제 카페에 가는지, 자주 가는 곳이 있는지, 누구와 함께 가는지 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 주말마다 와이프와 산책 겸 카페 가는 루틴
-2. 집 근처 스타벅스 (걸어서 10분)
-3. 주말에도 조용하고 한적함
-4. 작년 리모델링 후 더 깨끗해짐
-5. 커피 마시면서 이런저런 얘기하는 시간이 최고
-6. 당분간 바꿀 생각 없음
-
----
-
-### 🗣️ 답변
-
-Oh, I actually love going to cafes. It's kind of a weekend ritual for me and my wife.
-오, 저 사실 카페 가는 거 진짜 좋아해요. 저랑 와이프한테는 일종의 주말 루틴 같은 거예요.
-
-Almost every Saturday or Sunday, we go for a walk together, and we always end up at a cafe.
-거의 매주 토요일이나 일요일마다 같이 산책하러 나가는데, 결국엔 항상 카페에서 끝나요.
-
-Our go-to spot is a Starbucks near our place. It's only about a 10-minute walk from home.
-저희가 제일 자주 가는 곳은 집 근처 스타벅스예요. 집에서 걸어서 10분 정도밖에 안 걸려요.
-
-The thing I love most about this place is how quiet it is, even on weekends.
-여기서 제일 좋아하는 점은 주말에도 정말 조용하다는 거예요.
-
-Honestly, it's really hard to find a peaceful cafe on a Saturday afternoon. Most places are just packed.
-솔직히, 토요일 오후에 한적한 카페 찾기가 진짜 어렵거든요. 대부분 사람으로 꽉 차 있어요.
-
-But this Starbucks? It's always calm and relaxing.
-근데 이 스타벅스는? 항상 차분하고 편안해요.
-
-Oh, and one more thing - they actually renovated the place last year. So now it looks way cleaner and more modern inside.
-아, 그리고 하나 더 - 작년에 매장을 리모델링했어요. 그래서 지금은 내부가 훨씬 깨끗하고 세련돼 보여요.
-
-My wife and I usually grab our coffees, find a cozy spot, and just chat about random stuff.
-저랑 와이프는 보통 커피 사서, 아늑한 자리 잡고, 그냥 이런저런 얘기해요.
-
-It's a simple thing, but it's honestly the highlight of my weekend.
-별거 아닌 것 같지만, 솔직히 제 주말의 하이라이트예요.
-
-So yeah, I don't think I'll be switching to another cafe anytime soon!
-그래서, 당분간은 다른 카페로 바꿀 생각 없을 것 같아요!
-
----
-
-### 💡 포인트
-- **kind of a weekend ritual** -> "주말 루틴" IH급 표현
-- **we always end up at a cafe** -> 자연스러운 구어체
-- **Our go-to spot** -> "단골집" 원어민 표현
-- **The thing I love most about ~ is how...** -> IH급 강조 구문
-- **Most places are just packed** -> 비교 대비로 생생함
-- **But this Starbucks?** -> 반문으로 리듬감
-- **way cleaner and more modern** -> way + 비교급
-- **grab our coffees, find a cozy spot, and just chat** -> 3단 나열로 생동감
-- **the highlight of my weekend** -> 감정 마무리`
-            },
-            {
-              id: "cafe-description",
-              title: "자주 가는 카페 묘사",
-              badge: "묘사형",
-              scriptFile: "themes/cafe/describe/q1/script.txt",
-              audioFile: "themes/cafe/describe/q1/audio.wav",
-              scriptInline: `## 카페 묘사 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"당신 나라의 카페는 어떻게 생겼는지, 특별한 점은 무엇인지, 자주 가는 카페를 묘사해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 한국은 프랜차이즈 카페가 많아서 전반적으로 비슷하게 생김
-2. 자주 가는 스타벅스 묘사
-3. 입구 들어서면 케이크 진열장과 주문 카운터
-4. 왼쪽엔 텀블러 등 굿즈 구경 가능
-5. 오른쪽엔 2인석, 4인석 등 다양한 좌석
-
----
-
-### 🗣️ 답변
-
-Um, so in Korea, there are a lot of franchise cafes, you know, so most of them look pretty similar to each other.
-음, 한국에는 프랜차이즈 카페가 많아서 대부분 비슷하게 생긴 편이에요.
-
-They usually have a clean and modern interior, with a counter for ordering and a seating area.
-보통 깔끔하고 모던한 인테리어에 주문 카운터랑 좌석 공간이 있어요.
-
-As for the Starbucks I go to most often, um, when you walk in through the entrance, there's a cake display case and the ordering counter right in front of you.
-제가 자주 가는 스타벅스는요, 음, 입구로 들어서면 바로 앞에 케이크 진열장이랑 주문 카운터가 있어요.
-
-And on the left side, you know, there's a section where you can browse tumblers and other merchandise.
-그리고 왼쪽에는 텀블러랑 굿즈들을 구경할 수 있는 공간이 있어요.
-
-On the right side, there's the seating area with various tables - some for two people and some for four.
-오른쪽에는 좌석이 있는데, 2인 테이블이랑 4인 테이블 등 다양하게 있어요.
-
-What I really like about it is that the layout feels really organized and comfortable, you know.
-제가 특히 좋아하는 건 전체적인 구조가 정말 잘 정돈되어 있고 편안한 느낌이에요.
-
-So overall, it's a really easy and pleasant place to spend time in!
-그래서 전반적으로 시간 보내기 정말 좋은 곳이에요!
-
----
-
-### 💡 포인트
-- **franchise cafes** -> 프랜차이즈 카페 자연스러운 표현
-- **cake display case** -> 케이크 진열장
-- **browse merchandise** -> 굿즈 구경하다
-- **layout feels organized** -> 공간 구조 묘사할 때 세련된 표현`
-            },
-            {
-              id: "cafe-memorable-experience",
-              title: "카페에서 기억에 남는 경험",
-              badge: "경험형",
-              scriptFile: "themes/cafe/experience/q1/script.txt",
-              audioFile: "themes/cafe/experience/q1/audio.wav",
-              scriptInline: `## 카페 기억에 남는 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"카페에서 가장 기억에 남는 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 작년에 친구와 카페에서 만남
-2. 커피를 들고 가다가 쏟음
-3. 너무 창피하고 미안했음
-4. 점원이 와서 청소해줌
-5. 내 실수라 커피 다시 사야 해서 돈도 아까웠음
-
----
-
-### 🗣️ 답변
-
-Um, I actually have a really memorable, and honestly a bit embarrassing experience at a cafe.
-음, 사실 카페에서 정말 기억에 남는, 솔직히 좀 창피한 경험이 있어요.
-
-So, last year, I met a friend at a cafe, you know, just to catch up.
-작년에 친구를 만나러 카페에 갔었는데요.
-
-And while I was carrying my coffee to the table, I accidentally spilled it all over the floor.
-테이블로 커피를 들고 가다가 실수로 바닥에 다 쏟아버렸어요.
-
-I was so embarrassed, and honestly, I felt really bad about it too.
-너무 창피하기도 하고, 솔직히 정말 미안하기도 했어요.
-
-A staff member came over right away and cleaned it all up for me, which made me feel even more sorry.
-직원이 바로 와서 다 청소해줬는데, 그게 더 미안하더라고요.
-
-And on top of that, since it was my fault, I had to buy another coffee, so you know, it was a bit painful for my wallet too!
-게다가 제 실수였으니까 커피를 다시 사야 했는데, 돈도 좀 아까웠어요!
-
-But yeah, that's probably why it's still so vivid in my memory even now!
-그래서 아직도 그 기억이 생생한 것 같아요!
-
----
-
-### 💡 포인트
-- **a bit embarrassing** -> 좀 창피했던 경험
-- **just to catch up** -> 만나서 이야기 나누다
-- **spilled it all over the floor** -> 완전히 쏟았다는 생생한 표현
-- **came over right away** -> 바로 와서 도와줌
-- **painful for my wallet** -> 돈이 아까웠다는 자연스러운 표현
-- **still so vivid in my memory** -> 아직도 생생하게 기억남`
-            },
-            {
-              id: "cafe-first-visit-experience",
-              title: "카페 처음 간 경험",
-              badge: "경험형",
-              scriptFile: "themes/cafe/experience/q2/script.txt",
-              audioFile: "themes/cafe/experience/q2/audio.wav",
-              scriptInline: `## 카페 처음 간 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"카페에 처음 갔던 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 대학생 때 처음 카페에 가봄
-2. 친구가 아메리카노 시키길래 따라 시킴
-3. 너무 쓰고 맛이 없었음
-4. 가격도 비싸서 놀람
-5. 지금은 가장 자주 가는 카페가 됨
-
----
-
-### 🗣️ 답변
-
-Hmm, let me think for a second... Oh, I still remember the first time I went to a cafe. It was back when I was in college.
-음, 잠깐 생각해볼게요... 아, 처음 카페에 갔던 게 아직도 기억나요. 대학생 때였어요.
-
-So, my friend ordered an Americano, and you know, I just ordered the same thing without really thinking.
-친구가 아메리카노를 시키길래, 별 생각 없이 저도 똑같이 시켰어요.
-
-But honestly, when I took the first sip, it was so bitter and I really didn't like it at all.
-근데 솔직히 첫 모금을 마셨을 때 너무 써서 전혀 맛이 없었어요.
-
-And on top of that, I was really shocked by how expensive it was!
-게다가 가격이 너무 비싸서 엄청 놀랐죠!
-
-I remember thinking, why would anyone pay this much for something this bitter?
-이렇게 쓴 걸 왜 이 돈 주고 마시지? 라고 생각했던 게 기억나요.
-
-But you know, it's funny how things change - now it's actually my favorite place to go!
-근데 웃긴 건, 지금은 제가 가장 자주 가는 카페가 됐다는 거예요!
-
-I guess my taste has changed a lot since then!
-그때랑 입맛이 많이 달라진 것 같아요!`
-            },
-            {
-              id: "cafe-changes-over-time",
-              title: "카페 변화 비교",
-              badge: "비교형",
-              scriptFile: "themes/cafe/compare/q1/script.txt",
-              audioFile: "themes/cafe/compare/q1/audio.wav",
-              scriptInline: `## 카페 변화 비교형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"카페가 과거와 비교해서 어떻게 달라졌는지 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 과거엔 카페가 많지 않았음
-2. 요즘은 동네마다 카페가 엄청 많아짐
-3. 최근엔 가격 저렴한 프랜차이즈 카페도 많이 생김
-4. 스타벅스 사이렌 오더로 모바일 주문 가능
-5. 별 적립도 되어서 편리하고 좋음
-
----
-
-### 🗣️ 답변
-
-Um, so I think cafes have changed a lot, like, honestly so much.
-음, 카페가 정말 많이 변한 것 같아요, 솔직히 엄청나게요.
-
-Back in the day, you know, there weren't that many cafes around at all.
-예전에는 카페가 그렇게 많지 않았거든요.
-
-But like, these days you can find one on literally every corner - it's kind of crazy!
-근데 요즘은 진짜 어디에나 있어요, 좀 신기할 정도예요!
-
-And also, a lot of affordable franchise cafes have opened up recently, which is great honestly.
-그리고 저렴한 프랜차이즈 카페들도 많이 생겨서, 솔직히 너무 좋아요.
-
-And you know, the way we order has changed too - like, Starbucks now has this thing called Siren Order.
-그리고 주문 방식도 달라졌는데, 스타벅스에 사이렌 오더라는 게 생겼어요.
-
-You just order on your phone and collect stars - I mean, it's so convenient!
-핸드폰으로 주문하고 별도 적립되고, 진짜 너무 편해요!
-
-So yeah, cafes have just become way more convenient than they used to be - I love it!
-그래서 카페가 예전보다 훨씬 편리해진 것 같아요, 너무 좋아요!
-
----
-
-### 💡 포인트
-- **Back in the day** -> 예전에는
-- **literally every corner** -> 어디에나 있다는 강조
-- **it's kind of crazy** -> 변화가 커서 신기하다는 느낌
-- **affordable franchise cafes** -> 저렴한 프랜차이즈 카페
-- **the way we order has changed too** -> 주문 방식 변화 연결
-- **collect stars** -> 적립 표현
-- **way more convenient than they used to be** -> 과거 비교 마무리`
-            }
-          ]
-        },
-        {
-          id: "recycling",
-          title: "재활용",
-          questions: [
-            {
-              id: "recycling-roleplay-learning-from-parents",
-              title: "어릴 때 재활용을 배운 경험",
-              badge: "경험형",
-              scriptFile: "themes/recycling/roleplay/q1/script.txt",
-              audioFile: "themes/recycling/roleplay/q1/audio.wav",
-              scriptInline: `## 재활용 롤플레이 13번 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"어렸을 때 재활용을 누구에게 배웠는지 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 어렸을 때 부모님이 재활용하는 걸 따라다님
-2. 자연스럽게 재활용 방법을 배움
-3. 그 경험이 지금까지 이어짐
-
----
-
-### 🗣️ 답변
-
-Um, so I learned about recycling from my parents when I was young.
-음, 어렸을 때 부모님께 재활용을 배웠어요.
-
-Like, whenever they went to take out the recycling, I just followed them along, you know.
-부모님이 재활용하러 가실 때마다 그냥 따라다니곤 했거든요.
-
-And honestly, I just picked it up naturally by watching them - I never really studied it or anything.
-솔직히 그냥 보면서 자연스럽게 익혔어요, 따로 배운 건 아니고요.
-
-I mean, it was more like learning by doing, you know?
-그냥 하다 보니 익힌 것 같아요, 있잖아요?
-
-And I think those habits from back then are still with me today - which I'm really grateful for!
-그때 배운 습관이 지금까지도 이어지고 있는 것 같아서, 진짜 감사한 것 같아요!
-
-So yeah, I guess recycling just became a natural part of my life without me even realizing it!
-그래서 저도 모르는 사이에 재활용이 자연스럽게 제 삶의 일부가 된 것 같아요!`
-            },
-            {
-              id: "recycling-solving-neighbor-problem",
-              title: "재활용 문제 해결책 제시",
-              badge: "롤플레이",
-              scriptFile: "themes/recycling/roleplay/q2/script.txt",
-              audioFile: "themes/recycling/roleplay/q2/audio.wav",
-              scriptInline: `## 재활용 롤플레이 12번 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"외국인 이웃이 재활용 정책을 잘 몰라서 이웃들이 화가 난 상황이다. 해결책을 두세 가지 제시해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 상황 설명 - 외국인 이웃이 재활용 방법을 몰라서 문제가 생김
-2. 대안 1 - 관리인에게 외국어 안내문 요청
-3. 대안 2 - 안내문을 프린트해서 문에 붙여주기
-
----
-
-### 🗣️ 답변
-
-Um, okay, so I totally get the situation, and I think I have a couple of ideas that might help.
-음, 상황을 이해했고, 도움이 될 만한 방법이 몇 가지 있을 것 같아요.
-
-So first, like, maybe we could ask the building manager to provide a recycling guide in his language.
-우선, 건물 관리인에게 그 분 언어로 된 재활용 안내문을 제공해달라고 요청하는 건 어떨까요?
-
-That way, you know, he can actually understand the rules without any language barrier.
-그러면 언어 장벽 없이 규칙을 제대로 이해할 수 있을 것 같아요.
-
-And also, um, we could print out a recycling guide and just put it on his door.
-그리고 재활용 안내문을 프린트해서 문에 붙여주는 것도 좋을 것 같아요.
-
-Like, that way he always has something to look at at home, you know?
-그러면 집에서 언제든지 참고할 수 있잖아요, 그렇죠?
-
-I think these two things would really help him out and hopefully fix the problem!
-이 두 가지면 충분히 도움이 되고 문제도 해결될 것 같아요!`
-            },
-            {
-              id: "recycling-asking-manager-questions",
-              title: "관리인에게 재활용 정책 질문",
-              badge: "롤플레이",
-              scriptFile: "themes/recycling/roleplay/q3/script.txt",
-              audioFile: "themes/recycling/roleplay/q3/audio.wav",
-              scriptInline: `## 재활용 롤플레이 11번 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"새 아파트로 이사했다. 관리인에게 전화해서 재활용 정책에 대해 3~4가지 질문을 해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 새 건물로 이사했다고 소개
-2. 재활용 장소가 건물 안인지 밖인지 질문
-3. 재활용 날짜 질문
-4. 재활용 분리 방법 질문
-
----
-
-### 🗣️ 답변
-
-Hi, I just moved into this building and I have a couple of questions about the recycling policy.
-안녕하세요, 방금 이 건물로 이사를 왔는데 재활용 관련해서 몇 가지 여쭤봐도 될까요?
-
-Um, first of all, is the recycling area inside the building or outside?
-음, 우선 재활용 장소가 건물 안에 있나요, 아니면 밖에 있나요?
-
-And also, you know, is there a specific day for recycling, or can I do it anytime?
-그리고 재활용 날짜가 정해져 있나요, 아니면 언제든지 해도 되나요?
-
-Oh, and one more thing - how should I separate the recycling? Like, is there a specific way to sort plastic, paper, and glass?
-아, 그리고 한 가지 더 - 재활용을 어떻게 분리해야 하나요? 플라스틱, 종이, 유리 같은 걸 따로 분리해야 하나요?
-
-I'd really appreciate it if you could help me get settled in. Thank you so much!
-잘 적응할 수 있도록 도움 주시면 정말 감사하겠습니다. 감사합니다!`
-            }
-          ]
-        },
-        {
-          id: "mp3",
-          title: "MP3",
-          questions: [
-            {
-              id: "mp3-asking-friend-questions",
-              title: "친구에게 MP3 관련 질문하기",
-              badge: "롤플레이",
-              scriptFile: "themes/mp3/roleplay/q1/script.txt",
-              audioFile: "themes/mp3/roleplay/q1/audio.wav",
-              scriptInline: `## MP3 롤플레이 (질문형) - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"친구가 MP3를 샀다. 친구에게 MP3에 대해 3~4가지 질문을 해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 얼마에 샀는지 질문
-2. 어디서 샀는지, 온라인이 더 저렴하지 않은지 질문
-3. 장단점이 뭔지 질문
-
----
-
-### 🗣️ 답변
-
-Oh, you got a new MP3 player? That's so cool!
-오, 새 MP3 샀어? 좋겠다!
-
-Um, so how much did you pay for it?
-음, 근데 얼마 주고 샀어?
-
-And like, where did you buy it? I mean, isn't it cheaper to buy it online?
-어디서 샀어? 온라인으로 사면 좀 더 저렴하지 않아?
-
-Oh, and also, you know, what are the pros and cons of it?
-아, 그리고 장단점은 어때?
-
-Like, is there anything you don't like about it so far?
-지금까지 마음에 안 드는 점 있어?`
-            },
-            {
-              id: "mp3-borrowing-request",
-              title: "친구에게 MP3 빌리기",
-              badge: "롤플레이",
-              scriptFile: "themes/mp3/roleplay/q2/script.txt",
-              audioFile: "themes/mp3/roleplay/q2/audio.wav",
-              scriptInline: `## MP3 롤플레이 (빌리기) - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"친구에게 MP3를 빌려달라고 요청하고 관련 질문을 해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 공부하려고 MP3가 필요한 상황 설명
-2. 빌려달라고 요청
-3. 언제까지 빌릴 수 있는지 질문
-
----
-
-### 🗣️ 답변
-
-Hey, um, I have a favor to ask you.
-야, 음, 부탁이 있는데.
-
-So, you know, I'm trying to study these days and I really need an MP3 player.
-요즘 공부를 하려고 하는데 MP3가 필요하거든.
-
-I mean, it really helps me focus when I listen to music while studying.
-음악 들으면서 공부하면 집중이 훨씬 잘 되더라고.
-
-So, um, do you think I could borrow yours for a while?
-그래서, 음, 네 거 잠깐 빌릴 수 있을까?
-
-Oh, and also, you know, how long can I borrow it for?
-아, 그리고 언제까지 빌릴 수 있어?
-
-I'll take good care of it, I promise!
-잘 쓰고 돌려줄게, 약속해!`
-            },
-            {
-              id: "mp3-broken-player-solution",
-              title: "고장낸 MP3 문제 해결",
-              badge: "롤플레이",
-              scriptFile: "themes/mp3/roleplay/q3/script.txt",
-              audioFile: "themes/mp3/roleplay/q3/audio.wav",
-              scriptInline: `## MP3 롤플레이 (문제해결형) - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"친구에게 빌린 MP3를 고장냈다. 친구에게 상황을 설명하고 해결책을 제시해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 고장났다고 솔직하게 말함
-2. 진심으로 사과
-3. 똑같은 걸 새로 사줄 것을 제안
-
----
-
-### 🗣️ 답변
-
-Hey, um, I have something to tell you and I'm really sorry about this.
-야, 음, 할 말이 있는데 정말 미안해.
-
-So, you know, I accidentally broke your MP3 player.
-사실, 네 MP3를 실수로 고장냈어.
-
-I honestly don't know what to say - I feel really bad about it.
-솔직히 뭐라고 해야 할지 모르겠어, 정말 미안해.
-
-So, um, I was thinking - how about I just buy you a new one?
-그래서, 음, 생각해봤는데 - 내가 똑같은 걸 새로 사줄게, 어때?
-
-I mean, it's my fault, so it's only fair, you know.
-내 잘못이니까, 그게 맞는 것 같아.
-
-So yeah, really sorry again - I'll make it up to you!
-다시 한번 정말 미안해, 꼭 보상해줄게!`
-            }
-          ]
-        },
-        {
-          id: "music",
-          title: "음악",
-          questions: [
-            {
-              id: "favorite-music-artists",
-              title: "좋아하는 음악 장르와 가수",
-              badge: "묘사형",
-              scriptFile: "themes/music/describe/q1/script.txt",
-              audioFile: "themes/music/describe/q1/audio.wav",
-              scriptInline: `## 음악감상 묘사형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"좋아하는 음악 장르와 가수에 대해 설명해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 주로 발라드를 좋아함
-2. 신나는 노래도 좋아함
-3. 좋아하는 가수 - 성시경, 싸이
-4. 각각 좋아하는 이유
-
----
-
-### 🗣️ 답변
-
-Um, so when it comes to music, I enjoy two different types.
-음, 음악에 있어서 저는 두 가지 장르를 좋아해요.
-
-First, I really like ballads, you know, because they're emotional and relaxing.
-우선 발라드를 정말 좋아하는데, 감성적이고 편안해서 좋아요.
-
-But I also like upbeat songs when I want to feel more energetic.
-근데 기분을 업시키고 싶을 때는 신나는 노래도 즐겨 들어요.
-
-As for my favorite artists, um, I really like Sung Si-kyung and Psy.
-좋아하는 가수는요, 음, 성시경이랑 싸이를 좋아해요.
-
-You know, Sung Si-kyung has a really soft and calming voice, so his songs always make me feel relaxed.
-성시경은 목소리가 부드럽고 편안해서, 들으면 항상 마음이 차분해져요.
-
-And Psy, honestly, his songs are just so fun — I always feel good when I listen to him!
-그리고 싸이는 솔직히 노래가 너무 신나서, 들으면 항상 기분이 좋아져요!
-
-So yeah, these two artists are totally my style.
-그래서 이 두 가수가 제 음악 취향에 딱 맞는 것 같아요!`
-            },
-            {
-              id: "music-listening-routine",
-              title: "음악을 주로 듣는 상황",
-              badge: "습관형",
-              scriptFile: "themes/music/regular/q1/script.txt",
-              audioFile: "themes/music/regular/q1/audio.wav",
-              scriptInline: `## 음악감상 습관형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"언제, 어디서 음악을 주로 듣는지 설명해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 대중교통 이용할 때 음악 들음
-2. 일할 때 신나는 음악 들음
-3. 음악에서 에너지를 얻음
-
----
-
-### 🗣️ 답변
-
-Um, so I listen to music in a few different situations.
-음, 저는 몇 가지 다른 상황에서 음악을 들어요.
-
-First, you know, I usually listen to music when I'm on public transportation.
-우선, 대중교통을 탈 때 주로 음악을 들어요.
-
-It's a good way to pass the time, and honestly, it makes the ride a lot more enjoyable.
-시간 보내기도 좋고, 솔직히 이동하는 게 훨씬 즐거워져요.
-
-And also, um, when I'm working, I like to put on upbeat songs.
-그리고 일할 때는 신나는 노래를 틀어놓는 걸 좋아해요.
-
-I mean, it really helps me stay focused, especially when I'm tired.
-피곤할 때 특히 집중하는 데 정말 도움이 되거든요.
-
-So yeah, I'd say music is kind of like my energy boost throughout the day!
-그래서 음악이 저한테는 하루 종일 에너지를 주는 것 같아요!`
-            },
-            {
-              id: "music-interest-and-taste-change",
-              title: "음악에 관심을 갖게 된 계기",
-              badge: "경험형",
-              scriptFile: "themes/music/experience/q1/script.txt",
-              audioFile: "themes/music/experience/q1/audio.wav",
-              scriptInline: `## 음악감상 경험형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"음악에 관심을 갖게 된 계기와 어릴 적부터 지금까지 음악 취향이 어떻게 변했는지 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 어릴 때부터 노래 부르는 걸 좋아해서 자연스럽게 음악에 관심 생김
-2. 어렸을 땐 잔잔한 음악을 좋아했음
-3. 지금은 장르 가리지 않고 다양하게 들음
-
----
-
-### 🗣️ 답변
-
-Um, I think my interest in music started when I was really young.
-음, 음악에 대한 관심은 아주 어릴 때부터 시작된 것 같아요.
-
-You know, I've always loved singing, so I just naturally got interested in music.
-어릴 때부터 노래 부르는 걸 좋아했는데, 그러다 보니 자연스럽게 음악에 관심을 갖게 됐어요.
-
-Back then, um, I was really into calm and soft songs, you know, just relaxing music.
-그때는 잔잔하고 부드러운 노래를 정말 좋아했어요.
-
-But as I got older, honestly, my taste changed quite a bit.
-근데 나이가 들면서 솔직히 취향이 꽤 많이 달라졌어요.
-
-These days, I don't really stick to one genre — I just listen to whatever I feel like.
-요즘은 한 장르에 고집하지 않고, 그때그때 듣고 싶은 음악을 다 들어요.
-
-I mean, music has always been a big part of my life since I was a kid!
-어릴 때부터 음악이 항상 제 삶의 큰 부분인 것 같아요!`
-            },
-            {
-              id: "memorable-concert-experience",
-              title: "기억에 남는 콘서트 관람 경험",
-              badge: "경험형",
-              scriptFile: "themes/music/experience/q2/script.txt",
-              audioFile: "themes/music/experience/q2/audio.wav",
-              scriptInline: `## 콘서트 경험형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"기억에 남는 콘서트 관람 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 콘서트는 따로 가본 적 없음
-2. 대학교 축제에 싸이가 옴
-3. 너무 신나고 가슴이 두근거렸음
-4. 아직도 생생하게 기억남
-
----
-
-### 🗣️ 답변
-
-Um, I've actually never been to a proper concert before.
-음, 사실 제대로 된 콘서트는 가본 적이 없어요.
-
-But you know, the closest thing I had was at my university festival.
-근데 그나마 비슷한 경험이 대학교 축제에서 있었어요.
-
-Psy actually performed there, and honestly, I was so excited when I heard the news.
-싸이가 왔었는데, 소식을 들었을 때 정말 너무 신났어요.
-
-And when he came on stage, I mean, my heart was literally pounding.
-그가 무대에 올라왔을 때, 가슴이 정말 두근두근 거렸어요.
-
-I couldn't believe I was actually seeing him perform live, you know.
-라이브로 보고 있다는 게 진짜 믿기지 않았어요.
-
-I remember singing and dancing along to all his songs with everyone around me.
-주변 사람들이랑 같이 노래하고 춤췄던 기억이 나요.
-
-Even now, that memory is still so vivid — I'll never forget it!
-지금도 그 기억이 너무 생생해요, 절대 잊지 못할 것 같아요!`
-            }
-          ]
-        },
-        {
-          id: "park",
-          title: "공원",
-          questions: [
-            {
-              id: "park-littering-issue",
-              title: "공원 이용자들이 겪는 문제",
-              badge: "문제형",
-              scriptFile: "themes/park/issue/q1/script.txt",
-              audioFile: "themes/park/issue/q1/audio.wav",
-              segmentTimes: [
-                { start: 0.28, end: 6.02 },
-                { start: 6.87, end: 12.29 },
-                { start: 13.08, end: 19.96 },
-                { start: 20.94, end: 26.67 },
-                { start: 27.68, end: 33.92 },
-                { start: 35.11, end: 41.0 },
-                { start: 42.12, end: 47.86 },
-                { start: 48.98, end: 57.84 }
-              ],
-              segmentFiles: [
-                "themes/park/issue/q1/segments/s1.wav",
-                "themes/park/issue/q1/segments/s2.wav",
-                "themes/park/issue/q1/segments/s3.wav",
-                "themes/park/issue/q1/segments/s4.wav",
-                "themes/park/issue/q1/segments/s5.wav",
-                "themes/park/issue/q1/segments/s6.wav",
-                "themes/park/issue/q1/segments/s7.wav",
-                "themes/park/issue/q1/segments/s8.wav"
-              ],
-              scriptInline: `## 공원 이슈 문제형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-
-**"공원 이용자들이 겪는 가장 큰 문제는 무엇이며, 이를 해결하기 위해 무엇을 해야 하는지 설명하시오."**
-
----
-
-### 🗂️ 스토리라인
-
-1. 요즘 많은 사람들이 공원을 이용함
-2. 나도 자주 산책하러 감
-3. 가장 큰 문제는 쓰레기
-4. 일부 사람들이 쓰레기를 그냥 두고 감
-5. 벌금을 부과해야 함
-6. 쓰레기통을 더 많이 설치해야 함
-7. 시민의식 개선 필요
-
----
-
-### 🗣️ 답변
-
-Well, these days, a lot of people spend time in public parks.
-요즘 많은 사람들이 공원에서 시간을 보냅니다.
-
-I also visit parks quite often because I enjoy taking walks there.
-저도 산책하는 것을 좋아해서 공원에 자주 갑니다.
-
-But if you ask me about the biggest problem, I'd say littering is the main issue.
-하지만 가장 큰 문제가 무엇이냐고 묻는다면, 쓰레기 문제가 가장 크다고 생각합니다.
-
-You know, some people leave their trash behind instead of throwing it away properly.
-아시다시피 일부 사람들은 쓰레기를 제대로 버리지 않고 그냥 두고 갑니다.
-
-For example, they might finish a cup of coffee and just leave the empty cup on a bench.
-예를 들어 커피를 다 마신 뒤 빈 컵을 벤치에 그냥 두고 가기도 합니다.
-
-I think people who litter should be fined so they take more responsibility for their actions.
-저는 쓰레기를 함부로 버리는 사람들에게 벌금을 부과해야 한다고 생각합니다.
-
-Also, more trash cans should be placed throughout parks to make disposal easier.
-그리고 사람들이 쉽게 버릴 수 있도록 공원 곳곳에 쓰레기통을 더 설치해야 합니다.
-
-Most importantly, people need to understand that littering has consequences, and I think that awareness will help keep parks clean.
-무엇보다도 사람들은 쓰레기를 버리면 그에 따른 책임이 있다는 것을 알아야 하며, 그런 인식이 공원을 더 깨끗하게 유지하는 데 도움이 될 것이라고 생각합니다.`
-            },
-            {
-              id: "two-parks-comparison",
-              title: "두 공원 비교",
-              badge: "비교형",
-              scriptFile: "themes/park/compare/q1/script.txt",
-              audioFile: "themes/park/compare/q1/audio.wav",
-              scriptInline: `## 공원 비교형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-
-**"두 공원을 비교해서 설명해 주세요."**
-
----
-
-### 🗂️ 스토리라인
-
-1. 내가 좋아하는 공원이 두 개 있음
-2. 첫 번째는 아파트 단지 안 작은 공원
-3. 배드민턴 코트가 있어서 아내와 운동하기 좋음
-4. 규모가 작아 사람이 많음
-5. 두 번째는 단지 옆 대형 공원
-6. 산책하기 좋고 운동 시설도 있음
-7. 운동은 첫 번째, 산책은 두 번째
-8. 둘 다 좋아함
-
----
-
-### 🗣️ 답변
-
-Well, I have two favorite parks near my apartment, and I visit both of them quite often.
-음, 제 아파트 근처에는 제가 좋아하는 공원이 두 곳 있는데 둘 다 자주 갑니다.
-
-The first one is inside my apartment complex, and it has a badminton court where my wife and I like to exercise together.
-첫 번째 공원은 아파트 단지 안에 있고, 배드민턴 코트가 있어서 아내와 함께 운동하기 좋아합니다.
-
-However, it's quite small, so it can get pretty crowded sometimes.
-하지만 규모가 작아서 가끔 사람이 많이 붐빕니다.
-
-The second park is right next to my apartment, and it's much larger than the first one.
-두 번째 공원은 아파트 바로 옆에 있는데 첫 번째 공원보다 훨씬 큽니다.
-
-It's a great place for walking, and it takes about an hour to walk around the whole park.
-산책하기 정말 좋고, 공원을 한 바퀴 도는 데 약 한 시간이 걸립니다.
-
-There are also some outdoor exercise facilities, so many people work out there.
-간이 운동 시설도 있어서 많은 사람들이 운동을 합니다.
-
-So, I usually go to the first park for badminton and the second one for walking.
-그래서 저는 보통 배드민턴을 할 때는 첫 번째 공원에 가고, 산책할 때는 두 번째 공원에 갑니다.
-
-Even though they're different, I really love both parks.
-비록 서로 다르지만, 저는 두 공원 모두 정말 좋아합니다.`
-            }
-          ]
-        },
-        {
-          id: "phone",
-          title: "휴대폰",
-          questions: [
-            {
-              id: "phone-changes-over-time",
-              title: "휴대폰 변화 비교",
-              badge: "비교형",
-              scriptFile: "themes/phone/compare/q1/script.txt",
-              audioFile: "themes/phone/compare/q1/audio.wav",
-              scriptInline: `## 휴대폰 변화 비교형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"예전에 사용하던 휴대폰과 지금 사용하는 휴대폰은 어떤 차이가 있나요?"**
-
----
-
-### 🗂️ 스토리라인
-1. 지금은 모든 폰이 스마트폰, 많은 차이가 있음
-2. 예전엔 버튼, 지금은 터치스크린
-3. 예전엔 카메라 없었는데 지금은 카메라 성능이 엄청남
-4. 예전엔 전화, 문자만 가능했는데 지금은 유튜브, 음악, 주식 등 거의 모든 것 가능
-
----
-
-### 🗣️ 답변
-
-Um, so I think phones have changed like, incredibly compared to before.
-음, 예전이랑 비교하면 핸드폰이 진짜 엄청나게 달라진 것 같아요.
-
-Like, these days every single phone is a smartphone, you know - which is just crazy to think about.
-요즘은 모든 폰이 스마트폰이잖아요, 생각해보면 좀 신기하죠.
-
-Back then, you had to press physical buttons for everything, but now you just touch the screen - so much easier.
-예전엔 버튼을 눌러야 했는데, 지금은 그냥 화면을 터치하면 되니까 훨씬 편해요.
-
-And also, like, my first phone didn't even have a camera - but now, phones have better cameras than actual cameras!
-그리고 제 첫 번째 폰에는 카메라가 아예 없었는데, 요즘은 왠만한 카메라보다 성능이 더 좋잖아요!
-
-And you know, back then you could only make calls or send texts, but now you can do pretty much everything.
-그리고 예전엔 전화나 문자 정도만 됐는데, 요즘은 거의 모든 걸 할 수 있어요.
-
-Like, YouTube, music, even stock trading - I mean, it's basically a computer in your pocket, right?
-유튜브, 음악, 심지어 주식 거래까지, 그냥 주머니 속 컴퓨터나 다름없잖아요, 그렇죠?
-
-At that time, I had no idea phones would ever become this advanced!
-그때는 핸드폰이 이렇게까지 발전할 줄은 몰랐어요!`
-            },
-            {
-              id: "phone-first-phone-experience",
-              title: "처음 산 휴대폰 경험",
-              badge: "경험형",
-              scriptFile: "themes/phone/experience/q1/script.txt",
-              audioFile: "themes/phone/experience/q1/audio.wav",
-              scriptInline: `## 첫 휴대폰 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"휴대폰을 처음 샀던 때를 기억하시나요? 그때 어떤 휴대폰이었나요?"**
-
----
-
-### 🗂️ 스토리라인
-1. 중학생 때, 2002년쯤
-2. 흑백 폴더블 폰이었음
-3. 그 당시엔 스마트폰이 없었음
-4. 터치스크린도 당연히 없었음
-
----
-
-### 🗣️ 답변
-
-Um, so I still remember the first phone I ever had - it was back when I was in middle school, around 2002 I think.
-음, 처음 가졌던 휴대폰이 아직도 기억나요, 중학생 때였는데 아마 2002년쯤이었던 것 같아요.
-
-Like, back then, you know, smartphones didn't even exist yet.
-그때는 스마트폰이 아예 없었거든요.
-
-My first phone was this black and white flip phone - it was so basic compared to now!
-제 첫 번째 폰은 흑백 폴더폰이었는데, 지금이랑 비교하면 너무 기본적이었어요!
-
-And of course, you know, there was no touchscreen or anything like that.
-그리고 당연히 터치스크린 같은 건 없었어요.
-
-I mean, you just pressed physical buttons for everything - that's just how it was back then!
-모든 걸 버튼으로 눌러야 했는데, 그때는 그게 당연한 거였죠!
-
-But I was so excited when I got it - like, it was the best thing ever at the time!
-근데 그때는 너무 신났어요, 그때는 세상에서 제일 좋은 것 같았거든요!`
-            }
-          ]
-        },
-        {
-          id: "close-person",
-          title: "가까운 사람",
-          questions: [
-            {
-              id: "close-person-recent-experience",
-              title: "가까운 사람과 함께한 최근 경험",
-              badge: "경험형",
-              scriptFile: "themes/close-person/experience/q1/script.txt",
-              audioFile: "themes/close-person/experience/q1/audio.wav",
-              scriptInline: `## 가까운 사람과의 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"가까운 사람과 함께했던 최근 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 지난 주말 오랜만에 와이프랑 외출
-2. 집 근처 카페에서 커피 마심
-3. 일상, 직장 이야기 나눔
-4. 동네 산책
-5. 아무 걱정 없이 함께한 시간이 제일 좋았음
-
----
-
-### 🗣️ 답변
-
-Um, so I'd like to talk about a day I spent with my wife recently.
-음, 최근에 와이프랑 함께한 하루에 대해 말하고 싶어요.
-
-Actually, it was last weekend, and we decided to go out together after a long time.
-지난 주말이었는데, 오랜만에 같이 외출하기로 했어요.
-
-So first, we went to a cafe near our house and had some coffee.
-우선 집 근처 카페에 가서 커피를 마셨어요.
-
-And you know, we just sat there and talked about a lot of things, like work and daily life.
-그냥 앉아서 직장이나 일상 이야기 같은 것들을 많이 했어요.
-
-After that, we took a walk around the neighborhood, which was really relaxing.
-그 다음에는 동네를 산책했는데, 정말 여유롭고 좋았어요.
-
-But the best part was just spending time together without worrying about anything.
-근데 제일 좋았던 건 아무 걱정 없이 그냥 함께 시간을 보낸 거였어요.
-
-Overall, it was such a simple day, but it meant a lot to me, and I really enjoyed it.
-전반적으로 정말 평범한 하루였는데, 저한테는 정말 소중한 시간이었어요.`
-            },
-            {
-              id: "close-person-description",
-              title: "가까운 사람 묘사",
-              badge: "묘사형",
-              scriptFile: "themes/close-person/describe/q1/script.txt",
-              audioFile: "themes/close-person/describe/q1/audio.wav",
-              scriptInline: `## 가까운 사람 묘사 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"당신과 가까운 사람에 대해 묘사해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 가장 가까운 사람은 와이프
-2. 오래 알고 지냈고 함께 많은 시간을 보냄
-3. 친절하고 배려심이 깊음
-4. 스킨케어와 건강에 관심이 많아서 좋은 제품을 추천해줌
-5. 함께 있으면 편안하고 삶에서 중요한 사람
-
----
-
-### 🗣️ 답변
-
-Um, so I'd like to talk about someone I'm really close to, which is my wife.
-음, 제가 가장 가까운 사람에 대해 말하고 싶은데, 바로 와이프예요.
-
-Well, we've known each other for quite a long time, and we spend a lot of time together.
-꽤 오래 알고 지냈고, 함께 많은 시간을 보내요.
-
-She's actually really kind and thoughtful, and she's always there for me when I need help.
-정말 친절하고 배려심이 깊어서, 제가 도움이 필요할 때 항상 곁에 있어줘요.
-
-And you know, one thing I really like about her is that she's super passionate about skincare and health.
-그리고 제가 정말 좋아하는 점은 스킨케어랑 건강에 정말 관심이 많다는 거예요.
-
-So she always recommends good products to me, which I really appreciate.
-그래서 항상 좋은 제품을 추천해줘서 정말 감사해요.
-
-Overall, I think she's a really important person in my life, and I feel really comfortable when I'm with her.
-전반적으로 제 삶에서 정말 중요한 사람이고, 함께 있으면 정말 편안해요.`
-            }
-          ]
-        },
-        {
-          id: "korean-food",
-          title: "음식",
-          questions: [
-            {
-              id: "famous-korean-food-chicken",
-              title: "한국 유명 음식 치킨",
-              badge: "묘사형",
-              scriptFile: "themes/korean-food/describe/q1/script.txt",
-              audioFile: "themes/korean-food/describe/q1/audio.wav",
-              scriptInline: `## 한국 유명 음식 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"한국에서 유명한 음식이나 요리에 대해 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 한국에서 치킨이 유명함
-2. 굽네치킨은 튀기는 게 아니라 굽는 방식
-3. 튀기는 것보다 건강해서 자주 먹음
-4. 맛있고 프랜차이즈라 배달도 편리함
-
----
-
-### 🗣️ 답변
-
-Um, so if I had to pick one famous Korean food, I'd definitely say chicken!
-음, 한국에서 유명한 음식 하나를 고르라면, 저는 무조건 치킨이에요!
-
-Like, chicken is just huge in Korea — people eat it all the time, you know.
-치킨은 한국에서 진짜 엄청난데, 사람들이 정말 자주 먹거든요.
-
-And honestly, my personal favorite is this place called Goobne Chicken.
-근데 솔직히 제가 제일 좋아하는 건 굽네치킨이에요.
-
-What makes it special is that, like, they don't fry it — they actually grill it instead.
-특별한 점은, 튀기는 게 아니라 굽는 방식이에요.
-
-So it's honestly way healthier than regular fried chicken, which I really love about it!
-그래서 일반 튀긴 치킨보다 훨씬 건강한데, 그게 정말 마음에 들어요!
-
-And it's a franchise, so you can easily order delivery — which makes it even better!
-프랜차이즈라서 배달도 쉽게 시킬 수 있고, 그것도 너무 좋아요!
-
-So yeah, I eat it pretty often — it's just so good!
-그래서 자주 먹는데, 진짜 너무 맛있어요!
-
----
-
-### 💡 포인트
-- **if I had to pick one** → 하나를 고르라면 자연스러운 시작
-- **just huge in Korea** → 엄청 유명하다 구어체 표현
-- **grill it instead** → 굽는 방식 자연스러운 표현
-- **which I really love about it** → 감정 표현 자연스럽게 연결
-- **it's just so good** → 맛있다는 감정으로 마무리 👍`
-            },
-            {
-              id: "food-i-usually-eat",
-              title: "주로 먹는 음식",
-              badge: "루틴형",
-              scriptFile: "themes/korean-food/regular/q1/script.txt",
-              audioFile: "themes/korean-food/regular/q1/audio.wav",
-              scriptInline: `## 주로 먹는 음식 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"주로 어떤 음식을 먹는지 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 치킨도 자주 먹음
-2. 제일 좋아하는 건 빵
-3. 샌드위치, 케이크 등 빵이면 다 좋아함
-4. 살찌는 것 같아서 요즘은 줄이려고 노력 중
-
----
-
-### 🗣️ 답변
-
-Um, so like I mentioned, I eat chicken pretty often — I just love it.
-음, 아까 말했던 것처럼 치킨도 자주 먹어요, 진짜 좋아하거든요.
-
-But honestly, if I had to pick my absolute favorite food, it would be bread.
-근데 솔직히 제일 좋아하는 걸 하나 고르라면, 빵이에요.
-
-Like, any kind of bread — sandwiches, cake, anything really.
-샌드위치, 케이크, 뭐든 빵이면 다 좋아요.
-
-I mean, I could eat bread every single day and never get tired of it!
-진짜 매일 먹어도 질리지 않을 것 같아요!
-
-But, you know, the sad part is that I feel like I gain weight every time I eat it.
-근데, 슬픈 건 먹을 때마다 살이 찌는 것 같아서요.
-
-And that makes me so sad honestly — so these days I'm trying to cut back a little!
-그게 너무 슬퍼요, 솔직히 — 그래서 요즘은 좀 줄이려고 노력 중이에요!
-
----
-
-### 💡 포인트
-- **like I mentioned** → 아까 말했던 것처럼 자연스러운 연결
-- **absolute favorite** → 제일 좋아하는 강조 표현
-- **never get tired of it** → 질리지 않는다 자연스러운 표현
-- **that makes me so sad** → 슬프다는 감정 표현
-- **cut back** → 줄이다 구어체 표현 👍`
-            },
-            {
-              id: "memorable-food-experience",
-              title: "음식 관련 기억에 남는 경험",
-              badge: "경험형",
-              scriptFile: "themes/korean-food/experience/q1/script.txt",
-              audioFile: "themes/korean-food/experience/q1/audio.wav",
-              scriptInline: `## 음식 기억에 남는 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"음식을 먹다가 기억에 남는 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 와이프랑 식당에 가서 찌개를 시킴
-2. 먹다가 비닐이 나옴
-3. 매니저 불러서 항의 → 음식 다시 해줌
-4. 기분이 이미 상했고 음식값도 다 냄
-5. 다시는 그 식당에 안 감
-
----
-
-### 🗣️ 답변
-
-Um, so I have a really frustrating experience related to food.
-음, 음식과 관련해서 정말 황당했던 경험이 있어요.
-
-So, I went out to eat with my wife, and I ordered this stew, you know.
-와이프랑 밥 먹으러 갔는데, 찌개를 시켰어요.
-
-And like, while I was eating, I suddenly found a piece of plastic in my food.
-근데 먹다 보니까 음식에서 비닐이 나오는 거예요.
-
-I was so shocked — like, seriously? Plastic in my food?
-진짜 너무 놀랐어요, 음식에서 비닐이라니?
-
-So I called the manager and complained, and they said they'd remake the dish.
-그래서 매니저를 불러서 항의했는데, 음식을 다시 해주겠다고 하더라고요.
-
-But honestly, by that point, my mood was already completely ruined, you know.
-근데 솔직히 그때는 이미 기분이 완전히 상해버렸어요.
-
-And on top of that, they still charged us full price — I couldn't believe it!
-그리고 음식값도 다 받는 거예요, 진짜 믿기지 않았어요!
-
-So yeah, I never went back to that restaurant again — never!
-그래서 그 식당에 다시는 안 갔어요, 절대로!
-
----
-
-### 💡 포인트
-- **seriously? Plastic in my food?** → 황당함 감정 강조
-- **mood was completely ruined** → 기분이 상했다 자연스러운 표현
-- **charged us full price** → 음식값 다 받았다 자연스러운 표현
-- **I couldn't believe it** → 믿기지 않는다 감정 표현
-- **never! 반복** → 강조하는 마무리 👍`
-            }
-          ]
-        },
-        {
-          id: "restaurant",
-          title: "레스토랑",
-          questions: [
-            {
-              id: "restaurant-reservation-memory",
-              title: "레스토랑 예약 관련 경험",
-              badge: "경험형",
-              scriptFile: "themes/restaurant/experience/q1/script.txt",
-              audioFile: "themes/restaurant/experience/q1/audio.wav",
-              scriptInline: `## 레스토랑 롤플레이 13번 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"레스토랑 예약과 관련해서 기억에 남는 경험이 있으면 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 3명이서 저녁 7시 예약했던 상황
-2. 막상 가보니 예약이 안 돼있었음
-3. 다시 확인했지만 예약 없다고 함
-4. 결국 근처 다른 식당으로 감
-
----
-
-### 🗣️ 답변
-
-Um, so I have this really frustrating memory about a restaurant reservation.
-음, 레스토랑 예약 관련해서 정말 황당했던 기억이 있어요.
-
-Like, I made a reservation for 3 people at 7pm, you know.
-3명으로 저녁 7시에 예약을 했었거든요.
-
-But when we got there, they told us there was no reservation under my name — I was so confused!
-근데 도착했더니 제 이름으로 예약이 없다는 거예요, 너무 당황스러웠어요!
-
-So I asked them to double-check, but like, they still said nothing was there.
-다시 확인해달라고 했는데, 그래도 없다고 하더라고요.
-
-I mean, I couldn't believe it — I was so annoyed at that point!
-진짜 믿기지 않았어요, 그때 너무 짜증났어요!
-
-So we just had to find another place nearby, which was kind of a bummer.
-결국 근처 다른 식당을 찾아갔는데, 좀 실망스러웠죠.
-
-So yeah, I always double-check my reservations now — lesson learned!
-그래서 이제는 항상 예약을 두 번씩 확인해요, 교훈을 얻었죠!`
-            },
-            {
-              id: "restaurant-full-booking-solution",
-              title: "예약 마감 상황 해결",
-              badge: "롤플레이",
-              scriptFile: "themes/restaurant/roleplay/q1/script.txt",
-              audioFile: "themes/restaurant/roleplay/q1/audio.wav",
-              scriptInline: `## 레스토랑 롤플레이 12번 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"예약하려고 전화했더니 자리가 꽉 찼다고 한다. 매니저에게 상황을 설명하고 두세 가지 해결책을 제안해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 아쉽다는 감정 표현으로 시작
-2. 웨이팅 리스트 등록 요청
-3. 오늘 저녁 시간 가능한지 확인
-4. 다음 주 토요일로 날짜 변경 요청
-
----
-
-### 🗣️ 답변
-
-Oh no, that's too bad — I was really looking forward to it!
-아, 너무 아쉽네요, 정말 기대하고 있었는데!
-
-Um, okay so, is it possible to put me on a waiting list? Like, just in case someone cancels.
-음, 그럼 혹시 웨이팅 리스트에 올려주실 수 있나요? 취소 자리가 생길 수도 있으니까요.
-
-And like, what about dinner today? Is there any availability for this evening?
-그리고 오늘 저녁은요? 저녁 시간에 혹시 자리가 있을까요?
-
-If that doesn't work either, um, could we just move it to next Saturday?
-그것도 안 된다면, 음, 그냥 다음 주 토요일로 바꿀 수 있을까요?
-
-I really hope we can work something out — it's kind of a special day for us!
-어떻게든 방법이 있으면 좋겠어요, 저희한테 좀 특별한 날이거든요!`
-            },
-            {
-              id: "restaurant-special-event-questions",
-              title: "특별한 이벤트 예약 문의",
-              badge: "롤플레이",
-              scriptFile: "themes/restaurant/roleplay/q2/script.txt",
-              audioFile: "themes/restaurant/roleplay/q2/audio.wav",
-              scriptInline: `## 레스토랑 롤플레이 11번 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"특별한 이벤트를 위해 레스토랑에 전화해서 예약과 관련된 서너 가지 질문을 해보세요."**
-
----
-
-### 🗂️ 스토리라인
-1. 이번 주 토요일 점심 4명 예약 가능한지
-2. 프라이빗 룸 예약 가능한지
-3. 음식 미리 주문해야 하는지
-4. 주차 가능한지
-
----
-
-### 🗣️ 답변
-
-Hi there! Um, I'm calling because I want to make a reservation and I have a few quick questions.
-안녕하세요! 음, 예약을 하고 싶어서 전화드렸는데, 몇 가지 여쭤봐도 될까요?
-
-So, first of all, is it possible to get a table for 4 people this Saturday for lunch?
-우선, 이번 주 토요일 점심에 4명 예약이 가능한가요?
-
-Oh, and like, do you happen to have a private room? We're celebrating something special, so that would be amazing!
-아, 혹시 프라이빗 룸도 있나요? 특별한 날이라서 있으면 정말 좋겠어요!
-
-And also, do we need to pre-order our food, or is that not necessary?
-그리고 음식을 미리 주문해야 하나요, 아니면 괜찮은가요?
-
-Oh, one more thing — is there parking available?
-아, 한 가지 더 — 주차는 가능한가요?
-
-I'm really excited about this, so I hope it all works out!
-정말 기대가 돼서요, 잘 됐으면 좋겠어요!`
-            }
-          ]
-        },
-        {
-          id: "bank",
-          title: "은행",
-          questions: [
-            {
-              id: "bank-memorable-experience",
-              title: "은행에서 기억에 남는 경험",
-              badge: "경험형",
-              scriptFile: "themes/bank/experience/q1/script.txt",
-              audioFile: "themes/bank/experience/q1/audio.wav",
-              scriptInline: `## 은행 기억에 남는 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"은행에서 기억에 남는 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 지난 여름 너무 더웠음
-2. 은행에 갔는데 너무 시원했음
-3. 그게 기억에 남음
-
----
-
-### 🗣️ 답변
-
-Um, so I have this pretty funny memory at the bank.
-음, 은행에서 좀 웃긴 기억이 있어요.
-
-Like, last summer, it was just so incredibly hot outside, you know.
-지난 여름에 밖이 진짜 너무 더웠거든요.
-
-I mean, it was the kind of heat where you just don't want to go anywhere.
-어디도 나가고 싶지 않을 정도의 더위였어요.
-
-But like, I had no choice — I had to go to the bank.
-근데 어쩔 수 없이 은행에 가야 했어요.
-
-And the moment I walked in — oh my, it was so cool and refreshing inside!
-근데 들어가는 순간, 세상에, 너무 시원하고 상쾌한 거예요!
-
-I mean, I almost didn't want to leave — I just wanted to stay there all day!
-진짜 나가기 싫을 정도였어요, 그냥 하루 종일 있고 싶었어요!
-
-So yeah, kind of a funny memory, but that's probably why I still remember it!
-좀 웃긴 기억이긴 한데, 그래서 아직도 기억나는 것 같아요!`
-            },
-            {
-              id: "bank-recent-visit-experience",
-              title: "최근 은행 방문 경험",
-              badge: "경험형",
-              scriptFile: "themes/bank/experience/q2/script.txt",
-              audioFile: "themes/bank/experience/q2/audio.wav",
-              scriptInline: `## 은행 최근 방문 경험 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"최근에 은행에 갔던 경험을 말해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 결혼식 축의금 때문에 현금 뽑으러 감
-2. 은행 입구 앞에 ATM기가 있음
-3. 현금 필요할 때 간편하게 뽑을 수 있어서 편리함
-4. 요즘 현금을 잘 안 써서 ATM기가 점점 줄어드는 것 같아 아쉬움
-
----
-
-### 🗣️ 답변
-
-Um, so the last time I went to the bank was pretty recently.
-음, 최근에 은행에 갔던 게 얼마 안 됐어요.
-
-Like, I had to give cash as a gift for a friend's wedding, so I needed to withdraw some money.
-친구 결혼식에 축의금을 내야 해서 현금을 뽑으러 갔거든요.
-
-So, um, I just used the ATM machine right in front of the bank entrance, you know.
-그래서 은행 입구 바로 앞에 있는 ATM기를 이용했어요.
-
-And like, whenever I need cash, I can just quickly get it there — it's so convenient!
-현금이 필요할 때 거기서 바로 뽑을 수 있어서 진짜 편해요!
-
-I mean, it only took like a minute — super quick and easy!
-1분도 안 걸렸어요, 진짜 빠르고 간단했어요!
-
-But you know, these days people barely use cash anymore, so like, ATM machines are getting harder to find — which is kind of a shame!
-근데 요즘 사람들이 현금을 거의 안 써서 그런지, ATM기가 점점 찾기 어려워지는 것 같아서 좀 아쉬워요!`
-            },
-            {
-              id: "bank-description",
-              title: "자주 가는 은행 묘사",
-              badge: "묘사형",
-              scriptFile: "themes/bank/describe/q1/script.txt",
-              audioFile: "themes/bank/describe/q1/audio.wav",
-              scriptInline: `## 은행 묘사형 - 최종 정리
-
----
-
-### 📋 실제 시험 질문
-**"자주 가는 은행에 대해 묘사해보시오."**
-
----
-
-### 🗂️ 스토리라인
-1. 집 근처 2분 거리 농협은행
-2. 동네 은행이라 아담한 규모
-3. 경비원, 은행원 4~5명
-4. 요즘은 인터넷 뱅킹이 잘 돼서 잘 안 감
-
----
-
-### 🗣️ 답변
-
-Um, so there's a Nonghyup Bank that I usually go to.
-음, 제가 주로 가는 은행은 농협은행이에요.
-
-Like, it's only a 2-minute walk from my house, so it's really close, you know.
-집에서 걸어서 2분 정도밖에 안 걸려서 정말 가까워요.
-
-And it's a small neighborhood bank, so it's pretty cozy and not that big.
-동네 은행이라 아담하고 크지 않아요.
-
-There's a security guard at the entrance, and like, around 4 or 5 bank tellers inside.
-입구에 경비원이 있고, 안에는 은행원이 4~5명 정도 있어요.
-
-But these days, I barely go there, you know.
-근데 요즘은 거의 안 가요.
-
-Like, internet banking is so convenient now, so I just do everything on my phone!
-인터넷 뱅킹이 너무 잘 돼 있어서, 그냥 다 핸드폰으로 해결하거든요!
-
-So yeah, I only go when I really have to!
-그래서 꼭 필요할 때만 가는 것 같아요!`
-            }
-          ]
-        }
-      ];
-
-      const state = {
-        themeIndex: 0,
-        questionIndex: 0,
-        viewMode: "mixed",
-        scriptCache: new Map(),
-        hasInteracted: false,
-        userPausedAudio: false,
-        audioShouldResume: false,
-        pausedAudioTime: null,
-        pausedAudioSource: "",
-        segmentRequestId: 0
-      };
-
-      const themeList = document.getElementById("themeList");
-      const detailTag = document.getElementById("detailTag");
-      const detailType = document.getElementById("detailType");
-      const actualPrompt = document.getElementById("actualPrompt");
-      const questionNav = document.getElementById("questionNav");
-      const storyList = document.getElementById("storyList");
-      const scriptList = document.getElementById("scriptList");
-      const tipList = document.getElementById("tipList");
-      const viewMode = document.getElementById("viewMode");
-      const prevQuestion = document.getElementById("prevQuestion");
-      const nextQuestion = document.getElementById("nextQuestion");
-      const prevQuestionBottom = document.getElementById("prevQuestionBottom");
-      const nextQuestionBottom = document.getElementById("nextQuestionBottom");
-      const audio = document.getElementById("audio");
-      const trackName = document.getElementById("trackName");
-      const fullAudioButton = document.getElementById("fullAudioButton");
-      const loopToggle = document.getElementById("loopToggle");
-      const autoplayToggle = document.getElementById("autoplayToggle");
-      const speedControl = document.getElementById("speedControl");
-      const speedValue = document.getElementById("speedValue");
-
-      const viewModes = [
-        { key: "en", label: "영문" },
-        { key: "ko", label: "국문" },
-        { key: "mixed", label: "영한 병기" }
-      ];
-
-      function getActiveTheme() {
-        return studyLibrary[state.themeIndex];
-      }
-
-      function getActiveQuestion() {
-        const theme = getActiveTheme();
-        return theme.questions[state.questionIndex];
-      }
-
-      function parseScript(raw) {
-        const lines = raw.split(/\r?\n/);
-        const data = {
-          title: "",
-          prompt: "",
-          storyline: [],
-          answerPairs: [],
-          tips: []
-        };
-
-        let currentSection = "";
-        let pendingEnglish = null;
-
-        for (const originalLine of lines) {
-          const line = originalLine.trim();
-          if (!line || line === "---") continue;
-
-          if (line.startsWith("## ")) {
-            data.title = line.replace(/^##\s*/, "").trim();
-            continue;
-          }
-
-          if (line.startsWith("### ")) {
-            if (line.includes("실제 시험 질문")) currentSection = "prompt";
-            else if (line.includes("스토리라인")) currentSection = "storyline";
-            else if (line.includes("답변")) currentSection = "answer";
-            else if (line.includes("감정 표현") || line.includes("포인트")) currentSection = "tips";
-            continue;
-          }
-
-          if (currentSection === "prompt" && line.startsWith("**") && line.endsWith("**")) {
-            data.prompt = line.replace(/\*\*/g, "").trim();
-            continue;
-          }
-
-          if (currentSection === "storyline" && /^\d+\./.test(line)) {
-            data.storyline.push(line.replace(/^\d+\.\s*/, "").trim());
-            continue;
-          }
-
-          if (currentSection === "answer") {
-            if (pendingEnglish === null) {
-              pendingEnglish = line;
-            } else {
-              data.answerPairs.push({ en: pendingEnglish, ko: line });
-              pendingEnglish = null;
-            }
-            continue;
-          }
-
-          if (currentSection === "tips" && line.startsWith("- ")) {
-            data.tips.push(line.replace(/^- /, "").trim());
-          }
-        }
-
-        if (pendingEnglish) {
-          data.answerPairs.push({ en: pendingEnglish, ko: "" });
-        }
-
-        return data;
-      }
-
-      function hasRenderableContent(script) {
-        return Boolean(script.prompt || script.storyline.length || script.answerPairs.length || script.tips.length);
-      }
-
-      async function loadScript(question) {
-        if (state.scriptCache.has(question.scriptFile)) {
-          return state.scriptCache.get(question.scriptFile);
-        }
-
-        try {
-          const response = await fetch(question.scriptFile);
-          if (!response.ok) {
-            throw new Error(`Failed to load ${question.scriptFile}`);
-          }
-
-          const parsed = parseScript(await response.text());
-          if (!hasRenderableContent(parsed) && question.scriptInline) {
-            const fallback = parseScript(question.scriptInline);
-            state.scriptCache.set(question.scriptFile, fallback);
-            return fallback;
-          }
-          state.scriptCache.set(question.scriptFile, parsed);
-          return parsed;
-        } catch (error) {
-          if (!question.scriptInline) {
-            throw error;
-          }
-
-          const parsed = parseScript(question.scriptInline);
-          state.scriptCache.set(question.scriptFile, parsed);
-          return parsed;
-        }
-      }
-
-      function renderThemes() {
-        themeList.innerHTML = "";
-        studyLibrary.forEach((theme, index) => {
-          const button = document.createElement("button");
-          button.className = `theme-card${index === state.themeIndex ? " active" : ""}${theme.comingSoon ? " coming-soon" : ""}`;
-          button.type = "button";
-          button.disabled = Boolean(theme.comingSoon);
-          button.innerHTML = `<div class="card-title">${theme.title}</div>`;
-          button.addEventListener("click", () => {
-            state.themeIndex = index;
-            state.questionIndex = 0;
-            renderAll();
-          });
-          themeList.appendChild(button);
-        });
-      }
-
-      function renderViewMode() {
-        viewMode.innerHTML = "";
-        viewModes.forEach((mode) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.textContent = mode.label;
-          if (mode.key === state.viewMode) {
-            button.classList.add("active");
-          }
-          button.addEventListener("click", () => {
-            state.viewMode = mode.key;
-            renderViewMode();
-            renderScript(state.latestScript);
-          });
-          viewMode.appendChild(button);
-        });
-      }
-
-      function renderQuestionNav() {
-        const theme = getActiveTheme();
-        questionNav.innerHTML = "";
-
-        theme.questions.forEach((question, index) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = `question-pill${index === state.questionIndex ? " active" : ""}`;
-          button.textContent = question.badge;
-          button.addEventListener("click", () => {
-            state.questionIndex = index;
-            renderAll();
-          });
-          questionNav.appendChild(button);
-        });
-      }
-
-      function renderStoryline(items) {
-        storyList.innerHTML = "";
-        if (!items.length) {
-          storyList.innerHTML = `<div class="empty">스토리라인이 없습니다.</div>`;
-          return;
-        }
-
-        items.forEach((item, index) => {
-          const div = document.createElement("div");
-          div.className = "story-item";
-          div.innerHTML = `
-            <div class="story-item-number">${index + 1}</div>
-            <p>${item}</p>
-          `;
-          storyList.appendChild(div);
-        });
-      }
-
-      function renderScript(script) {
-        scriptList.innerHTML = "";
-
-        if (!script.answerPairs.length) {
-          scriptList.innerHTML = `<div class="empty">답변 스크립트가 없습니다.</div>`;
-          return;
-        }
-
-        const question = getActiveQuestion();
-        const segmentTimes = question.segmentTimes || [];
-        const segmentFiles = question.segmentFiles || [];
-
-        script.answerPairs.forEach((pair, index) => {
-          const card = document.createElement("article");
-          card.className = "line-card";
-          const body = document.createElement("div");
-          body.className = "line-card-body";
-
-          if (state.viewMode === "en") {
-            const en = document.createElement("p");
-            en.className = "en";
-            en.textContent = pair.en;
-            body.appendChild(en);
-          }
-
-          if (state.viewMode === "ko") {
-            const ko = document.createElement("p");
-            ko.className = "ko";
-            ko.textContent = pair.ko;
-            body.appendChild(ko);
-          }
-
-          if (state.viewMode === "mixed") {
-            const mixed = document.createElement("p");
-            mixed.className = "mix";
-            mixed.innerHTML = `<span class="mix-en">${pair.en}</span><br /><span class="mix-ko">${pair.ko}</span>`;
-            body.appendChild(mixed);
-          }
-
-          if (segmentFiles[index]) {
-            const header = document.createElement("div");
-            const playButton = document.createElement("button");
-            header.className = "line-card-header";
-            playButton.className = "line-play";
-            playButton.type = "button";
-            playButton.textContent = "▶";
-            playButton.setAttribute("aria-label", `${index + 1}번 문장 재생`);
-            playButton.addEventListener("click", () => {
-              playSegmentFile(segmentFiles[index]);
-            });
-            header.append(playButton, body);
-            card.appendChild(header);
-          } else {
-            card.appendChild(body);
-          }
-
-          scriptList.appendChild(card);
-        });
-      }
-
-      function renderTips(items) {
-        tipList.innerHTML = "";
-        if (!items.length) {
-          tipList.innerHTML = `<div class="empty">표현 포인트가 없습니다.</div>`;
-          return;
-        }
-
-        items.forEach((item) => {
-          const div = document.createElement("div");
-          div.className = "tip-item";
-          div.innerHTML = `<p>${item}</p>`;
-          tipList.appendChild(div);
-        });
-      }
-
-      async function renderDetail() {
-        const theme = getActiveTheme();
-        const question = getActiveQuestion();
-
-        detailTag.textContent = theme.title;
-        detailType.textContent = question.badge;
-
-        try {
-          const script = await loadScript(question);
-          state.latestScript = script;
-          actualPrompt.textContent = (script.prompt || "질문 정보가 없습니다.").replace(/^"(.*)"$/, "$1");
-          renderStoryline(script.storyline);
-          renderScript(script);
-          renderTips(script.tips);
-        } catch (error) {
-          actualPrompt.textContent = "스크립트를 불러오지 못했습니다.";
-          storyList.innerHTML = `<div class="empty">${error.message}</div>`;
-          scriptList.innerHTML = `<div class="empty">${error.message}</div>`;
-          tipList.innerHTML = `<div class="empty">${error.message}</div>`;
-        }
-      }
-
-      async function renderPlayer() {
-        const question = getActiveQuestion();
-        const nextAudioSrc = encodeURI(question.audioFile);
-        const sourceChanged = audio.dataset.source !== nextAudioSrc;
-        const shouldAutoplay = autoplayToggle.checked && state.hasInteracted && state.audioShouldResume;
-
-        trackName.textContent = question.audioFile;
-        audio.loop = loopToggle.checked;
-        audio.playbackRate = Number(speedControl.value);
-
-        if (sourceChanged) {
-          audio.src = nextAudioSrc;
-          audio.dataset.source = nextAudioSrc;
-          audio.dataset.mode = "full";
-          state.pausedAudioTime = null;
-          state.pausedAudioSource = "";
-        }
-
-        if (sourceChanged && shouldAutoplay) {
-          try {
-            await audio.play();
-          } catch (_error) {
-            // Ignore autoplay failures caused by browser policy.
-          }
-        }
-      }
-
-      async function playSegmentFile(segmentFile) {
-        state.hasInteracted = true;
-        state.segmentRequestId += 1;
-
-        audio.pause();
-        audio.src = encodeURI(segmentFile);
-        audio.dataset.source = encodeURI(segmentFile);
-        audio.dataset.mode = "segment";
-        audio.currentTime = 0;
-        audio.loop = false;
-        audio.playbackRate = Number(speedControl.value);
-        trackName.textContent = segmentFile;
-
-        try {
-          await audio.play();
-        } catch (_error) {
-          // Ignore play failures caused by browser policy.
-        }
-      }
-
-      async function restoreFullAudio() {
-        const question = getActiveQuestion();
-        const nextAudioSrc = encodeURI(question.audioFile);
-
-        state.audioShouldResume = false;
-        state.pausedAudioTime = null;
-        state.pausedAudioSource = "";
-
-        audio.pause();
-        audio.src = nextAudioSrc;
-        audio.dataset.source = nextAudioSrc;
-        audio.dataset.mode = "full";
-        audio.currentTime = 0;
-        audio.loop = loopToggle.checked;
-        audio.playbackRate = Number(speedControl.value);
-        trackName.textContent = question.audioFile;
-      }
-
-      async function renderAll() {
-        renderThemes();
-        renderQuestionNav();
-        renderViewMode();
-        prevQuestion.disabled = state.questionIndex === 0;
-        prevQuestionBottom.disabled = state.questionIndex === 0;
-        nextQuestion.disabled =
-          state.questionIndex >= getActiveTheme().questions.length - 1;
-        nextQuestionBottom.disabled =
-          state.questionIndex >= getActiveTheme().questions.length - 1;
-        await renderDetail();
-        await renderPlayer();
-      }
-
-      function goToPreviousQuestion() {
-        if (state.questionIndex > 0) {
-          state.questionIndex -= 1;
-          renderAll();
-        }
-      }
-
-      function goToNextQuestion() {
-        const lastIndex = getActiveTheme().questions.length - 1;
-        if (state.questionIndex < lastIndex) {
-          state.questionIndex += 1;
-          renderAll();
-        }
-      }
-
-      prevQuestion.addEventListener("click", goToPreviousQuestion);
-      nextQuestion.addEventListener("click", goToNextQuestion);
-      prevQuestionBottom.addEventListener("click", goToPreviousQuestion);
-      nextQuestionBottom.addEventListener("click", goToNextQuestion);
-
-      loopToggle.addEventListener("change", () => {
-        audio.loop = loopToggle.checked;
-      });
-
-      autoplayToggle.addEventListener("change", () => {
-        state.hasInteracted = true;
-      });
-
-      fullAudioButton.addEventListener("click", () => {
-        state.hasInteracted = true;
-        restoreFullAudio();
-      });
-
-      speedControl.addEventListener("input", () => {
-        const speed = Number(speedControl.value);
-        audio.playbackRate = speed;
-        speedValue.textContent = `${speed.toFixed(2).replace(/\.00$/, ".0")}x`;
-      });
-
-      audio.addEventListener("pause", () => {
-        if (!audio.ended) {
-          state.userPausedAudio = true;
-          state.audioShouldResume = false;
-          state.pausedAudioTime = audio.currentTime;
-          state.pausedAudioSource = audio.dataset.source || "";
-        }
-      });
-
-      audio.addEventListener("play", () => {
-        state.userPausedAudio = false;
-        state.audioShouldResume = true;
-      });
-
-      audio.addEventListener("ended", () => {
-        state.userPausedAudio = false;
-        state.audioShouldResume = false;
-        state.pausedAudioTime = null;
-        state.pausedAudioSource = "";
-        state.segmentRequestId += 1;
-      });
-
-      ["click", "touchstart", "keydown"].forEach((eventName) => {
-        document.addEventListener(
-          eventName,
-          () => {
-            state.hasInteracted = true;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <h1>OPIC Practice</h1>
+      <p class="subtitle">테마별 문항을 선택해서 연습합니다. 각 문항은 themes 아래의 script.txt와 audio.wav를 참조합니다.</p>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="Practice navigation">
+    <div class="wrap toolbar-inner">
+      <div class="nav-row" id="themeNav" aria-label="Theme navigation"></div>
+      <div class="nav-row" id="viewModeNav" aria-label="View mode"></div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap practice-list" id="practiceList"></div>
+  </main>
+
+  <script>
+    const studyLibrary = [
+      {
+        id: "music",
+        title: "Music",
+        questions: [
+          {
+            title: "좋아하는 음악/가수 묘사",
+            label: "Describe",
+            scriptFile: "themes/music/describe/q1/script.txt",
+            audioFile: "themes/music/describe/q1/audio.wav",
           },
-          { once: true }
-        );
+          {
+            title: "음악 언제들어",
+            label: "Regular 1",
+            scriptFile: "themes/music/regular/q1/script.txt",
+            audioFile: "themes/music/regular/q1/audio.wav",
+          },
+          {
+            title: "음악 취향 변화",
+            label: "Experience 1",
+            scriptFile: "themes/music/experience/q1/script.txt",
+            audioFile: "themes/music/experience/q1/audio.wav",
+          },
+          {
+            title: "기억나는 콘서트",
+            label: "Experience 2",
+            scriptFile: "themes/music/experience/q2/script.txt",
+            audioFile: "themes/music/experience/q2/audio.wav",
+          },
+          {
+            title: "두 장르간 비교",
+            label: "Compare",
+            scriptFile: "themes/music/compare/q1/script.txt",
+            audioFile: "themes/music/compare/q1/audio.wav",
+          },
+          {
+            title: "음악 가젯/도구",
+            label: "Regular 2",
+            scriptFile: "themes/music/regular/q2/script.txt",
+            audioFile: "themes/music/regular/q2/audio.wav",
+          },
+        ],
+      },
+    ];
+
+    const fallbackScripts = {
+      "themes/music/describe/q1/script.txt": [
+        "좋아하는 음악/가수 묘사",
+        "EN: Well... / these days, / my favorite song is \"Red Red\" / by CORTIS.",
+        "KR: 음... / 요즘에는, / 내가 가장 좋아하는 노래는 \"Red Red\"이다 / CORTIS의.",
+        "EN: I think I like them / because they're really unique.",
+        "KR: 나는 생각한다 내가 그들을 좋아한다고 / 왜냐하면 그들은 정말 독특하기 때문에.",
+        "EN: Honestly, / I don't really understand / the lyrics to their song, / but I really like / the catchy hook.",
+        "KR: 솔직히, / 나는 정말 이해하지는 못한다 / 그들의 노래 가사를, / 하지만 나는 정말 좋아한다 / 중독성 있는 후렴을.",
+        "EN: I also watch their dance videos / on YouTube, / and it's really awsome.",
+        "KR: 나는 또한 그들의 댄스 영상을 본다 / 유튜브에서, / 그리고 그것은 정말 멋지다.",
+        "EN: You know, / I keep watching it / over and over again.",
+        "KR: 알잖아, / 나는 그것을 계속 본다 / 반복해서 또 반복해서.",
+        "EN: That's why I like them so much.",
+        "KR: 그것이 이유이다 내가 그들을 그렇게 많이 좋아하는.",
+      ],
+      "themes/music/regular/q1/script.txt": [
+        "음악 언제들어",
+        "EN: Well... / I listen to music / on my phone / almost every day.",
+        "KR: 음... / 나는 음악을 듣는다 / 내 휴대폰으로 / 거의 매일.",
+        "EN: I usually listen to it / on the bus / and even while I'm working.",
+        "KR: 나는 보통 그것을 듣는다 / 버스에서 / 그리고 심지어 내가 일하는 동안에도.",
+        "EN: I always use / Bluetooth earbuds, / and they're amazing.",
+        "KR: 나는 항상 사용한다 / 블루투스 이어버드를, / 그리고 그것들은 훌륭하다.",
+        "EN: The noise-canceling feature / blocks out / almost all the noise.",
+        "KR: 노이즈 캔슬링 기능은 / 차단한다 / 거의 모든 소음을.",
+        "EN: So, I can foucs much better.",
+        "KR: 그래서, 나는 집중할 수 있다 훨씬 더 잘.",
+        "EN: Isn't it awesome? I think that's cool.",
+        "KR: 그것은 멋지지 않니? 나는 생각한다 그것이 멋지다고.",
+        "EN: That's why / I love listening to music",
+        "KR: 그것이 이유이다 / 내가 음악 듣는 것을 좋아하는",
+      ],
+      "themes/music/experience/q1/script.txt": [
+        "음악 취향 변화",
+        "EN: Well... / I think my taste in music / has changed a lot / over the years.",
+        "KR: 음... / 나는 생각한다 내 음악 취향이 / 많이 변했다고 / 여러 해 동안.",
+        "EN: When I was a teenager, / I really loved / Westlife's \"My Love,\" / and I also liked / the Backstreet Boys.",
+        "KR: 내가 십대였을 때, / 나는 정말 좋아했다 / Westlife의 \"My Love\"를, / 그리고 나는 또한 좋아했다 / Backstreet Boys를.",
+        "EN: I thought / their harmonies / were incredible.",
+        "KR: 나는 생각했다 / 그들의 화음이 / 믿을 수 없을 만큼 좋았다고.",
+        "EN: But these days, / my taste has changed a lot, / and I'm really into K-pop.",
+        "KR: 하지만 요즘에는, / 내 취향은 많이 변했다, / 그리고 나는 정말 K-pop에 빠져 있다.",
+        "EN: I love it / because it's full of energy / and the hooks are really catchy.",
+        "KR: 나는 그것을 좋아한다 / 왜냐하면 그것은 에너지로 가득 차 있기 때문에 / 그리고 후렴들이 정말 중독성 있기 때문에.",
+        "EN: When I listen to K-pop, I feel more energetic.",
+        "KR: 내가 K-pop을 들을 때, 나는 더 활기차게 느낀다.",
+        "EN: That's why / I listen to K-pop / almost every day.",
+        "KR: 그것이 이유이다 / 내가 K-pop을 듣는 / 거의 매일.",
+      ],
+      "themes/music/experience/q2/script.txt": [
+        "기억나는 콘서트",
+        "EN: Well... / my most memorable exprience / was a Psy concert / at my university festival.",
+        "KR: 음... / 나의 가장 기억에 남는 경험은 / 싸이 콘서트였다 / 내 대학교 축제에서.",
+        "EN: At first, / I didn't want to go / because I don't like crowded places.",
+        "KR: 처음에는, / 나는 가고 싶지 않았다 / 왜냐하면 나는 붐비는 장소를 좋아하지 않기 때문에.",
+        "EN: But my friends asked me to go, / so I went with them.",
+        "KR: 하지만 내 친구들이 나에게 가자고 했다, / 그래서 나는 그들과 함께 갔다.",
+        "EN: It was my first live concert, / and the music was really loud. / and I loved the catchy hook.",
+        "KR: 그것은 나의 첫 라이브 콘서트였다, / 그리고 음악은 정말 컸다. / 그리고 나는 중독성 있는 후렴을 좋아했다.",
+        "EN: Everyone was shouting, singing and dancing together.",
+        "KR: 모두가 소리치고, 노래하고 그리고 춤추고 있었다 함께.",
+        "EN: I was surprised, and it was incredible.",
+        "KR: 나는 놀랐다, 그리고 그것은 믿을 수 없을 만큼 좋았다.",
+        "EN: That's why / I still remember that day.",
+        "KR: 그것이 이유이다 / 내가 아직도 그날을 기억하는.",
+      ],
+      "themes/music/compare/q1/script.txt": [
+        "두 장르간 비교",
+        "EN: Well... / that's a difficult question.",
+        "KR: 음... / 그것은 어려운 질문이다.",
+        "EN: When it comes to music, / I can think of two genres: / ballads and K-pop.",
+        "KR: 음악에 관해서라면, / 나는 두 장르를 생각할 수 있다: / 발라드와 K-pop.",
+        "EN: I like both of them.",
+        "KR: 나는 그것들 둘 다 좋아한다.",
+        "EN: first, Ballads are calm / and relaxing.",
+        "KR: 먼저, 발라드는 차분하다 / 그리고 편안하게 해준다.",
+        "EN: I feel relaxed when I listen to it.",
+        "KR: 나는 편안하게 느낀다 내가 그것을 들을 때.",
+        "EN: On the other hand, / K-pop is really energetic, / and the hooks are really catchy.",
+        "KR: 반면에, / K-pop은 정말 에너지가 넘친다, / 그리고 후렴들이 정말 중독성 있다.",
+        "EN: It's really awesome. / Maybe you'll like it too.",
+        "KR: 그것은 정말 멋지다. / 아마 너도 그것을 좋아할 것이다.",
+        "EN: Overall, / I enjoy listening to / both of them.",
+        "KR: 전체적으로, / 나는 듣는 것을 즐긴다 / 그것들 둘 다를.",
+      ],
+      "themes/music/regular/q2/script.txt": [
+        "음악 가젯/도구",
+        "EN: Well... / these days, /  noise-canceling wireless earbuds / are really popular.",
+        "KR: 음... / 요즘에는, / 노이즈 캔슬링 무선 이어버드는 / 정말 인기가 많다.",
+        "EN: By the way, my wife gave them to me / for my birthday.",
+        "KR: 그런데, 내 아내가 그것들을 나에게 주었다 / 내 생일에.",
+        "EN: Anyway, they're great on a plane / because they block out / the noise.",
+        "KR: 어쨌든, 그것들은 비행기에서 좋다 / 왜냐하면 그것들이 차단하기 때문에 / 소음을.",
+        "EN: So I can just relax / and enjoy my music.",
+        "KR: 그래서 나는 그냥 쉴 수 있다 / 그리고 내 음악을 즐길 수 있다.",
+        "EN: Also, / there are no wires, / so they're really convenient.",
+        "KR: 또한, / 선들이 없다, / 그래서 그것들은 정말 편리하다.",
+        "EN: They're a little expensive, / but I highly recommend them.",
+        "KR: 그것들은 조금 비싸다, / 하지만 나는 그것들을 강력히 추천한다.",
+        "EN: That's why I really like my noise-canceling wiress earbuds.",
+        "KR: 그것이 이유이다 내가 정말 좋아하는 내 노이즈 캔슬링 무선 이어버드를.",
+      ],
+    };
+
+    const state = {
+      themeIndex: 0,
+      viewMode: "both",
+    };
+
+    const themeNav = document.getElementById("themeNav");
+    const viewModeNav = document.getElementById("viewModeNav");
+    const practiceList = document.getElementById("practiceList");
+    const scriptCache = new Map();
+
+    function escapeHtml(value) {
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function formatLine(line) {
+      return escapeHtml(line).replaceAll("/", '<span class="chunk">/</span>');
+    }
+
+    function parseScriptLines(lines) {
+      const contentLines = lines.slice(1).filter(Boolean);
+      const pairs = [];
+
+      contentLines.forEach((line) => {
+        if (line.startsWith("EN: ")) {
+          pairs.push({ english: line.slice(4), korean: "" });
+          return;
+        }
+
+        if (line.startsWith("KR: ")) {
+          if (!pairs.length) pairs.push({ english: "", korean: "" });
+          pairs[pairs.length - 1].korean = line.slice(4);
+          return;
+        }
+
+        pairs.push({ english: line, korean: "" });
       });
 
-      renderAll();
-    </script>
-  </body>
+      return pairs;
+    }
+
+    function renderScriptLines(article, lines) {
+      const list = article.querySelector(".script");
+      list.innerHTML = parseScriptLines(lines).map((line) => `
+        <li>
+          ${line.english && state.viewMode !== "korean" ? `<p class="english">${formatLine(line.english)}</p>` : ""}
+          ${line.korean && state.viewMode !== "english" ? `<p class="korean">${formatLine(line.korean)}</p>` : ""}
+        </li>
+      `).join("");
+    }
+
+    async function loadScript(question, article) {
+      try {
+        const response = await fetch(question.scriptFile);
+        if (!response.ok) throw new Error(question.scriptFile);
+        const text = await response.text();
+        const lines = text.split(/\r?\n/).filter(Boolean);
+        scriptCache.set(question.scriptFile, lines);
+        renderScriptLines(article, lines);
+      } catch {
+        const fallback = fallbackScripts[question.scriptFile];
+        if (fallback) {
+          scriptCache.set(question.scriptFile, fallback);
+          renderScriptLines(article, fallback);
+          return;
+        }
+
+        const list = article.querySelector(".script");
+        list.innerHTML = `<li class="error">스크립트를 불러오지 못했습니다: ${escapeHtml(question.scriptFile)}</li>`;
+      }
+    }
+
+    function renderViewModeNav() {
+      const modes = [
+        { id: "both", label: "한영" },
+        { id: "english", label: "영어" },
+        { id: "korean", label: "한글" },
+      ];
+
+      viewModeNav.innerHTML = [
+        '<span class="nav-label">View</span>',
+        ...modes.map((mode) => `
+          <button class="nav-button mode-button${mode.id === state.viewMode ? " active" : ""}" type="button" data-view-mode="${mode.id}">
+            ${mode.label}
+          </button>
+        `),
+      ].join("");
+
+      viewModeNav.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.viewMode = button.dataset.viewMode;
+          renderViewModeNav();
+          renderCachedScripts();
+        });
+      });
+    }
+
+    function renderCachedScripts() {
+      const activeTheme = studyLibrary[state.themeIndex];
+      activeTheme.questions.forEach((question, index) => {
+        const article = document.getElementById(`q${index + 1}`);
+        const lines = scriptCache.get(question.scriptFile);
+        if (article && lines) renderScriptLines(article, lines);
+      });
+    }
+
+    function render() {
+      const activeTheme = studyLibrary[state.themeIndex];
+
+      themeNav.innerHTML = [
+        '<span class="nav-label">Theme</span>',
+        ...studyLibrary.map((theme, index) => `
+          <button class="nav-button${index === state.themeIndex ? " active" : ""}" type="button" data-theme-index="${index}">
+            ${escapeHtml(theme.title)}
+          </button>
+        `),
+      ].join("");
+
+      renderViewModeNav();
+
+      themeNav.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.themeIndex = Number(button.dataset.themeIndex);
+          render();
+        });
+      });
+
+      practiceList.innerHTML = activeTheme.questions
+        .map((question, index) => `
+          <article id="q${index + 1}">
+            <div class="question-head">
+              <h2>${escapeHtml(question.title)}</h2>
+              <span class="tag">${escapeHtml(question.scriptFile)}</span>
+            </div>
+            <audio controls preload="metadata" src="${escapeHtml(question.audioFile)}"></audio>
+            <ul class="script"></ul>
+          </article>
+        `)
+        .join("");
+
+      activeTheme.questions.forEach((question, index) => {
+        loadScript(question, document.getElementById(`q${index + 1}`));
+      });
+    }
+
+    render();
+  </script>
+</body>
 </html>

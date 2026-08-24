@@ -1,0 +1,103 @@
+Audio mapping
+1. 좋아하는 음악/가수 묘사: themes/music/describe/q1/audio.wav
+2. 음악 언제들어: themes/music/regular/q1/audio.wav
+3. 음악 취향 변화: themes/music/experience/q1/audio.wav
+4. 기억나는 콘서트: themes/music/experience/q2/audio.wav
+5. 두 장르간 비교: themes/music/compare/q1/audio.wav
+6. 음악 가젯/도구: themes/music/regular/q2/audio.wav
+
+좋아하는 음악/가수 묘사
+EN: Well... / these days, / my favorite song is "Red Red" / by CORTIS.
+KR: 음... / 요즘에는, / 내가 가장 좋아하는 노래는 "Red Red"이다 / CORTIS의.
+EN: I think I like them / because they're really unique.
+KR: 나는 생각한다 내가 그들을 좋아한다고 / 왜냐하면 그들은 정말 독특하기 때문에.
+EN: Honestly, / I don't really understand / the lyrics to their song, / but I really like / the catchy hook.
+KR: 솔직히, / 나는 정말 이해하지는 못한다 / 그들의 노래 가사를, / 하지만 나는 정말 좋아한다 / 중독성 있는 후렴을.
+EN: I also watch their dance videos / on YouTube, / and it's really awsome.
+KR: 나는 또한 그들의 댄스 영상을 본다 / 유튜브에서, / 그리고 그것은 정말 멋지다.
+EN: You know, / I keep watching it / over and over again.
+KR: 알잖아, / 나는 그것을 계속 본다 / 반복해서 또 반복해서.
+EN: That's why I like them so much.
+KR: 그것이 이유이다 내가 그들을 그렇게 많이 좋아하는.
+
+음악 언제들어
+EN: Well... / I listen to music / on my phone / almost every day.
+KR: 음... / 나는 음악을 듣는다 / 내 휴대폰으로 / 거의 매일.
+EN: I usually listen to it / on the bus / and even while I'm working.
+KR: 나는 보통 그것을 듣는다 / 버스에서 / 그리고 심지어 내가 일하는 동안에도.
+EN: I always use / Bluetooth earbuds, / and they're amazing.
+KR: 나는 항상 사용한다 / 블루투스 이어버드를, / 그리고 그것들은 훌륭하다.
+EN: The noise-canceling feature / blocks out / almost all the noise.
+KR: 노이즈 캔슬링 기능은 / 차단한다 / 거의 모든 소음을.
+EN: So, I can foucs much better.
+KR: 그래서, 나는 집중할 수 있다 훨씬 더 잘.
+EN: Isn't it awesome? I think that's cool.
+KR: 그것은 멋지지 않니? 나는 생각한다 그것이 멋지다고.
+EN: That's why / I love listening to music
+KR: 그것이 이유이다 / 내가 음악 듣는 것을 좋아하는
+
+음악 취향 변화
+EN: Well... / I think my taste in music / has changed a lot / over the years.
+KR: 음... / 나는 생각한다 내 음악 취향이 / 많이 변했다고 / 여러 해 동안.
+EN: When I was a teenager, / I really loved / Westlife's "My Love," / and I also liked / the Backstreet Boys.
+KR: 내가 십대였을 때, / 나는 정말 좋아했다 / Westlife의 "My Love"를, / 그리고 나는 또한 좋아했다 / Backstreet Boys를.
+EN: I thought / their harmonies / were incredible.
+KR: 나는 생각했다 / 그들의 화음이 / 믿을 수 없을 만큼 좋았다고.
+EN: But these days, / my taste has changed a lot, / and I'm really into K-pop.
+KR: 하지만 요즘에는, / 내 취향은 많이 변했다, / 그리고 나는 정말 K-pop에 빠져 있다.
+EN: I love it / because it's full of energy / and the hooks are really catchy.
+KR: 나는 그것을 좋아한다 / 왜냐하면 그것은 에너지로 가득 차 있기 때문에 / 그리고 후렴들이 정말 중독성 있기 때문에.
+EN: When I listen to K-pop, I feel more energetic.
+KR: 내가 K-pop을 들을 때, 나는 더 활기차게 느낀다.
+EN: That's why / I listen to K-pop / almost every day.
+KR: 그것이 이유이다 / 내가 K-pop을 듣는 / 거의 매일.
+
+기억나는 콘서트
+EN: Well... / my most memorable exprience / was a Psy concert / at my university festival.
+KR: 음... / 나의 가장 기억에 남는 경험은 / 싸이 콘서트였다 / 내 대학교 축제에서.
+EN: At first, / I didn't want to go / because I don't like crowded places.
+KR: 처음에는, / 나는 가고 싶지 않았다 / 왜냐하면 나는 붐비는 장소를 좋아하지 않기 때문에.
+EN: But my friends asked me to go, / so I went with them.
+KR: 하지만 내 친구들이 나에게 가자고 했다, / 그래서 나는 그들과 함께 갔다.
+EN: It was my first live concert, / and the music was really loud. / and I loved the catchy hook.
+KR: 그것은 나의 첫 라이브 콘서트였다, / 그리고 음악은 정말 컸다. / 그리고 나는 중독성 있는 후렴을 좋아했다.
+EN: Everyone was shouting, singing and dancing together.
+KR: 모두가 소리치고, 노래하고 그리고 춤추고 있었다 함께.
+EN: I was surprised, and it was incredible.
+KR: 나는 놀랐다, 그리고 그것은 믿을 수 없을 만큼 좋았다.
+EN: That's why / I still remember that day.
+KR: 그것이 이유이다 / 내가 아직도 그날을 기억하는.
+
+두 장르간 비교
+EN: Well... / that's a difficult question.
+KR: 음... / 그것은 어려운 질문이다.
+EN: When it comes to music, / I can think of two genres: / ballads and K-pop.
+KR: 음악에 관해서라면, / 나는 두 장르를 생각할 수 있다: / 발라드와 K-pop.
+EN: I like both of them.
+KR: 나는 그것들 둘 다 좋아한다.
+EN: first, Ballads are calm / and relaxing.
+KR: 먼저, 발라드는 차분하다 / 그리고 편안하게 해준다.
+EN: I feel relaxed when I listen to it.
+KR: 나는 편안하게 느낀다 내가 그것을 들을 때.
+EN: On the other hand, / K-pop is really energetic, / and the hooks are really catchy.
+KR: 반면에, / K-pop은 정말 에너지가 넘친다, / 그리고 후렴들이 정말 중독성 있다.
+EN: It's really awesome. / Maybe you'll like it too.
+KR: 그것은 정말 멋지다. / 아마 너도 그것을 좋아할 것이다.
+EN: Overall, / I enjoy listening to / both of them.
+KR: 전체적으로, / 나는 듣는 것을 즐긴다 / 그것들 둘 다를.
+
+음악 가젯/도구
+EN: Well... / these days, /  noise-canceling wireless earbuds / are really popular.
+KR: 음... / 요즘에는, / 노이즈 캔슬링 무선 이어버드는 / 정말 인기가 많다.
+EN: By the way, my wife gave them to me / for my birthday.
+KR: 그런데, 내 아내가 그것들을 나에게 주었다 / 내 생일에.
+EN: Anyway, they're great on a plane / because they block out / the noise.
+KR: 어쨌든, 그것들은 비행기에서 좋다 / 왜냐하면 그것들이 차단하기 때문에 / 소음을.
+EN: So I can just relax / and enjoy my music.
+KR: 그래서 나는 그냥 쉴 수 있다 / 그리고 내 음악을 즐길 수 있다.
+EN: Also, / there are no wires, / so they're really convenient.
+KR: 또한, / 선들이 없다, / 그래서 그것들은 정말 편리하다.
+EN: They're a little expensive, / but I highly recommend them.
+KR: 그것들은 조금 비싸다, / 하지만 나는 그것들을 강력히 추천한다.
+EN: That's why I really like my noise-canceling wiress earbuds.
+KR: 그것이 이유이다 내가 정말 좋아하는 내 노이즈 캔슬링 무선 이어버드를.
