@@ -6,6 +6,34 @@
 
 - `index.html`: 음악 6문항 학습 페이지
 - `script.txt`: 음악 관련 질문 6개와 답변 스크립트 원본
+- `themes/self-introduction/regular/q1/`: 자기소개
+- `themes/park/describe/q1/`: 공원 묘사
+- `themes/park/experience/q1/`: 최근 공원 방문
+- `themes/park/compare/q1/`: 아이들, 어른들 공원 비교
+- `themes/park/issue/q1/`: 공원 문제
+- `themes/park/experience/q2/`: 기억에 남는 공원
+- `themes/movie/describe/q1/`: 좋아하는 장르, 좋아하는 배우 묘사
+- `themes/movie/regular/q1/`: 영화관 갈때 루틴
+- `themes/movie/experience/q1/`: 영화 취향 변화
+- `themes/movie/experience/q2/`: 가장 흥미롭게 본 영화
+- `themes/movie/compare/q1/`: 영화 변화 비교
+- `themes/movie/issue/q1/`: 영화에 대한 이슈
+- `themes/cafe/regular/q1/`: 보통 언제 카페가? 뭐 주문해? 거기서 뭐해?
+- `themes/cafe/describe/q1/`: 너가 제일 좋아하는 카페 묘사해봐
+- `themes/cafe/experience/q1/`: 카페 처음간 경험
+- `themes/cafe/compare/q1/`: 카페 변화
+- `themes/cafe/experience/q2/`: 카페 기억나는 경험
+- `themes/home/describe/q1/`: 집 묘사하기
+- `themes/home/regular/q1/`: 집 일상 루틴
+- `themes/home/compare/q1/`: 집 옛날/현재 비교
+- `themes/home/experience/q1/`: 집 문제
+- `themes/home/chores/q1/`: 집안일 루틴
+- `themes/home/chores/q2/`: 하지못한 집안일
+- `themes/home/chores/q3/`: 어렸을때 집안일
+- `themes/home/issue/q1/`: 한국의 집 이슈
+- `themes/cooking/describe/q1/`: 요리하기 좋아하는 음식
+- `themes/cooking/experience/q1/`: 최근에 한 요리
+- `themes/cooking/experience/q2/`: 요리하다 망한 경험
 - `themes/music/describe/q1/`: 좋아하는 음악/가수 묘사
 - `themes/music/regular/q1/`: 음악 언제들어
 - `themes/music/experience/q1/`: 음악 취향 변화
