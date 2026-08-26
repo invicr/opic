@@ -2235,6 +2235,7 @@
       viewMode: "both",
       themeAudioIndex: 0,
       isThemePlaying: false,
+      isThemePlayBlocked: false,
     };
 
     const themeNav = document.getElementById("themeNav");
@@ -2323,10 +2324,12 @@
       });
     }
 
-    function playAudio(audio) {
+    function playAudio(audio, onBlocked) {
       const result = audio.play();
       if (result && typeof result.catch === "function") {
-        result.catch(() => {});
+        result.catch(() => {
+          if (onBlocked) onBlocked();
+        });
       }
     }
 
@@ -2338,31 +2341,13 @@
         return;
       }
 
-      themePlayerStatus.textContent = `${theme.title} ${state.themeAudioIndex + 1}/${theme.questions.length}: ${question.title}`;
+      const statusPrefix = state.isThemePlayBlocked ? "재생 재개 대기 중" : theme.title;
+      themePlayerStatus.textContent = `${statusPrefix} ${state.themeAudioIndex + 1}/${theme.questions.length}: ${question.title}`;
     }
 
-    function playThemeAudioAt(index) {
-      const theme = getActiveTheme();
-      const question = theme.questions[index];
-      if (!question) return;
+    function handleThemeAudioEnded() {
+      if (!state.isThemePlaying) return;
 
-      stopQuestionAudios();
-      state.themeAudioIndex = index;
-      state.isThemePlaying = true;
-      themeAudio.src = question.audioFile;
-      setThemeAudioStatus();
-      playAudio(themeAudio);
-    }
-
-    function stopThemeAudio() {
-      state.isThemePlaying = false;
-      themeAudio.pause();
-      themeAudio.removeAttribute("src");
-      themeAudio.load();
-      setThemeAudioStatus();
-    }
-
-    themeAudio.addEventListener("ended", () => {
       const theme = getActiveTheme();
       const nextIndex = state.themeAudioIndex + 1;
 
@@ -2377,7 +2362,60 @@
       }
 
       state.isThemePlaying = false;
+      state.isThemePlayBlocked = false;
       setThemeAudioStatus();
+    }
+
+    function retryThemePlayback() {
+      if (!state.isThemePlaying || !themeAudio.src || !themeAudio.paused) return;
+
+      if (themeAudio.ended) {
+        handleThemeAudioEnded();
+        return;
+      }
+
+      playAudio(themeAudio, () => {
+        state.isThemePlayBlocked = true;
+        setThemeAudioStatus();
+      });
+    }
+
+    function playThemeAudioAt(index) {
+      const theme = getActiveTheme();
+      const question = theme.questions[index];
+      if (!question) return;
+
+      stopQuestionAudios();
+      state.themeAudioIndex = index;
+      state.isThemePlaying = true;
+      state.isThemePlayBlocked = false;
+      themeAudio.src = question.audioFile;
+      setThemeAudioStatus();
+      playAudio(themeAudio, () => {
+        state.isThemePlayBlocked = true;
+        setThemeAudioStatus();
+      });
+    }
+
+    function stopThemeAudio() {
+      state.isThemePlaying = false;
+      state.isThemePlayBlocked = false;
+      themeAudio.pause();
+      themeAudio.removeAttribute("src");
+      themeAudio.load();
+      setThemeAudioStatus();
+    }
+
+    themeAudio.addEventListener("ended", handleThemeAudioEnded);
+
+    themeAudio.addEventListener("play", () => {
+      state.isThemePlayBlocked = false;
+      setThemeAudioStatus();
+    });
+
+    themeAudio.addEventListener("pause", () => {
+      if (!state.isThemePlaying || themeAudio.ended) return;
+      window.setTimeout(retryThemePlayback, 500);
     });
 
     playTheme.addEventListener("click", () => {
@@ -2482,6 +2520,29 @@
         });
       });
     }
+
+    document.addEventListener("visibilitychange", () => {
+      window.setTimeout(retryThemePlayback, 300);
+    });
+
+    ["pageshow", "focus", "resize", "orientationchange"].forEach((eventName) => {
+      window.addEventListener(eventName, () => {
+        window.setTimeout(retryThemePlayback, 300);
+      });
+    });
+
+    window.setInterval(() => {
+      if (!state.isThemePlaying || !themeAudio.src) return;
+
+      if (themeAudio.ended) {
+        handleThemeAudioEnded();
+        return;
+      }
+
+      if (themeAudio.paused && !state.isThemePlayBlocked) {
+        retryThemePlayback();
+      }
+    }, 1000);
 
     render();
   </script>
