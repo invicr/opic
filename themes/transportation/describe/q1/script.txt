@@ -1,0 +1,13 @@
+너가 사는 곳의 교통 수단 묘사
+EN: Well... / there are many kinds of public transportation / where I live.
+KR: 음... / 많은 종류의 대중교통이 있습니다 / 내가 사는 곳에는.
+EN: We have / buses, subways, / and taxis.
+KR: 우리는 가지고 있습니다 / 버스, 지하철, / 그리고 택시를.
+EN: Personally, / I like taking the bus / because I can relax / and enjoy the view.
+KR: 개인적으로, / 나는 버스 타는 것을 좋아합니다 / 왜냐하면 나는 쉴 수 있기 때문입니다 / 그리고 경치를 즐길 수 있기 때문입니다.
+EN: But when I’m in a hurry, / I usually take / the subway.
+KR: 하지만 내가 급할 때, / 나는 보통 탑니다 / 지하철을.
+EN: It’s really fast, / and there’s no traffic.
+KR: 그것은 정말 빠릅니다, / 그리고 교통 체증이 없습니다.
+EN: Honestly, / public transportation is / really convenient.
+KR: 솔직히, / 대중교통은 / 정말 편리합니다.

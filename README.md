@@ -34,6 +34,54 @@
 - `themes/cooking/describe/q1/`: 요리하기 좋아하는 음식
 - `themes/cooking/experience/q1/`: 최근에 한 요리
 - `themes/cooking/experience/q2/`: 요리하다 망한 경험
+- `themes/vacation-at-home/describe/q1/`: 집에서 휴가 보낼 때 뭐하는지 묘사
+- `themes/vacation-at-home/regular/q1/`: 집에서 보내는 휴가가 좋은 이유
+- `themes/vacation-at-home/compare/q1/`: 휴가를 보내는 방식 변화
+- `themes/vacation-at-home/importance/q1/`: 휴가의 이점과 중요성
+- `themes/vacation-at-home/experience/q1/`: 최근 기억에 남는 집에서의 휴가
+- `themes/travel/describe/q1/`: 국내 여행 어디 좋아해? 설명
+- `themes/travel/planning/q1/`: 여행 준비 단계 설명
+- `themes/travel/experience/q1/`: 어렸을 때 여행 경험
+- `themes/travel/compare/q1/`: 여행 방식 변화
+- `themes/travel/issue/q1/`: 여행에 대한 걱정과 해결
+- `themes/overseas-travel/describe/q1/`: 휴가 때 방문한 도시나 나라
+- `themes/overseas-travel/experience/q1/`: 첫 해외여행
+- `themes/overseas-travel/experience/q2/`: 해외여행 중 기억나는 경험
+- `themes/overseas-travel/culture/q1/`: 다른 나라 여행 때 관심있는 것
+- `themes/clothing/regular/q1/`: 한국사람들이 보통 입는 옷
+- `themes/clothing/describe/q1/`: 주로 입는 옷과 오늘 입은 옷
+- `themes/clothing/compare/q1/`: 패션 트렌드 변화
+- `themes/clothing/experience/q1/`: 최근 옷을 샀던 경험
+- `themes/beach/describe/q1/`: 좋아하는 해변 묘사
+- `themes/beach/regular/q1/`: 해변 루틴
+- `themes/beach/experience/q1/`: 최근 해변 경험
+- `themes/beach/experience/q2/`: 해변에서 기억나는 경험
+- `themes/weather/regular/q1/`: 가장 좋아하는 계절과 계절 활동
+- `themes/weather/describe/q1/`: 오늘 날씨 묘사
+- `themes/weather/compare/q1/`: 계절 변화
+- `themes/weather/experience/q1/`: 날씨 기억나는 경험
+- `themes/holidays/regular/q1/`: 휴일에 하는 활동
+- `themes/holidays/experience/q1/`: 최근 기억에 남는 모임
+- `themes/holidays/compare/q1/`: 소도시와 대도시 축제 비교
+- `themes/holidays/issue/q1/`: 모임 축하행사 걱정과 문제
+- `themes/hotel/compare/q1/`: 한국 호텔과 해외 호텔 비교
+- `themes/hotel/experience/q1/`: 최근 가본 호텔
+- `themes/hotel/experience/q2/`: 호텔에서 기억나는 경험
+- `themes/transportation/experience/q1/`: 대중교통 기억나는 경험
+- `themes/transportation/experience/q2/`: 다른 형식의 대중교통 이용 경험
+- `themes/transportation/compare/q1/`: 대중교통 변화
+- `themes/transportation/describe/q1/`: 사는 곳의 교통 수단 묘사
+- `themes/recycling/describe/q1/`: 한국 재활용 방식
+- `themes/recycling/regular/q1/`: 재활용 루틴
+- `themes/recycling/experience/q1/`: 기억나는 재활용 경험
+- `themes/recycling/compare/q1/`: 재활용 현재/과거 비교
+- `themes/recycling/issue/q1/`: 재활용 뉴스/이슈
+- `themes/bank/describe/q1/`: 은행 묘사
+- `themes/bank/compare/q1/`: 은행 변화
+- `themes/bank/issue/q1/`: 은행 문제
+- `themes/hair-salon/describe/q1/`: 미용실 묘사
+- `themes/hair-salon/regular/q1/`: 미용실 갈 때 루틴
+- `themes/hair-salon/experience/q1/`: 미용실에서 기억에 남는 경험
 - `themes/music/describe/q1/`: 좋아하는 음악/가수 묘사
 - `themes/music/regular/q1/`: 음악 언제들어
 - `themes/music/experience/q1/`: 음악 취향 변화

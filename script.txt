@@ -1,52 +1,43 @@
-Audio mapping
-1. 요리하기 좋아하는 음식, 왜하기 좋아하는지 (묘사): themes/cooking/describe/q1/audio.wav
-2. 최근에 한 요리: themes/cooking/experience/q1/audio.wav
-3. 요리하다 망한 경험, 왜 망했고 어떤 교훈을 얻었나: themes/cooking/experience/q2/audio.wav
+보통 어디가서 어디가서 머리를 자르는지? 그곳의 분위기는 어떤지? 왜 가는지? 묘사
+EN: Well... / I usually go to a hair salon / near my home / once a month.
+KR: 음... / 나는 보통 미용실에 갑니다 / 내 집 근처의 / 한 달에 한 번.
+EN: It's only / about a five-minute walk / from my place.
+KR: 그것은 단지 / 약 5분 거리입니다 걸어서 / 내 장소에서.
+EN: The salon is / really clean and modern, / and the staff are friendly.
+KR: 그 미용실은 / 정말 깨끗하고 현대적입니다, / 그리고 직원들은 친절합니다.
+EN: I've been going there / for about two years, / so my hairstylist knows / how I like my hair.
+KR: 나는 거기에 다니고 있습니다 / 약 2년 동안, / 그래서 내 헤어스타일리스트는 압니다 / 내가 내 머리를 어떻게 좋아하는지.
+EN: I don't have to explain / what I want / every time.
+KR: 나는 설명할 필요가 없습니다 / 내가 원하는 것을 / 매번.
+EN: Honestly, / that's why I like going there.
+KR: 솔직히, / 그것이 이유입니다 내가 거기에 가는 것을 좋아하는.
 
-요리하기 좋아하는 음식, 왜하기 좋아하는지 (묘사)
-EN: Honestly, / I'm not good at cooking.
-KR: 솔직히, / 나는 요리를 잘하지 못합니다.
-EN: But / I really like kimchi stew, / so I sometimes make it myself.
-KR: 하지만 / 나는 정말 김치찌개를 좋아합니다, / 그래서 나는 가끔 그것을 직접 만듭니다.
-EN: When I cook it, / I always find a recipe / on YouTube.
-KR: 내가 그것을 요리할 때, / 나는 항상 레시피를 찾습니다 / 유튜브에서.
-EN: Then, / I just follow the recipe, / and it's usually delicious.
-KR: 그러면, / 나는 그냥 그 레시피를 따라 합니다, / 그리고 그것은 보통 맛있습니다.
-EN: Otherwise, / I usually mess it up.
-KR: 그렇지 않으면, / 나는 보통 그것을 망칩니다.
-EN: Anyway, / I enjoy making kimchi stew / because it's easy and delicious.
-KR: 어쨌든, / 나는 김치찌개 만드는 것을 즐깁니다 / 왜냐하면 그것은 쉽고 맛있기 때문입니다.
+미용실 갈 때 루틴
+EN: Well... / I usually make an appointment / through the Naver app.
+KR: 음... / 나는 보통 예약을 합니다 / 네이버 앱을 통해서.
+EN: I choose / the date, time, / and my hairstylist.
+KR: 나는 선택합니다 / 날짜, 시간, / 그리고 내 헤어스타일리스트를.
+EN: When I get there, / my hairstylist already knows / how I like my hair.
+KR: 내가 거기에 도착하면, / 내 헤어스타일리스트는 이미 압니다 / 내가 내 머리를 어떻게 좋아하는지.
+EN: So I don't have to explain / what I want / every time.
+KR: 그래서 나는 설명할 필요가 없습니다 / 내가 원하는 것을 / 매번.
+EN: After the haircut, / she washes and dries / my hair.
+KR: 머리를 자른 후에, / 그녀는 감겨주고 말려줍니다 / 내 머리를.
+EN: That's pretty much it. / It's really simple / and convenient.
+KR: 그것이 거의 전부입니다. / 그것은 정말 간단합니다 / 그리고 편리합니다.
 
-최근에 한 요리
-EN: Um, / let me think... / I made a bowl of sweet potato soup / a while ago.
-KR: 음, / 생각해 보겠습니다... / 나는 고구마 수프 한 그릇을 만들었습니다 / 얼마 전에.
-EN: Well... / I had some sweet potatoes / at home.
-KR: 음... / 나는 몇 개의 고구마를 가지고 있었습니다 / 집에.
-EN: So I decided / to make / a bowl of sweet potato soup.
-KR: 그래서 나는 결정했습니다 / 만들기로 / 고구마 수프 한 그릇을.
-EN: I'm not very good at cooking, / so I found a recipe / on YouTube.
-KR: 나는 요리를 아주 잘하지는 못합니다, / 그래서 나는 레시피를 찾았습니다 / 유튜브에서.
-EN: I followed it / and measured / all the ingredients.
-KR: 나는 그것을 따라 했습니다 / 그리고 계량했습니다 / 모든 재료들을.
-EN: When I tried the soup, / I was really surprised / because it was so delicious!
-KR: 내가 그 수프를 먹어봤을 때, / 나는 정말 놀랐습니다 / 왜냐하면 그것이 너무 맛있었기 때문입니다!
-EN: So I made it for my family, / and they loved it.
-KR: 그래서 나는 그것을 내 가족을 위해 만들었습니다, / 그리고 그들은 그것을 좋아했습니다.
-EN: Anyway, / that's my most recent cooking experience.
-KR: 어쨌든, / 그것이 나의 가장 최근 요리 경험입니다.
-
-요리하다 망한 경험, 왜 망했고 어떤 교훈을 얻었나
-EN: Well... / I once totally messed up / while making ramen.
-KR: 음... / 나는 한 번 완전히 망쳤습니다 / 라면을 만드는 동안.
-EN: My family and I / had ramen for dinner / in Gwangyang.
-KR: 내 가족과 나는 / 라면을 저녁으로 먹었습니다 / 광양에서.
-EN: I tried to make / several packs / at once.
-KR: 나는 만들려고 했습니다 / 여러 봉지를 / 한 번에.
-EN: Actually, / I didn't have much experience / making several packs of ramen at once.
-KR: 사실, / 나는 경험이 많지 않았습니다 / 라면 여러 봉지를 한 번에 만드는.
-EN: But I got the timing wrong, / so most of the soup / was gone.
-KR: 하지만 나는 타이밍을 잘못 맞췄습니다, / 그래서 대부분의 국물이 / 사라졌습니다.
-EN: The ramen was way too salty, / and honestly, / I felt really sorry.
-KR: 그 라면은 너무 짰습니다, / 그리고 솔직히, / 나는 정말 미안했습니다.
-EN: Since then, / I haven't made ramen / for my family again.
-KR: 그 이후로, / 나는 라면을 만들지 않았습니다 / 내 가족을 위해 다시.
+미용실에서 기억에 남는 경험
+EN: Well... / I remember one experience / really well.
+KR: 음... / 나는 한 경험을 기억합니다 / 정말 잘.
+EN: I was at my hair salon, / and I went to / the bathroom.
+KR: 나는 내 미용실에 있었습니다, / 그리고 나는 갔습니다 / 화장실에.
+EN: But suddenly, / the bathroom door wouldn't open, / so I got stuck inside.
+KR: 하지만 갑자기, / 화장실 문이 열리지 않았습니다, / 그래서 나는 안에 갇혔습니다.
+EN: I was totally surprised, / so I called / one of the staff.
+KR: 나는 완전히 놀랐습니다, / 그래서 나는 불렀습니다 / 직원들 중 한 명을.
+EN: A few minutes later, / someone came / and opened the door for me.
+KR: 몇 분 후에, / 누군가 왔습니다 / 그리고 문을 열어주었습니다 나를 위해.
+EN: Honestly, / I was so relieved, / but it was really strange.
+KR: 솔직히, / 나는 정말 안도했습니다, / 하지만 그것은 정말 이상했습니다.
+EN: Anyway, / I'll never forget / getting stuck in that bathroom.
+KR: 어쨌든, / 나는 절대 잊지 못할 것입니다 / 그 화장실에 갇혔던 것을.
