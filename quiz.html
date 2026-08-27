@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OPIC Writing Quiz</title>
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --panel: #ffffff;
+      --text: #202124;
+      --muted: #646762;
+      --line: #ddded8;
+      --accent: #246b5f;
+      --accent-2: #b64d2f;
+      --chip: #eef3f1;
+      --good: #176b45;
+      --bad: #9b2c1f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .wrap {
+      width: min(940px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top {
+      display: grid;
+      gap: 14px;
+      padding: 28px 0 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .page-links,
+    .button-row,
+    .meta-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-button,
+    button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 9px 12px;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .nav-button:hover,
+    button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    button.primary:hover {
+      color: #fff;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    main {
+      padding: 28px 0 48px;
+    }
+
+    .quiz-panel {
+      display: grid;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--accent);
+      padding: 4px 10px;
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .prompt {
+      display: grid;
+      gap: 8px;
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+    }
+
+    .prompt-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .korean {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 750;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .chunk {
+      color: var(--accent-2);
+      font-weight: 800;
+    }
+
+    .question-title {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 132px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--text);
+      font: inherit;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    textarea:focus {
+      border-color: var(--accent);
+      outline: 2px solid rgba(36, 107, 95, 0.18);
+    }
+
+    .feedback {
+      display: none;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfbf8;
+    }
+
+    .feedback.visible {
+      display: grid;
+    }
+
+    .feedback.good {
+      border-color: rgba(23, 107, 69, 0.35);
+    }
+
+    .feedback.bad {
+      border-color: rgba(155, 44, 31, 0.35);
+    }
+
+    .feedback-title {
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .feedback.good .feedback-title {
+      color: var(--good);
+    }
+
+    .feedback.bad .feedback-title {
+      color: var(--bad);
+    }
+
+    .answer {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .normalized {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 24px, 940px);
+      }
+
+      .quiz-panel {
+        padding: 16px;
+      }
+
+      .korean {
+        font-size: 21px;
+      }
+
+      textarea {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <h1>OPIC Writing Quiz</h1>
+      <p class="subtitle">랜덤 테마에서 문항을 고르고, 한국어 문장을 영어로 작성해 맞춰봅니다.</p>
+      <div class="page-links" aria-label="Practice pages">
+        <a class="nav-button" href="index.html">스크립트 보기</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="quiz-panel" aria-label="Writing quiz">
+        <div class="meta-row">
+          <span class="tag" id="themeTag">Loading</span>
+          <span class="status" id="progressStatus">데이터를 불러오는 중</span>
+        </div>
+
+        <div class="prompt">
+          <p class="prompt-label">Korean</p>
+          <p class="korean" id="koreanPrompt">잠시만 기다려주세요.</p>
+          <p class="question-title" id="questionTitle"></p>
+        </div>
+
+        <label>
+          <span class="prompt-label">Your English</span>
+          <textarea id="answerInput" autocomplete="off" autocapitalize="none" spellcheck="false"></textarea>
+        </label>
+
+        <div class="button-row">
+          <button class="primary" type="button" id="checkAnswer">정답 확인</button>
+          <button type="button" id="nextSentence" disabled>다음 문장</button>
+          <button type="button" id="skipSentence">건너뛰기</button>
+          <button type="button" id="newTheme">다른 테마</button>
+        </div>
+
+        <div class="feedback" id="feedback" aria-live="polite">
+          <p class="feedback-title" id="feedbackTitle"></p>
+          <p class="answer" id="correctAnswer"></p>
+          <p class="normalized" id="normalizedAnswer"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const state = {
+      library: [],
+      fallbackScripts: {},
+      usedThemeIds: new Set(),
+      activeTheme: null,
+      sentenceQueue: [],
+      currentIndex: 0,
+      checked: false,
+    };
+
+    const themeTag = document.getElementById("themeTag");
+    const progressStatus = document.getElementById("progressStatus");
+    const koreanPrompt = document.getElementById("koreanPrompt");
+    const questionTitle = document.getElementById("questionTitle");
+    const answerInput = document.getElementById("answerInput");
+    const checkAnswer = document.getElementById("checkAnswer");
+    const nextSentence = document.getElementById("nextSentence");
+    const skipSentence = document.getElementById("skipSentence");
+    const newTheme = document.getElementById("newTheme");
+    const feedback = document.getElementById("feedback");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const correctAnswer = document.getElementById("correctAnswer");
+    const normalizedAnswer = document.getElementById("normalizedAnswer");
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function shuffle(items) {
+      const result = [...items];
+      for (let index = result.length - 1; index > 0; index -= 1) {
+        const nextIndex = Math.floor(Math.random() * (index + 1));
+        [result[index], result[nextIndex]] = [result[nextIndex], result[index]];
+      }
+      return result;
+    }
+
+    function normalizeAnswer(value) {
+      return value
+        .toLowerCase()
+        .replace(/[’']/g, "")
+        .replace(/\//g, " ")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function extractAssignedLiteral(source, name) {
+      const marker = `const ${name} = `;
+      const markerIndex = source.indexOf(marker);
+      if (markerIndex === -1) throw new Error(`${name} not found`);
+
+      let index = markerIndex + marker.length;
+      while (/\s/.test(source[index])) index += 1;
+
+      const opener = source[index];
+      const closer = opener === "[" ? "]" : "}";
+      let depth = 0;
+      let quote = "";
+      let escaped = false;
+
+      for (let cursor = index; cursor < source.length; cursor += 1) {
+        const char = source[cursor];
+
+        if (quote) {
+          if (escaped) {
+            escaped = false;
+          } else if (char === "\\") {
+            escaped = true;
+          } else if (char === quote) {
+            quote = "";
+          }
+          continue;
+        }
+
+        if (char === '"' || char === "'") {
+          quote = char;
+          continue;
+        }
+
+        if (char === opener) depth += 1;
+        if (char === closer) depth -= 1;
+
+        if (depth === 0) {
+          return source.slice(index, cursor + 1);
+        }
+      }
+
+      throw new Error(`${name} literal is incomplete`);
+    }
+
+    async function loadIndexData() {
+      const response = await fetch("index.html");
+      if (!response.ok) throw new Error("index.html");
+
+      const html = await response.text();
+      const librarySource = extractAssignedLiteral(html, "studyLibrary");
+      const fallbackSource = extractAssignedLiteral(html, "fallbackScripts");
+
+      state.library = Function(`return (${librarySource});`)();
+      state.fallbackScripts = Function(`return (${fallbackSource});`)();
+    }
+
+    function parseScriptLines(lines) {
+      const pairs = [];
+
+      lines.slice(1).filter(Boolean).forEach((line) => {
+        if (line.startsWith("EN: ")) {
+          pairs.push({ english: line.slice(4), korean: "" });
+          return;
+        }
+
+        if (line.startsWith("KR: ")) {
+          if (!pairs.length) pairs.push({ english: "", korean: "" });
+          pairs[pairs.length - 1].korean = line.slice(4);
+        }
+      });
+
+      return pairs.filter((pair) => pair.english && pair.korean);
+    }
+
+    async function loadQuestionPairs(question) {
+      try {
+        const response = await fetch(question.scriptFile);
+        if (!response.ok) throw new Error(question.scriptFile);
+        const text = await response.text();
+        return parseScriptLines(text.split(/\r?\n/));
+      } catch {
+        const fallback = state.fallbackScripts[question.scriptFile] || [];
+        return parseScriptLines(fallback);
+      }
+    }
+
+    async function buildThemeQueue(theme) {
+      const entries = [];
+      const questions = shuffle(theme.questions);
+
+      for (const question of questions) {
+        const pairs = await loadQuestionPairs(question);
+        pairs.forEach((pair, sentenceIndex) => {
+          entries.push({
+            question,
+            sentenceIndex,
+            english: pair.english,
+            korean: pair.korean,
+          });
+        });
+      }
+
+      return entries;
+    }
+
+    function chooseTheme() {
+      if (state.usedThemeIds.size >= state.library.length) {
+        state.usedThemeIds.clear();
+      }
+
+      const choices = state.library.filter((theme) => !state.usedThemeIds.has(theme.id));
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    function setLoading(message) {
+      themeTag.textContent = "Loading";
+      progressStatus.textContent = message;
+      koreanPrompt.textContent = "잠시만 기다려주세요.";
+      questionTitle.textContent = "";
+      answerInput.value = "";
+      answerInput.disabled = true;
+      checkAnswer.disabled = true;
+      nextSentence.disabled = true;
+      skipSentence.disabled = true;
+      newTheme.disabled = true;
+      feedback.className = "feedback";
+    }
+
+    function renderCurrentSentence() {
+      const current = state.sentenceQueue[state.currentIndex];
+      if (!current) {
+        startNextTheme();
+        return;
+      }
+
+      state.checked = false;
+      themeTag.textContent = state.activeTheme.title;
+      progressStatus.textContent = `${state.currentIndex + 1}/${state.sentenceQueue.length}`;
+      koreanPrompt.innerHTML = escapeHtml(current.korean).replaceAll("/", '<span class="chunk">/</span>');
+      questionTitle.textContent = current.question.title;
+      answerInput.value = "";
+      answerInput.disabled = false;
+      checkAnswer.disabled = false;
+      nextSentence.disabled = true;
+      skipSentence.disabled = false;
+      newTheme.disabled = false;
+      feedback.className = "feedback";
+      answerInput.focus();
+    }
+
+    async function startNextTheme() {
+      if (!state.library.length) return;
+
+      setLoading("다음 테마를 준비하는 중");
+
+      const theme = chooseTheme();
+      state.activeTheme = theme;
+      state.usedThemeIds.add(theme.id);
+      state.sentenceQueue = await buildThemeQueue(theme);
+      state.currentIndex = 0;
+
+      if (!state.sentenceQueue.length) {
+        startNextTheme();
+        return;
+      }
+
+      renderCurrentSentence();
+    }
+
+    function showResult() {
+      const current = state.sentenceQueue[state.currentIndex];
+      const userAnswer = normalizeAnswer(answerInput.value);
+      const expectedAnswer = normalizeAnswer(current.english);
+      const isCorrect = userAnswer === expectedAnswer;
+
+      state.checked = true;
+      feedback.className = `feedback visible ${isCorrect ? "good" : "bad"}`;
+      feedbackTitle.textContent = isCorrect ? "정답" : "다시 확인";
+      correctAnswer.textContent = current.english;
+      normalizedAnswer.textContent = `비교 기준: ${expectedAnswer}`;
+      nextSentence.disabled = false;
+      checkAnswer.disabled = true;
+    }
+
+    function goNextSentence() {
+      state.currentIndex += 1;
+      renderCurrentSentence();
+    }
+
+    checkAnswer.addEventListener("click", showResult);
+
+    answerInput.addEventListener("keydown", (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+        if (state.checked) {
+          goNextSentence();
+        } else {
+          showResult();
+        }
+      }
+    });
+
+    nextSentence.addEventListener("click", goNextSentence);
+    skipSentence.addEventListener("click", goNextSentence);
+    newTheme.addEventListener("click", startNextTheme);
+
+    setLoading("데이터를 불러오는 중");
+
+    loadIndexData()
+      .then(startNextTheme)
+      .catch(() => {
+        themeTag.textContent = "Error";
+        progressStatus.textContent = "데이터를 불러오지 못했습니다";
+        koreanPrompt.textContent = "로컬 서버나 배포된 페이지에서 다시 열어주세요.";
+      });
+  </script>
+</body>
+</html>

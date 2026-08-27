@@ -1,11 +1,12 @@
 # OPIC Study
 
-오픽 음악 주제 스크립트와 음성 파일 모음입니다.
+오픽 주제별 스크립트와 음성 파일 모음입니다.
 
 ## 현재 구성
 
-- `index.html`: 음악 6문항 학습 페이지
-- `script.txt`: 음악 관련 질문 6개와 답변 스크립트 원본
+- `index.html`: 주제별 스크립트와 음성 학습 페이지
+- `quiz.html`: 랜덤 테마 영작 퀴즈 페이지
+- `script.txt`: 최근 추가한 질문과 답변 스크립트 원본
 - `themes/self-introduction/regular/q1/`: 자기소개
 - `themes/park/describe/q1/`: 공원 묘사
 - `themes/park/experience/q1/`: 최근 공원 방문
