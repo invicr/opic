@@ -1,43 +1,17 @@
-보통 어디가서 어디가서 머리를 자르는지? 그곳의 분위기는 어떤지? 왜 가는지? 묘사
-EN: Well... / I usually go to a hair salon / near my home / once a month.
-KR: 음... / 나는 보통 미용실에 갑니다 / 내 집 근처의 / 한 달에 한 번.
-EN: It's only / about a five-minute walk / from my place.
-KR: 그것은 단지 / 약 5분 거리입니다 걸어서 / 내 장소에서.
-EN: The salon is / really clean and modern, / and the staff are friendly.
-KR: 그 미용실은 / 정말 깨끗하고 현대적입니다, / 그리고 직원들은 친절합니다.
-EN: I've been going there / for about two years, / so my hairstylist knows / how I like my hair.
-KR: 나는 거기에 다니고 있습니다 / 약 2년 동안, / 그래서 내 헤어스타일리스트는 압니다 / 내가 내 머리를 어떻게 좋아하는지.
-EN: I don't have to explain / what I want / every time.
-KR: 나는 설명할 필요가 없습니다 / 내가 원하는 것을 / 매번.
-EN: Honestly, / that's why I like going there.
-KR: 솔직히, / 그것이 이유입니다 내가 거기에 가는 것을 좋아하는.
-
-미용실 갈 때 루틴
-EN: Well... / I usually make an appointment / through the Naver app.
-KR: 음... / 나는 보통 예약을 합니다 / 네이버 앱을 통해서.
-EN: I choose / the date, time, / and my hairstylist.
-KR: 나는 선택합니다 / 날짜, 시간, / 그리고 내 헤어스타일리스트를.
-EN: When I get there, / my hairstylist already knows / how I like my hair.
-KR: 내가 거기에 도착하면, / 내 헤어스타일리스트는 이미 압니다 / 내가 내 머리를 어떻게 좋아하는지.
-EN: So I don't have to explain / what I want / every time.
-KR: 그래서 나는 설명할 필요가 없습니다 / 내가 원하는 것을 / 매번.
-EN: After the haircut, / she washes and dries / my hair.
-KR: 머리를 자른 후에, / 그녀는 감겨주고 말려줍니다 / 내 머리를.
-EN: That's pretty much it. / It's really simple / and convenient.
-KR: 그것이 거의 전부입니다. / 그것은 정말 간단합니다 / 그리고 편리합니다.
-
-미용실에서 기억에 남는 경험
-EN: Well... / I remember one experience / really well.
-KR: 음... / 나는 한 경험을 기억합니다 / 정말 잘.
-EN: I was at my hair salon, / and I went to / the bathroom.
-KR: 나는 내 미용실에 있었습니다, / 그리고 나는 갔습니다 / 화장실에.
-EN: But suddenly, / the bathroom door wouldn't open, / so I got stuck inside.
-KR: 하지만 갑자기, / 화장실 문이 열리지 않았습니다, / 그래서 나는 안에 갇혔습니다.
-EN: I was totally surprised, / so I called / one of the staff.
-KR: 나는 완전히 놀랐습니다, / 그래서 나는 불렀습니다 / 직원들 중 한 명을.
-EN: A few minutes later, / someone came / and opened the door for me.
-KR: 몇 분 후에, / 누군가 왔습니다 / 그리고 문을 열어주었습니다 나를 위해.
-EN: Honestly, / I was so relieved, / but it was really strange.
-KR: 솔직히, / 나는 정말 안도했습니다, / 하지만 그것은 정말 이상했습니다.
-EN: Anyway, / I'll never forget / getting stuck in that bathroom.
-KR: 어쨌든, / 나는 절대 잊지 못할 것입니다 / 그 화장실에 갇혔던 것을.
+카페 기억나는 경험
+EN: Well... / my most memorable cafe experience / was when I almost lost my smartphone.
+KR: 음... / 나의 가장 기억에 남는 카페 경험은 / 내가 거의 내 스마트폰을 잃어버렸을 때였습니다.
+EN: I went to Starbucks / with my wife / a while ago.
+KR: 나는 스타벅스에 갔습니다 / 내 아내와 함께 / 얼마 전에.
+EN: And then, / we went to a restaurant nearby / for dinner.
+KR: 그리고 나서, / 우리는 근처 식당에 갔습니다 / 저녁을 먹기 위해.
+EN: When I was about to pay / with Samsung Pay, / I realized / I didn't have my smartphone.
+KR: 내가 막 결제하려고 했을 때 / 삼성페이로, / 나는 깨달았습니다 / 내가 내 스마트폰을 가지고 있지 않다는 것을.
+EN: I was so surprised, / so we went back to Starbucks / to look for my phone.
+KR: 나는 정말 놀랐습니다, / 그래서 우리는 스타벅스로 돌아갔습니다 / 내 휴대폰을 찾기 위해.
+EN: I asked the staff, / and luckily, / they had my phone.
+KR: 나는 직원에게 물었습니다, / 그리고 다행히, / 그들이 내 휴대폰을 가지고 있었습니다.
+EN: I was really relieved.
+KR: 나는 정말 안도했습니다.
+EN: Since then, / I always check my phone / before I leave any place.
+KR: 그 이후로, / 나는 항상 내 휴대폰을 확인합니다 / 내가 어떤 장소를 떠나기 전에.
