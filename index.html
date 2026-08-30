@@ -237,7 +237,8 @@
     }
 
     .english,
-    .korean {
+    .korean,
+    .summary-line {
       margin: 0;
     }
 
@@ -249,6 +250,11 @@
       margin-top: 3px;
       color: var(--muted);
       font-size: 14px;
+    }
+
+    .summary-line {
+      color: #30322f;
+      font-weight: 650;
     }
 
     .chunk {
@@ -290,6 +296,7 @@
       <p class="subtitle">테마별 문항을 선택해서 연습합니다. 각 문항은 themes 아래의 script.txt와 audio.wav를 참조합니다.</p>
       <div class="page-links" aria-label="Practice pages">
         <a class="nav-button" href="quiz.html">영작 퀴즈</a>
+        <a class="nav-button" href="mock.html">모의고사</a>
       </div>
     </div>
   </header>
@@ -341,30 +348,40 @@
             label: "Describe",
             scriptFile: "themes/park/describe/q1/script.txt",
             audioFile: "themes/park/describe/q1/audio.wav",
+            questionFile: "themes/park/describe/q1/question.txt",
+            questionAudioFile: "themes/park/describe/q1/question.wav",
           },
           {
             title: "최근 공원 방문",
             label: "Experience 1",
             scriptFile: "themes/park/experience/q1/script.txt",
             audioFile: "themes/park/experience/q1/audio.wav",
+            questionFile: "themes/park/experience/q1/question.txt",
+            questionAudioFile: "themes/park/experience/q1/question.wav",
           },
           {
             title: "아이들, 어른들 공원 비교",
             label: "Compare",
             scriptFile: "themes/park/compare/q1/script.txt",
             audioFile: "themes/park/compare/q1/audio.wav",
+            questionFile: "themes/park/compare/q1/question.txt",
+            questionAudioFile: "themes/park/compare/q1/question.wav",
           },
           {
             title: "공원 문제",
             label: "Issue",
             scriptFile: "themes/park/issue/q1/script.txt",
             audioFile: "themes/park/issue/q1/audio.wav",
+            questionFile: "themes/park/issue/q1/question.txt",
+            questionAudioFile: "themes/park/issue/q1/question.wav",
           },
           {
             title: "기억에 남는 공원",
             label: "Experience 2",
             scriptFile: "themes/park/experience/q2/script.txt",
             audioFile: "themes/park/experience/q2/audio.wav",
+            questionFile: "themes/park/experience/q2/question.txt",
+            questionAudioFile: "themes/park/experience/q2/question.wav",
           },
         ],
       },
@@ -377,36 +394,48 @@
             label: "Describe",
             scriptFile: "themes/movie/describe/q1/script.txt",
             audioFile: "themes/movie/describe/q1/audio.wav",
+            questionFile: "themes/movie/describe/q1/question.txt",
+            questionAudioFile: "themes/movie/describe/q1/question.wav",
           },
           {
             title: "영화관 갈때 루틴",
             label: "Regular 1",
             scriptFile: "themes/movie/regular/q1/script.txt",
             audioFile: "themes/movie/regular/q1/audio.wav",
+            questionFile: "themes/movie/regular/q1/question.txt",
+            questionAudioFile: "themes/movie/regular/q1/question.wav",
           },
           {
             title: "영화 취향은 어떻게 변했는지?",
             label: "Experience 1",
             scriptFile: "themes/movie/experience/q1/script.txt",
             audioFile: "themes/movie/experience/q1/audio.wav",
+            questionFile: "themes/movie/experience/q1/question.txt",
+            questionAudioFile: "themes/movie/experience/q1/question.wav",
           },
           {
             title: "가장 흥미롭게 본 영화",
             label: "Experience 2",
             scriptFile: "themes/movie/experience/q2/script.txt",
             audioFile: "themes/movie/experience/q2/audio.wav",
+            questionFile: "themes/movie/experience/q2/question.txt",
+            questionAudioFile: "themes/movie/experience/q2/question.wav",
           },
           {
             title: "영화 변화 비교",
             label: "Compare",
             scriptFile: "themes/movie/compare/q1/script.txt",
             audioFile: "themes/movie/compare/q1/audio.wav",
+            questionFile: "themes/movie/compare/q1/question.txt",
+            questionAudioFile: "themes/movie/compare/q1/question.wav",
           },
           {
             title: "영화에 대한 이슈",
             label: "Issue",
             scriptFile: "themes/movie/issue/q1/script.txt",
             audioFile: "themes/movie/issue/q1/audio.wav",
+            questionFile: "themes/movie/issue/q1/question.txt",
+            questionAudioFile: "themes/movie/issue/q1/question.wav",
           },
         ],
       },
@@ -419,30 +448,40 @@
             label: "Regular 1",
             scriptFile: "themes/cafe/regular/q1/script.txt",
             audioFile: "themes/cafe/regular/q1/audio.wav",
+            questionFile: "themes/cafe/regular/q1/question.txt",
+            questionAudioFile: "themes/cafe/regular/q1/question.wav",
           },
           {
             title: "너가 제일 좋아하는 카페 묘사해봐",
             label: "Describe",
             scriptFile: "themes/cafe/describe/q1/script.txt",
             audioFile: "themes/cafe/describe/q1/audio.wav",
+            questionFile: "themes/cafe/describe/q1/question.txt",
+            questionAudioFile: "themes/cafe/describe/q1/question.wav",
           },
           {
             title: "카페 처음간 경험",
             label: "Experience 1",
             scriptFile: "themes/cafe/experience/q1/script.txt",
             audioFile: "themes/cafe/experience/q1/audio.wav",
+            questionFile: "themes/cafe/experience/q1/question.txt",
+            questionAudioFile: "themes/cafe/experience/q1/question.wav",
           },
           {
             title: "카페 변화",
             label: "Compare",
             scriptFile: "themes/cafe/compare/q1/script.txt",
             audioFile: "themes/cafe/compare/q1/audio.wav",
+            questionFile: "themes/cafe/compare/q1/question.txt",
+            questionAudioFile: "themes/cafe/compare/q1/question.wav",
           },
           {
             title: "카페 기억나는 경험",
             label: "Experience 2",
             scriptFile: "themes/cafe/experience/q2/script.txt",
             audioFile: "themes/cafe/experience/q2/audio.wav",
+            questionFile: "themes/cafe/experience/q2/question.txt",
+            questionAudioFile: "themes/cafe/experience/q2/question.wav",
           },
         ],
       },
@@ -455,48 +494,64 @@
             label: "Describe",
             scriptFile: "themes/home/describe/q1/script.txt",
             audioFile: "themes/home/describe/q1/audio.wav",
+            questionFile: "themes/home/describe/q1/question.txt",
+            questionAudioFile: "themes/home/describe/q1/question.wav",
           },
           {
             title: "집 일상 루틴",
             label: "Regular 1",
             scriptFile: "themes/home/regular/q1/script.txt",
             audioFile: "themes/home/regular/q1/audio.wav",
+            questionFile: "themes/home/regular/q1/question.txt",
+            questionAudioFile: "themes/home/regular/q1/question.wav",
           },
           {
             title: "집 옛날/현재 비교",
             label: "Compare",
             scriptFile: "themes/home/compare/q1/script.txt",
             audioFile: "themes/home/compare/q1/audio.wav",
+            questionFile: "themes/home/compare/q1/question.txt",
+            questionAudioFile: "themes/home/compare/q1/question.wav",
           },
           {
             title: "집 문제",
             label: "Experience 1",
             scriptFile: "themes/home/experience/q1/script.txt",
             audioFile: "themes/home/experience/q1/audio.wav",
+            questionFile: "themes/home/experience/q1/question.txt",
+            questionAudioFile: "themes/home/experience/q1/question.wav",
           },
           {
             title: "집안일 - 루틴",
             label: "Chores 1",
             scriptFile: "themes/home/chores/q1/script.txt",
             audioFile: "themes/home/chores/q1/audio.wav",
+            questionFile: "themes/home/chores/q1/question.txt",
+            questionAudioFile: "themes/home/chores/q1/question.wav",
           },
           {
             title: "집안일 - 하지못한 집안일",
             label: "Chores 2",
             scriptFile: "themes/home/chores/q2/script.txt",
             audioFile: "themes/home/chores/q2/audio.wav",
+            questionFile: "themes/home/chores/q2/question.txt",
+            questionAudioFile: "themes/home/chores/q2/question.wav",
           },
           {
             title: "집안일 - 어렸을때 집안일",
             label: "Chores 3",
             scriptFile: "themes/home/chores/q3/script.txt",
             audioFile: "themes/home/chores/q3/audio.wav",
+            questionFile: "themes/home/chores/q3/question.txt",
+            questionAudioFile: "themes/home/chores/q3/question.wav",
           },
           {
             title: "집 - 한국의 집 이슈",
             label: "Issue",
             scriptFile: "themes/home/issue/q1/script.txt",
             audioFile: "themes/home/issue/q1/audio.wav",
+            questionFile: "themes/home/issue/q1/question.txt",
+            questionAudioFile: "themes/home/issue/q1/question.wav",
           },
         ],
       },
@@ -509,18 +564,70 @@
             label: "Describe",
             scriptFile: "themes/cooking/describe/q1/script.txt",
             audioFile: "themes/cooking/describe/q1/audio.wav",
+            questionFile: "themes/cooking/describe/q1/question.txt",
+            questionAudioFile: "themes/cooking/describe/q1/question.wav",
           },
           {
             title: "최근에 한 요리",
             label: "Experience 1",
             scriptFile: "themes/cooking/experience/q1/script.txt",
             audioFile: "themes/cooking/experience/q1/audio.wav",
+            questionFile: "themes/cooking/experience/q1/question.txt",
+            questionAudioFile: "themes/cooking/experience/q1/question.wav",
           },
           {
             title: "요리하다 망한 경험, 왜 망했고 어떤 교훈을 얻었나",
             label: "Experience 2",
             scriptFile: "themes/cooking/experience/q2/script.txt",
             audioFile: "themes/cooking/experience/q2/audio.wav",
+            questionFile: "themes/cooking/experience/q2/question.txt",
+            questionAudioFile: "themes/cooking/experience/q2/question.wav",
+          },
+        ],
+      },
+      {
+        id: "food",
+        title: "Food",
+        questions: [
+          {
+            title: "너희 나라에서 인기가 많은 음식, 최애 음식",
+            label: "Describe",
+            scriptFile: "themes/food/describe/q1/script.txt",
+            audioFile: "themes/food/describe/q1/audio.wav",
+            questionFile: "themes/food/describe/q1/question.txt",
+            questionAudioFile: "themes/food/describe/q1/question.wav",
+          },
+          {
+            title: "어린 시절 기억에 남는 음식 경험",
+            label: "Experience",
+            scriptFile: "themes/food/experience/q1/script.txt",
+            audioFile: "themes/food/experience/q1/audio.wav",
+            questionFile: "themes/food/experience/q1/question.txt",
+            questionAudioFile: "themes/food/experience/q1/question.wav",
+          },
+          {
+            title: "음식 관련 문제 경험",
+            label: "Problem",
+            scriptFile: "themes/food/problem/q1/script.txt",
+            audioFile: "themes/food/problem/q1/audio.wav",
+            questionFile: "themes/food/problem/q1/question.txt",
+            questionAudioFile: "themes/food/problem/q1/question.wav",
+          },
+          {
+            title: "장을 보는 방식 변화",
+            label: "Compare",
+            scriptFile: "themes/food/compare/q1/script.txt",
+            audioFile: "themes/food/compare/q1/audio.wav",
+            questionFile: "themes/food/compare/q1/question.txt",
+            questionAudioFile: "themes/food/compare/q1/question.wav",
+          },
+          {
+            title: "음식 관련 뉴스나 문제",
+            label: "Issue",
+            scriptFile: "themes/food/issue/q1/script.txt",
+            audioFile: "themes/food/issue/q1/audio.wav",
+            questionFile: "themes/food/issue/q1/question.txt",
+            questionAudioFile: "themes/food/issue/q1/question.wav",
           },
         ],
       },
@@ -558,6 +665,13 @@
             scriptFile: "themes/vacation-at-home/experience/q1/script.txt",
             audioFile: "themes/vacation-at-home/experience/q1/audio.wav",
           },
+          {
+            title: "최근에 집에서 보낸 휴가",
+            label: "Experience 2",
+            scriptFile: "themes/vacation-at-home/experience/q2/script.txt",
+            summaryFile: "themes/vacation-at-home/experience/q2/summary.txt",
+            audioFile: "themes/vacation-at-home/experience/q2/audio.wav",
+          },
         ],
       },
       {
@@ -569,30 +683,40 @@
             label: "Describe",
             scriptFile: "themes/travel/describe/q1/script.txt",
             audioFile: "themes/travel/describe/q1/audio.wav",
+            questionFile: "themes/travel/describe/q1/question.txt",
+            questionAudioFile: "themes/travel/describe/q1/question.wav",
           },
           {
             title: "여행 준비 단계 설명",
             label: "Planning",
             scriptFile: "themes/travel/planning/q1/script.txt",
             audioFile: "themes/travel/planning/q1/audio.wav",
+            questionFile: "themes/travel/planning/q1/question.txt",
+            questionAudioFile: "themes/travel/planning/q1/question.wav",
           },
           {
             title: "어렸을 때 여행 경험",
             label: "Experience",
             scriptFile: "themes/travel/experience/q1/script.txt",
             audioFile: "themes/travel/experience/q1/audio.wav",
+            questionFile: "themes/travel/experience/q1/question.txt",
+            questionAudioFile: "themes/travel/experience/q1/question.wav",
           },
           {
             title: "여행이 힘들어졌다고 하는데 어떻게 달라졌는지?",
             label: "Compare",
             scriptFile: "themes/travel/compare/q1/script.txt",
             audioFile: "themes/travel/compare/q1/audio.wav",
+            questionFile: "themes/travel/compare/q1/question.txt",
+            questionAudioFile: "themes/travel/compare/q1/question.wav",
           },
           {
             title: "여행에 대한 걱정, 왜 그런 걱정이 생겼고, 어떻게 해결할 수 있는지?",
             label: "Issue",
             scriptFile: "themes/travel/issue/q1/script.txt",
             audioFile: "themes/travel/issue/q1/audio.wav",
+            questionFile: "themes/travel/issue/q1/question.txt",
+            questionAudioFile: "themes/travel/issue/q1/question.wav",
           },
         ],
       },
@@ -605,24 +729,32 @@
             label: "Describe",
             scriptFile: "themes/overseas-travel/describe/q1/script.txt",
             audioFile: "themes/overseas-travel/describe/q1/audio.wav",
+            questionFile: "themes/overseas-travel/describe/q1/question.txt",
+            questionAudioFile: "themes/overseas-travel/describe/q1/question.wav",
           },
           {
             title: "너의 첫 해외여행",
             label: "Experience 1",
             scriptFile: "themes/overseas-travel/experience/q1/script.txt",
             audioFile: "themes/overseas-travel/experience/q1/audio.wav",
+            questionFile: "themes/overseas-travel/experience/q1/question.txt",
+            questionAudioFile: "themes/overseas-travel/experience/q1/question.wav",
           },
           {
             title: "기억나는 경험",
             label: "Experience 2",
             scriptFile: "themes/overseas-travel/experience/q2/script.txt",
             audioFile: "themes/overseas-travel/experience/q2/audio.wav",
+            questionFile: "themes/overseas-travel/experience/q2/question.txt",
+            questionAudioFile: "themes/overseas-travel/experience/q2/question.wav",
           },
           {
             title: "다른 나라 여행할때 관심있는 몇가지 이야기해보자",
             label: "Culture",
             scriptFile: "themes/overseas-travel/culture/q1/script.txt",
             audioFile: "themes/overseas-travel/culture/q1/audio.wav",
+            questionFile: "themes/overseas-travel/culture/q1/question.txt",
+            questionAudioFile: "themes/overseas-travel/culture/q1/question.wav",
           },
         ],
       },
@@ -664,24 +796,33 @@
             title: "좋아하는 해변 묘사",
             label: "Describe",
             scriptFile: "themes/beach/describe/q1/script.txt",
+            summaryFile: "themes/beach/describe/q1/summary.txt",
+            questionFile: "themes/beach/describe/q1/question.txt",
+            questionAudioFile: "themes/beach/describe/q1/question.wav",
             audioFile: "themes/beach/describe/q1/audio.wav",
           },
           {
             title: "해변 루틴",
             label: "Regular 1",
             scriptFile: "themes/beach/regular/q1/script.txt",
+            questionFile: "themes/beach/regular/q1/question.txt",
+            questionAudioFile: "themes/beach/regular/q1/question.wav",
             audioFile: "themes/beach/regular/q1/audio.wav",
           },
           {
             title: "최근 해변 경험",
             label: "Experience 1",
             scriptFile: "themes/beach/experience/q1/script.txt",
+            questionFile: "themes/beach/experience/q1/question.txt",
+            questionAudioFile: "themes/beach/experience/q1/question.wav",
             audioFile: "themes/beach/experience/q1/audio.wav",
           },
           {
             title: "해변에서 기억나는 경험",
             label: "Experience 2",
             scriptFile: "themes/beach/experience/q2/script.txt",
+            questionFile: "themes/beach/experience/q2/question.txt",
+            questionAudioFile: "themes/beach/experience/q2/question.wav",
             audioFile: "themes/beach/experience/q2/audio.wav",
           },
         ],
@@ -695,24 +836,32 @@
             label: "Regular 1",
             scriptFile: "themes/weather/regular/q1/script.txt",
             audioFile: "themes/weather/regular/q1/audio.wav",
+            questionFile: "themes/weather/regular/q1/question.txt",
+            questionAudioFile: "themes/weather/regular/q1/question.wav",
           },
           {
             title: "오늘 날씨에 대해서 묘사해봐.",
             label: "Describe",
             scriptFile: "themes/weather/describe/q1/script.txt",
             audioFile: "themes/weather/describe/q1/audio.wav",
+            questionFile: "themes/weather/describe/q1/question.txt",
+            questionAudioFile: "themes/weather/describe/q1/question.wav",
           },
           {
             title: "계절은 어떻게 변했어?",
             label: "Compare",
             scriptFile: "themes/weather/compare/q1/script.txt",
             audioFile: "themes/weather/compare/q1/audio.wav",
+            questionFile: "themes/weather/compare/q1/question.txt",
+            questionAudioFile: "themes/weather/compare/q1/question.wav",
           },
           {
             title: "날씨 기억나는 경험",
             label: "Experience",
             scriptFile: "themes/weather/experience/q1/script.txt",
             audioFile: "themes/weather/experience/q1/audio.wav",
+            questionFile: "themes/weather/experience/q1/question.txt",
+            questionAudioFile: "themes/weather/experience/q1/question.wav",
           },
         ],
       },
@@ -755,18 +904,24 @@
             label: "Compare",
             scriptFile: "themes/hotel/compare/q1/script.txt",
             audioFile: "themes/hotel/compare/q1/audio.wav",
+            questionFile: "themes/hotel/compare/q1/question.txt",
+            questionAudioFile: "themes/hotel/compare/q1/question.wav",
           },
           {
             title: "최근 가본 호텔",
             label: "Experience 1",
             scriptFile: "themes/hotel/experience/q1/script.txt",
             audioFile: "themes/hotel/experience/q1/audio.wav",
+            questionFile: "themes/hotel/experience/q1/question.txt",
+            questionAudioFile: "themes/hotel/experience/q1/question.wav",
           },
           {
             title: "호텔에서 기억나는 경험",
             label: "Experience 2",
             scriptFile: "themes/hotel/experience/q2/script.txt",
             audioFile: "themes/hotel/experience/q2/audio.wav",
+            questionFile: "themes/hotel/experience/q2/question.txt",
+            questionAudioFile: "themes/hotel/experience/q2/question.wav",
           },
         ],
       },
@@ -779,24 +934,32 @@
             label: "Experience 1",
             scriptFile: "themes/transportation/experience/q1/script.txt",
             audioFile: "themes/transportation/experience/q1/audio.wav",
+            questionFile: "themes/transportation/experience/q1/question.txt",
+            questionAudioFile: "themes/transportation/experience/q1/question.wav",
           },
           {
             title: "최근에 다른 형식의 대중교통을 이용했던 경험",
             label: "Experience 2",
             scriptFile: "themes/transportation/experience/q2/script.txt",
             audioFile: "themes/transportation/experience/q2/audio.wav",
+            questionFile: "themes/transportation/experience/q2/question.txt",
+            questionAudioFile: "themes/transportation/experience/q2/question.wav",
           },
           {
             title: "대중 교통이 시간지나면서 어떻게 발전했는지",
             label: "Compare",
             scriptFile: "themes/transportation/compare/q1/script.txt",
             audioFile: "themes/transportation/compare/q1/audio.wav",
+            questionFile: "themes/transportation/compare/q1/question.txt",
+            questionAudioFile: "themes/transportation/compare/q1/question.wav",
           },
           {
             title: "너가 사는 곳의 교통 수단 묘사",
             label: "Describe",
             scriptFile: "themes/transportation/describe/q1/script.txt",
             audioFile: "themes/transportation/describe/q1/audio.wav",
+            questionFile: "themes/transportation/describe/q1/question.txt",
+            questionAudioFile: "themes/transportation/describe/q1/question.wav",
           },
         ],
       },
@@ -809,30 +972,40 @@
             label: "Describe",
             scriptFile: "themes/recycling/describe/q1/script.txt",
             audioFile: "themes/recycling/describe/q1/audio.wav",
+            questionFile: "themes/recycling/describe/q1/question.txt",
+            questionAudioFile: "themes/recycling/describe/q1/question.wav",
           },
           {
             title: "재활용 루틴",
             label: "Regular",
             scriptFile: "themes/recycling/regular/q1/script.txt",
             audioFile: "themes/recycling/regular/q1/audio.wav",
+            questionFile: "themes/recycling/regular/q1/question.txt",
+            questionAudioFile: "themes/recycling/regular/q1/question.wav",
           },
           {
             title: "기억나는 재활용 경험",
             label: "Experience",
             scriptFile: "themes/recycling/experience/q1/script.txt",
             audioFile: "themes/recycling/experience/q1/audio.wav",
+            questionFile: "themes/recycling/experience/q1/question.txt",
+            questionAudioFile: "themes/recycling/experience/q1/question.wav",
           },
           {
             title: "재활용 현재/과거 비교",
             label: "Compare",
             scriptFile: "themes/recycling/compare/q1/script.txt",
             audioFile: "themes/recycling/compare/q1/audio.wav",
+            questionFile: "themes/recycling/compare/q1/question.txt",
+            questionAudioFile: "themes/recycling/compare/q1/question.wav",
           },
           {
             title: "재활용 관련된 뉴스/이슈",
             label: "Issue",
             scriptFile: "themes/recycling/issue/q1/script.txt",
             audioFile: "themes/recycling/issue/q1/audio.wav",
+            questionFile: "themes/recycling/issue/q1/question.txt",
+            questionAudioFile: "themes/recycling/issue/q1/question.wav",
           },
         ],
       },
@@ -845,18 +1018,24 @@
             label: "Describe",
             scriptFile: "themes/bank/describe/q1/script.txt",
             audioFile: "themes/bank/describe/q1/audio.wav",
+            questionFile: "themes/bank/describe/q1/question.txt",
+            questionAudioFile: "themes/bank/describe/q1/question.wav",
           },
           {
             title: "은행 변화",
             label: "Compare",
             scriptFile: "themes/bank/compare/q1/script.txt",
             audioFile: "themes/bank/compare/q1/audio.wav",
+            questionFile: "themes/bank/compare/q1/question.txt",
+            questionAudioFile: "themes/bank/compare/q1/question.wav",
           },
           {
             title: "은행 문제",
             label: "Issue",
             scriptFile: "themes/bank/issue/q1/script.txt",
             audioFile: "themes/bank/issue/q1/audio.wav",
+            questionFile: "themes/bank/issue/q1/question.txt",
+            questionAudioFile: "themes/bank/issue/q1/question.wav",
           },
         ],
       },
@@ -869,18 +1048,24 @@
             label: "Describe",
             scriptFile: "themes/hair-salon/describe/q1/script.txt",
             audioFile: "themes/hair-salon/describe/q1/audio.wav",
+            questionFile: "themes/hair-salon/describe/q1/question.txt",
+            questionAudioFile: "themes/hair-salon/describe/q1/question.wav",
           },
           {
             title: "미용실 갈 때 루틴",
             label: "Regular",
             scriptFile: "themes/hair-salon/regular/q1/script.txt",
             audioFile: "themes/hair-salon/regular/q1/audio.wav",
+            questionFile: "themes/hair-salon/regular/q1/question.txt",
+            questionAudioFile: "themes/hair-salon/regular/q1/question.wav",
           },
           {
             title: "미용실에서 기억에 남는 경험",
             label: "Experience",
             scriptFile: "themes/hair-salon/experience/q1/script.txt",
             audioFile: "themes/hair-salon/experience/q1/audio.wav",
+            questionFile: "themes/hair-salon/experience/q1/question.txt",
+            questionAudioFile: "themes/hair-salon/experience/q1/question.wav",
           },
         ],
       },
@@ -893,36 +1078,48 @@
             label: "Describe",
             scriptFile: "themes/music/describe/q1/script.txt",
             audioFile: "themes/music/describe/q1/audio.wav",
+            questionFile: "themes/music/describe/q1/question.txt",
+            questionAudioFile: "themes/music/describe/q1/question.wav",
           },
           {
             title: "음악 언제들어",
             label: "Regular 1",
             scriptFile: "themes/music/regular/q1/script.txt",
             audioFile: "themes/music/regular/q1/audio.wav",
+            questionFile: "themes/music/regular/q1/question.txt",
+            questionAudioFile: "themes/music/regular/q1/question.wav",
           },
           {
             title: "음악 취향 변화",
             label: "Experience 1",
             scriptFile: "themes/music/experience/q1/script.txt",
             audioFile: "themes/music/experience/q1/audio.wav",
+            questionFile: "themes/music/experience/q1/question.txt",
+            questionAudioFile: "themes/music/experience/q1/question.wav",
           },
           {
             title: "기억나는 콘서트",
             label: "Experience 2",
             scriptFile: "themes/music/experience/q2/script.txt",
             audioFile: "themes/music/experience/q2/audio.wav",
+            questionFile: "themes/music/experience/q2/question.txt",
+            questionAudioFile: "themes/music/experience/q2/question.wav",
           },
           {
             title: "두 장르간 비교",
             label: "Compare",
             scriptFile: "themes/music/compare/q1/script.txt",
             audioFile: "themes/music/compare/q1/audio.wav",
+            questionFile: "themes/music/compare/q1/question.txt",
+            questionAudioFile: "themes/music/compare/q1/question.wav",
           },
           {
             title: "음악 가젯/도구",
             label: "Regular 2",
             scriptFile: "themes/music/regular/q2/script.txt",
             audioFile: "themes/music/regular/q2/audio.wav",
+            questionFile: "themes/music/regular/q2/question.txt",
+            questionAudioFile: "themes/music/regular/q2/question.wav",
           },
         ],
       },
@@ -1056,21 +1253,19 @@
         "KR: 우리는 정말 좋아합니다 캐러멜 팝콘을, 왜냐하면 그것은 정말 맛있고 달콤하기 때문입니다.",
         "EN: After the movie, we talk about how the popcorn tasted that day, isn't it funny?",
         "KR: 영화 후에, 우리는 이야기합니다 팝콘이 그날 어떻게 맛있었는지를, 그것은 웃기지 않나요?",
-        "EN: Anyway, when we go to movies, we always eat it.",
+        "EN: Anyway, when we go to the movies, we always eat it.",
         "KR: 어쨌든, 우리가 영화 보러 갈 때, 우리는 항상 그것을 먹습니다.",
       ],
       "themes/movie/experience/q1/script.txt": [
         "영화 취향은 어떻게 변했는지?",
-        "EN: Um, That's an interesting question.",
-        "KR: 음, 그것은 흥미로운 질문입니다.",
+        "EN: Um, / that's an interesting question.",
+        "KR: 음, / 그것은 흥미로운 질문입니다.",
         "EN: Well... / I think my taste in movies / has changed a lot.",
         "KR: 음... / 나는 생각합니다 내 영화 취향이 / 많이 변했다고.",
         "EN: When I was a kid, / I really liked animated movies / like Toy Story.",
         "KR: 내가 아이였을 때, / 나는 정말 좋아했습니다 애니메이션 영화를 / Toy Story 같은.",
-        "EN: But as I got older, / I started watching / more sci-fi movies.",
-        "KR: 하지만 내가 나이가 들면서, / 나는 보기 시작했습니다 / 더 많은 공상 과학 영화를.",
-        "EN: I especially like / movies like Iron Man.",
-        "KR: 나는 특히 좋아합니다 / Iron Man 같은 영화를.",
+        "EN: But as I got older, / I started watching more sci-fi movies, / especially Iron Man.",
+        "KR: 하지만 내가 나이가 들면서, / 나는 더 많은 공상 과학 영화를 보기 시작했습니다, / 특히 Iron Man을.",
         "EN: I love seeing / new technology / in sci-fi movies.",
         "KR: 나는 보는 것을 좋아합니다 / 새로운 기술을 / 공상 과학 영화에서.",
         "EN: Overall, / I guess my taste in movies / has changed a lot.",
@@ -1097,8 +1292,8 @@
         "KR: 음... / 나는 생각합니다 영화들이 / 많이 변했다고.",
         "EN: When I was a kid, / computer graphics didn't look / very real.",
         "KR: 내가 아이였을 때, / 컴퓨터 그래픽은 보이지 않았습니다 / 아주 진짜처럼.",
-        "EN: I mean, back then, you could tell it was fake.",
-        "KR: 내 말은, 그때는, 당신은 알 수 있었습니다 그것이 가짜였다는 것을.",
+        "EN: I mean, / back then, / it looked pretty fake.",
+        "KR: 내 말은, / 그때는, / 그것은 꽤 가짜처럼 보였습니다.",
         "EN: But these days, / computer graphics / are much better than ever.",
         "KR: 하지만 요즘에는, / 컴퓨터 그래픽은 / 이전보다 훨씬 더 좋습니다.",
         "EN: For example, / when I first watched Iron Man, / the suit looked so real.",
@@ -1328,19 +1523,19 @@
         "KR: 돌아보면, / 나는 생각합니다 그것이 / 꽤 좋은 생각이었다고.",
       ],
       "themes/home/issue/q1/script.txt": [
-        "집 - 한국의 집 이슈",
-        "EN: Well... / I think noise / is a big problem / in Korean apartments.",
-        "KR: 음... / 나는 생각합니다 소음이 / 큰 문제라고 / 한국 아파트에서.",
-        "EN: You can hear / people running or moving chairs / upstairs.",
-        "KR: 당신은 들을 수 있습니다 / 사람들이 뛰거나 의자를 움직이는 것을 / 위층에서.",
-        "EN: I've had this problem / before.",
-        "KR: 나는 겪은 적이 있습니다 이 문제를 / 전에.",
-        "EN: One night, / I couldn't sleep / because of the noise.",
-        "KR: 어느 날 밤, / 나는 잠을 잘 수 없었습니다 / 그 소음 때문에.",
-        "EN: Honestly, / I was really annoyed. / It was so stressful.",
-        "KR: 솔직히, / 나는 정말 짜증났습니다. / 그것은 정말 스트레스였습니다.",
-        "EN: It's actually / a pretty common problem / in Korea.",
-        "KR: 그것은 사실 / 꽤 흔한 문제입니다 / 한국에서.",
+        "최근 기억에 남는 집에서의 휴가",
+        "EN: Well... / my most memorable experience at home / was when my wife got stuck in a room.",
+        "KR: 음... / 집에서의 나의 가장 기억에 남는 경험은 / 내 아내가 방에 갇혔을 때였습니다.",
+        "EN: She sent me a picture on KakaoTalk / and told me / that the door handle suddenly broke.",
+        "KR: 그녀는 나에게 사진을 보냈습니다 카카오톡으로 / 그리고 나에게 말했습니다 / 문 손잡이가 갑자기 고장났다고.",
+        "EN: I was totally surprised, / so I thought about it for a moment / and called the management office.",
+        "KR: 나는 완전히 놀랐습니다, / 그래서 나는 그것에 대해 잠시 생각했습니다 / 그리고 관리사무소에 전화했습니다.",
+        "EN: About 30 minutes later, / someone came / and opened the door.",
+        "KR: 약 30분 후에, / 누군가 왔습니다 / 그리고 문을 열었습니다.",
+        "EN: Luckily, / my wife was able to get out, / so I was really relieved.",
+        "KR: 다행히, / 내 아내는 나올 수 있었습니다, / 그래서 나는 정말 안도했습니다.",
+        "EN: Anyway, / I'll never forget that experience / because it was so strange.",
+        "KR: 어쨌든, / 나는 그 경험을 절대 잊지 못할 것입니다 / 왜냐하면 그것은 정말 이상했기 때문입니다.",
       ],
       "themes/cooking/describe/q1/script.txt": [
         "요리하기 좋아하는 음식, 왜하기 좋아하는지 (묘사)",
@@ -1382,8 +1577,6 @@
         "KR: 음... / 나는 한 번 완전히 망쳤습니다 / 라면을 만드는 동안.",
         "EN: My family and I / had ramen for dinner / in Gwangyang.",
         "KR: 내 가족과 나는 / 라면을 저녁으로 먹었습니다 / 광양에서.",
-        "EN: I tried to make / several packs / at once.",
-        "KR: 나는 만들려고 했습니다 / 여러 봉지를 / 한 번에.",
         "EN: Actually, / I didn't have much experience / making several packs of ramen at once.",
         "KR: 사실, / 나는 경험이 많지 않았습니다 / 라면 여러 봉지를 한 번에 만드는.",
         "EN: But I got the timing wrong, / so most of the soup / was gone.",
@@ -1455,24 +1648,33 @@
       ],
       "themes/vacation-at-home/experience/q1/script.txt": [
         "최근 기억에 남는 집에서의 휴가",
-        "EN: Well, I remember one experience really well.",
-        "KR: 음, 나는 한 경험을 정말 잘 기억합니다.",
-        "EN: At that time, My wife was at home / staying at a hotel / traveling with my wife.",
-        "KR: 그때, 내 아내는 집에 있었습니다 / 호텔에 머물면서 / 내 아내와 여행하면서.",
-        "EN: My wife got stuck in a room.",
-        "KR: 내 아내는 방에 갇혔습니다.",
-        "EN: She sent me a picute on KakaoTalk and told me that the door handle suddenly broke.",
-        "KR: 그녀는 나에게 사진을 보냈습니다 카카오톡으로 그리고 말했습니다 나에게 문 손잡이가 갑자기 고장났다고.",
-        "EN: I was totally surprised.",
-        "KR: 나는 완전히 놀랐습니다.",
-        "EN: I thought about it for a moment, and then I call the management office.",
-        "KR: 나는 그것에 대해 잠시 생각했습니다, 그리고 그 다음 나는 관리사무소에 전화했습니다.",
-        "EN: About 30 minutes later, someon came and opened door.",
-        "KR: 약 30분 후에, 누군가 왔습니다 그리고 문을 열었습니다.",
-        "EN: Anyway I was absolutely shocked because my wife got stuck in the room.",
-        "KR: 어쨌든 나는 완전히 충격받았습니다 왜냐하면 내 아내가 그 방에 갇혔기 때문입니다.",
-        "EN: I still don't know why the door handle broke. It was so strange.",
-        "KR: 나는 아직도 모릅니다 왜 문 손잡이가 고장났는지. 그것은 정말 이상했습니다.",
+        "EN: Well... / my most memorable experience at home / was when my wife got stuck in a room.",
+        "KR: 음... / 집에서의 나의 가장 기억에 남는 경험은 / 내 아내가 방에 갇혔을 때였습니다.",
+        "EN: She sent me a picture on KakaoTalk / and told me / that the door handle suddenly broke.",
+        "KR: 그녀는 나에게 사진을 보냈습니다 카카오톡으로 / 그리고 나에게 말했습니다 / 문 손잡이가 갑자기 고장났다고.",
+        "EN: I was totally surprised, / so I thought about it for a moment / and called the management office.",
+        "KR: 나는 완전히 놀랐습니다, / 그래서 나는 그것에 대해 잠시 생각했습니다 / 그리고 관리사무소에 전화했습니다.",
+        "EN: About 30 minutes later, / someone came / and opened the door.",
+        "KR: 약 30분 후에, / 누군가 왔습니다 / 그리고 문을 열었습니다.",
+        "EN: Luckily, / my wife was able to get out, / so I was really relieved.",
+        "KR: 다행히, / 내 아내는 나올 수 있었습니다, / 그래서 나는 정말 안도했습니다.",
+        "EN: Anyway, / I'll never forget that experience / because it was so strange.",
+        "KR: 어쨌든, / 나는 그 경험을 절대 잊지 못할 것입니다 / 왜냐하면 그것은 정말 이상했기 때문입니다.",
+      ],
+      "themes/vacation-at-home/experience/q2/script.txt": [
+        "최근에 집에서 보낸 휴가",
+        "EN: Well... / I recently spent my vacation at home / with my wife.",
+        "KR: 음... / 나는 최근에 내 휴가를 집에서 보냈습니다 / 내 아내와 함께.",
+        "EN: We slept in / and had breakfast together.",
+        "KR: 우리는 늦잠을 잤습니다 / 그리고 아침을 함께 먹었습니다.",
+        "EN: Then, / we ordered some food / for lunch.",
+        "KR: 그 다음, / 우리는 음식을 조금 주문했습니다 / 점심으로.",
+        "EN: After that, / we went to a Starbucks near my home / and had some coffee.",
+        "KR: 그 후에, / 우리는 내 집 근처 스타벅스에 갔습니다 / 그리고 커피를 조금 마셨습니다.",
+        "EN: In the evening, / we took a walk / at a park near my home.",
+        "KR: 저녁에, / 우리는 산책을 했습니다 / 내 집 근처 공원에서.",
+        "EN: Honestly, / we didn't do anything special, / but I really enjoyed / spending my vacation at home.",
+        "KR: 솔직히, / 우리는 특별한 어떤 것도 하지 않았습니다, / 하지만 나는 정말 즐겼습니다 / 내 휴가를 집에서 보내는 것을.",
       ],
       "themes/travel/describe/q1/script.txt": [
         "국내 여행 어디 좋아해? 설명해봐",
@@ -1707,18 +1909,22 @@
       ],
       "themes/beach/experience/q1/script.txt": [
         "최근 해변 경험",
-        "EN: Well... / I recently went to a beach / in Gwangyang.",
-        "KR: 음... / 나는 최근에 해변에 갔습니다 / 광양에 있는.",
+        "EN: Well... / I recently went to my favorite beach / in Gwangyang.",
+        "KR: 음... / 나는 최근에 내가 가장 좋아하는 해변에 갔습니다 / 광양에 있는.",
         "EN: I went there / with my wife's family / a while ago.",
         "KR: 나는 거기에 갔습니다 / 내 아내의 가족과 함께 / 얼마 전에.",
-        "EN: It was a small beach, / and some people were walking around / with their dogs.",
-        "KR: 그것은 작은 해변이었습니다, / 그리고 몇몇 사람들이 산책하고 있었습니다 / 그들의 개들과 함께.",
-        "EN: There was a small bridge, / and I could feel / the cool breeze there.",
-        "KR: 작은 다리가 있었습니다, / 그리고 나는 느낄 수 있었습니다 / 시원한 바람을 거기에서.",
-        "EN: Honestly, / it felt really nice, / and the sunset was beautiful in the evening.",
-        "KR: 솔직히, / 그것은 정말 기분 좋았습니다, / 그리고 노을은 아름다웠습니다 저녁에.",
-        "EN: Anyway, / I had a really good time / with my family.",
-        "KR: 어쨌든, / 나는 정말 좋은 시간을 보냈습니다 / 내 가족과 함께.",
+        "EN: It's a small beach, / but it's quiet / and peaceful.",
+        "KR: 그것은 작은 해변입니다, / 하지만 그것은 조용합니다 / 그리고 평화롭습니다.",
+        "EN: Some people were walking around there / with their dogs.",
+        "KR: 몇몇 사람들은 거기에서 산책하고 있었습니다 / 그들의 개들과 함께.",
+        "EN: There's also a bridge / connected to a small island.",
+        "KR: 또한 다리가 있습니다 / 작은 섬에 연결된.",
+        "EN: When I walked across the bridge, / I could feel the cool breeze, / and it felt really nice.",
+        "KR: 내가 그 다리를 건넜을 때, / 나는 시원한 바람을 느낄 수 있었습니다, / 그리고 그것은 정말 기분 좋았습니다.",
+        "EN: In the evening, / I saw / a beautiful sunset.",
+        "KR: 저녁에는, / 나는 보았습니다 / 아름다운 노을을.",
+        "EN: Anyway, / I had a really good time there / with my family.",
+        "KR: 어쨌든, / 나는 정말 좋은 시간을 보냈습니다 거기에서 / 내 가족과 함께.",
       ],
       "themes/beach/experience/q2/script.txt": [
         "해변에서 기억나는 경험",
@@ -1889,24 +2095,22 @@
       ],
       "themes/hotel/experience/q2/script.txt": [
         "호텔에서 기억나는 경험",
-        "EN: Well, I remember one experience really well.",
-        "KR: 음, 나는 한 경험을 정말 잘 기억합니다.",
-        "EN: At that time, My wife was at home / staying at a hotel / traveling with my wife.",
-        "KR: 그때, 내 아내는 집에 있었습니다 / 호텔에 머물면서 / 내 아내와 여행하면서.",
-        "EN: My wife got stuck in a room.",
-        "KR: 내 아내는 방에 갇혔습니다.",
-        "EN: She sent me a picute on KakaoTalk and told me that the door handle suddenly broke.",
-        "KR: 그녀는 나에게 사진을 보냈습니다 카카오톡으로 그리고 말했습니다 나에게 문 손잡이가 갑자기 고장났다고.",
-        "EN: I was totally surprised.",
-        "KR: 나는 완전히 놀랐습니다.",
-        "EN: I thought about it for a moment, and then I call the management office.",
-        "KR: 나는 그것에 대해 잠시 생각했습니다, 그리고 그 다음 나는 관리사무소에 전화했습니다.",
-        "EN: About 30 minutes later, someon came and opened door.",
-        "KR: 약 30분 후에, 누군가 왔습니다 그리고 문을 열었습니다.",
-        "EN: Anyway I was absolutely shocked because my wife got stuck in the room.",
-        "KR: 어쨌든 나는 완전히 충격받았습니다 왜냐하면 내 아내가 그 방에 갇혔기 때문입니다.",
-        "EN: I still don't know why the door handle broke. It was so strange.",
-        "KR: 나는 아직도 모릅니다 왜 문 손잡이가 고장났는지. 그것은 정말 이상했습니다.",
+        "EN: I think the most memorable hotel experience / was when my wife got stuck in a room.",
+        "KR: 나는 생각합니다 가장 기억에 남는 호텔 경험은 / 내 아내가 방에 갇혔을 때였다고.",
+        "EN: One day, / my wife couldn't get out of the room / because the door handle suddenly broke.",
+        "KR: 어느 날, / 내 아내는 방에서 나올 수 없었습니다 / 왜냐하면 문 손잡이가 갑자기 고장났기 때문입니다.",
+        "EN: She sent me a picture on KakaoTalk, / and I was so surprised / when I saw it.",
+        "KR: 그녀는 나에게 사진을 보냈습니다 카카오톡으로, / 그리고 나는 정말 놀랐습니다 / 내가 그것을 봤을 때.",
+        "EN: I called the front desk / right away.",
+        "KR: 나는 프런트 데스크에 전화했습니다 / 바로.",
+        "EN: Someone came / about thirty minutes later / and opened the door.",
+        "KR: 누군가 왔습니다 / 약 30분 후에 / 그리고 문을 열었습니다.",
+        "EN: After that, / I was so relieved.",
+        "KR: 그 후에, / 나는 정말 안도했습니다.",
+        "EN: But I still don't know / why the door handle suddenly broke.",
+        "KR: 하지만 나는 아직도 모릅니다 / 왜 문 손잡이가 갑자기 고장났는지.",
+        "EN: It was really strange.",
+        "KR: 그것은 정말 이상했습니다.",
       ],
       "themes/transportation/experience/q1/script.txt": [
         "대중교통 기억나는 경험",
@@ -2120,20 +2324,18 @@
       ],
       "themes/hair-salon/experience/q1/script.txt": [
         "미용실에서 기억에 남는 경험",
-        "EN: Well... / I remember one experience / really well.",
-        "KR: 음... / 나는 한 경험을 기억합니다 / 정말 잘.",
-        "EN: I was at my hair salon, / and I went to / the bathroom.",
-        "KR: 나는 내 미용실에 있었습니다, / 그리고 나는 갔습니다 / 화장실에.",
-        "EN: But suddenly, / the bathroom door wouldn't open, / so I got stuck inside.",
-        "KR: 하지만 갑자기, / 화장실 문이 열리지 않았습니다, / 그래서 나는 안에 갇혔습니다.",
-        "EN: I was totally surprised, / so I called / one of the staff.",
-        "KR: 나는 완전히 놀랐습니다, / 그래서 나는 불렀습니다 / 직원들 중 한 명을.",
-        "EN: A few minutes later, / someone came / and opened the door for me.",
-        "KR: 몇 분 후에, / 누군가 왔습니다 / 그리고 문을 열어주었습니다 나를 위해.",
-        "EN: Honestly, / I was so relieved, / but it was really strange.",
-        "KR: 솔직히, / 나는 정말 안도했습니다, / 하지만 그것은 정말 이상했습니다.",
-        "EN: Anyway, / I'll never forget / getting stuck in that bathroom.",
-        "KR: 어쨌든, / 나는 절대 잊지 못할 것입니다 / 그 화장실에 갇혔던 것을.",
+        "EN: Well... / my most memorable experience at a hair salon / was when I got stuck in the bathroom.",
+        "KR: 음... / 미용실에서 나의 가장 기억에 남는 경험은 / 내가 화장실에 갇혔을 때였습니다.",
+        "EN: I called the staff / and told them / that the door handle suddenly broke.",
+        "KR: 나는 직원을 불렀습니다 / 그리고 그들에게 말했습니다 / 문 손잡이가 갑자기 고장났다고.",
+        "EN: I was totally surprised, / so I thought about it for a moment / and asked the staff for help.",
+        "KR: 나는 완전히 놀랐습니다, / 그래서 나는 그것에 대해 잠시 생각했습니다 / 그리고 직원에게 도움을 요청했습니다.",
+        "EN: About 30 minutes later, / someone came / and opened the door.",
+        "KR: 약 30분 후에, / 누군가 왔습니다 / 그리고 문을 열었습니다.",
+        "EN: Luckily, / I was able to get out, / so I was really relieved.",
+        "KR: 다행히, / 나는 나올 수 있었습니다, / 그래서 나는 정말 안도했습니다.",
+        "EN: Anyway, / I'll never forget that experience / because it was so strange.",
+        "KR: 어쨌든, / 나는 그 경험을 절대 잊지 못할 것입니다 / 왜냐하면 그것은 정말 이상했기 때문입니다.",
       ],
       "themes/music/describe/q1/script.txt": [
         "좋아하는 음악/가수 묘사",
@@ -2239,6 +2441,100 @@
       ],
     };
 
+    const fallbackSummaries = {
+      "themes/vacation-at-home/describe/q1/summary.txt": [
+        "집에서 휴가 보낼 때 뭐하는지 묘사",
+        "아내와 집에서 휴가",
+        "늦잠 → 늦은 아침",
+        "낮에는 영화 또는 거실 휴식",
+        "배고프면 배달 음식",
+        "특별한 건 안 해도 즐거움",
+        "집이 쉬고 재충전하기 최고",
+      ],
+      "themes/vacation-at-home/regular/q1/summary.txt": [
+        "넌 왜 집에서 보내는 휴가가 좋아? 설명해봐",
+        "휴가 때 집에 있는 걸 선호",
+        "일 때문에 평소 피곤함",
+        "늦잠 + 영화 + 소파 휴식",
+        "돈을 많이 안 써도 됨",
+        "아무것도 안 하면 재충전됨",
+        "그래서 집 휴가를 정말 즐김",
+      ],
+      "themes/vacation-at-home/compare/q1/summary.txt": [
+        "휴가를 보내는 방식이 어떤점에서 달라졌어? 어떻게 바뀌었는지 이야기해줘",
+        "휴가 방식이 많이 변함",
+        "어릴 때는 국내 여행",
+        "요즘은 해외여행 많음",
+        "스마트폰으로 항공권/호텔 예약",
+        "구글맵으로 갈 곳 찾기",
+        "기술 덕분에 여행이 훨씬 쉬워짐",
+      ],
+      "themes/vacation-at-home/importance/q1/summary.txt": [
+        "휴가가 개인의 성장과 개인의 건강 측면에서 어떤 이점과 중요성이 있는지?",
+        "모두 가끔 휴가 필요",
+        "쉬고 에너지 재충전",
+        "가족/친구와 시간",
+        "여행하면 새로운 경험",
+        "휴가는 삶에서 정말 중요함",
+      ],
+      "themes/vacation-at-home/experience/q1/summary.txt": [
+        "최근 기억에 남는 집에서의 휴가",
+        "가장 기억나는 집 경험 → 아내가 방에 갇힘",
+        "카톡 사진 → 문손잡이 고장",
+        "깜짝 놀람 → 관리사무소 연락",
+        "30분 후 → 직원이 문 열어줌",
+        "아내 나옴 → 안도",
+        "너무 이상해서 잊을 수 없음",
+      ],
+      "themes/vacation-at-home/experience/q2/summary.txt": [
+        "최근에 집에서 보낸 휴가",
+        "최근 아내와 집 휴가",
+        "늦잠 → 함께 아침",
+        "점심은 배달 음식",
+        "집 근처 스타벅스 → 커피",
+        "저녁에는 근처 공원 산책",
+        "특별한 건 없어도 집 휴가가 좋았음",
+      ],
+      "themes/beach/describe/q1/summary.txt": [
+        "좋아하는 해변 묘사",
+        "광양 최애 해변",
+        "작고 조용하고 평화로움",
+        "강아지와 산책",
+        "작은 섬 연결 다리",
+        "다리 위 시원한 바람",
+        "저녁의 예쁜 노을",
+        "평화롭고 아름다워서 좋음",
+      ],
+      "themes/beach/regular/q1/summary.txt": [
+        "해변 루틴",
+        "아내와 해변 → 항상 사진",
+        "도착 → 좋은 사진 장소 찾기",
+        "아내가 바로 사진 확인",
+        "마음에 안 들면 다시 찍기",
+        "그다음 커피 → 바다 보며 휴식",
+        "별거 안 해도 함께 쉬는 게 좋음",
+      ],
+      "themes/beach/experience/q1/summary.txt": [
+        "최근 해변 경험",
+        "최근 광양 최애 해변 방문",
+        "아내 가족과 함께",
+        "작고 조용하고 평화로움",
+        "강아지와 산책하는 사람들",
+        "작은 섬 연결 다리",
+        "다리 위 시원한 바람",
+        "저녁의 아름다운 노을",
+      ],
+      "themes/beach/experience/q2/summary.txt": [
+        "해변에서 기억나는 경험",
+        "가장 기억에 남는 호주 해변",
+        "수영 중 → 남자가 “Help!” 외침",
+        "놀라서 튜브 잡고 다가감",
+        "가까이 가보니 구조 훈련",
+        "수영 못해서 정말 안도함",
+        "절대 못 잊을 경험",
+      ],
+    };
+
     const state = {
       themeIndex: 0,
       viewMode: "both",
@@ -2256,6 +2552,8 @@
     const repeatTheme = document.getElementById("repeatTheme");
     const themePlayerStatus = document.getElementById("themePlayerStatus");
     const scriptCache = new Map();
+    const summaryCache = new Map();
+    const missingSummaryFiles = new Set();
 
     function escapeHtml(value) {
       return value
@@ -2268,6 +2566,10 @@
 
     function formatLine(line) {
       return escapeHtml(line).replaceAll("/", '<span class="chunk">/</span>');
+    }
+
+    function cacheBustedPath(path) {
+      return `${path}${path.includes("?") ? "&" : "?"}v=${Date.now()}`;
     }
 
     function parseScriptLines(lines) {
@@ -2292,6 +2594,10 @@
       return pairs;
     }
 
+    function getSummaryFile(question) {
+      return question.summaryFile || question.scriptFile.replace(/script\.txt$/, "summary.txt");
+    }
+
     function renderScriptLines(article, lines) {
       const list = article.querySelector(".script");
       list.innerHTML = parseScriptLines(lines).map((line) => `
@@ -2302,24 +2608,90 @@
       `).join("");
     }
 
+    function renderSummaryLines(article, lines) {
+      const list = article.querySelector(".script");
+      const summaryLines = lines.slice(1).filter(Boolean);
+
+      if (!summaryLines.length) {
+        list.innerHTML = '<li class="error">요약이 없습니다.</li>';
+        return;
+      }
+
+      list.innerHTML = summaryLines.map((line) => `
+        <li>
+          <p class="summary-line">${formatLine(line)}</p>
+        </li>
+      `).join("");
+    }
+
+    function renderMissingSummary(article) {
+      const list = article.querySelector(".script");
+      list.innerHTML = '<li class="error">이 문항에는 아직 요약이 없습니다.</li>';
+    }
+
+    function renderQuestionContent(question, article) {
+      if (state.viewMode === "summary") {
+        const summaryFile = getSummaryFile(question);
+
+        if (summaryCache.has(summaryFile)) {
+          renderSummaryLines(article, summaryCache.get(summaryFile));
+          return;
+        }
+
+        if (missingSummaryFiles.has(summaryFile)) {
+          renderMissingSummary(article);
+          return;
+        }
+
+        loadSummary(question, article);
+        return;
+      }
+
+      const lines = scriptCache.get(question.scriptFile);
+      if (lines) renderScriptLines(article, lines);
+    }
+
     async function loadScript(question, article) {
       try {
-        const response = await fetch(question.scriptFile);
+        const response = await fetch(cacheBustedPath(question.scriptFile), { cache: "no-store" });
         if (!response.ok) throw new Error(question.scriptFile);
         const text = await response.text();
         const lines = text.split(/\r?\n/).filter(Boolean);
         scriptCache.set(question.scriptFile, lines);
-        renderScriptLines(article, lines);
+        renderQuestionContent(question, article);
       } catch {
         const fallback = fallbackScripts[question.scriptFile];
         if (fallback) {
           scriptCache.set(question.scriptFile, fallback);
-          renderScriptLines(article, fallback);
+          renderQuestionContent(question, article);
           return;
         }
 
         const list = article.querySelector(".script");
         list.innerHTML = `<li class="error">스크립트를 불러오지 못했습니다: ${escapeHtml(question.scriptFile)}</li>`;
+      }
+    }
+
+    async function loadSummary(question, article) {
+      const summaryFile = getSummaryFile(question);
+
+      try {
+        const response = await fetch(cacheBustedPath(summaryFile), { cache: "no-store" });
+        if (!response.ok) throw new Error(summaryFile);
+        const text = await response.text();
+        const lines = text.split(/\r?\n/).filter(Boolean);
+        summaryCache.set(summaryFile, lines);
+        if (state.viewMode === "summary") renderSummaryLines(article, lines);
+      } catch {
+        const fallback = fallbackSummaries[summaryFile];
+        if (fallback) {
+          summaryCache.set(summaryFile, fallback);
+          if (state.viewMode === "summary") renderSummaryLines(article, fallback);
+          return;
+        }
+
+        missingSummaryFiles.add(summaryFile);
+        if (state.viewMode === "summary") renderMissingSummary(article);
       }
     }
 
@@ -2360,7 +2732,7 @@
       const theme = getActiveTheme();
       const nextIndex = state.themeAudioIndex + 1;
 
-      if (nextIndex < theme.questions.length) {
+      if (theme.questions.slice(nextIndex).some((question) => question.audioFile)) {
         playThemeAudioAt(nextIndex);
         return;
       }
@@ -2391,11 +2763,12 @@
 
     function playThemeAudioAt(index) {
       const theme = getActiveTheme();
-      const question = theme.questions[index];
+      const questionIndex = theme.questions.findIndex((item, itemIndex) => itemIndex >= index && item.audioFile);
+      const question = theme.questions[questionIndex];
       if (!question) return;
 
       stopQuestionAudios();
-      state.themeAudioIndex = index;
+      state.themeAudioIndex = questionIndex;
       state.isThemePlaying = true;
       state.isThemePlayBlocked = false;
       themeAudio.src = question.audioFile;
@@ -2438,8 +2811,9 @@
     function renderViewModeNav() {
       const modes = [
         { id: "both", label: "한영" },
-        { id: "english", label: "영어" },
         { id: "korean", label: "한글" },
+        { id: "english", label: "영어" },
+        { id: "summary", label: "요약" },
       ];
 
       viewModeNav.innerHTML = [
@@ -2455,17 +2829,16 @@
         button.addEventListener("click", () => {
           state.viewMode = button.dataset.viewMode;
           renderViewModeNav();
-          renderCachedScripts();
+          renderCachedContent();
         });
       });
     }
 
-    function renderCachedScripts() {
+    function renderCachedContent() {
       const activeTheme = studyLibrary[state.themeIndex];
       activeTheme.questions.forEach((question, index) => {
         const article = document.getElementById(`q${index + 1}`);
-        const lines = scriptCache.get(question.scriptFile);
-        if (article && lines) renderScriptLines(article, lines);
+        if (article) renderQuestionContent(question, article);
       });
     }
 
@@ -2498,13 +2871,15 @@
               <h2>${escapeHtml(question.title)}</h2>
               <span class="tag">${escapeHtml(question.scriptFile)}</span>
             </div>
-            <div class="audio-row">
-              <audio class="question-audio" controls preload="metadata" src="${escapeHtml(question.audioFile)}"></audio>
-              <label class="toggle">
-                <input type="checkbox" class="repeat-question">
-                문항 반복
-              </label>
-            </div>
+            ${question.audioFile ? `
+              <div class="audio-row">
+                <audio class="question-audio" controls preload="metadata" src="${escapeHtml(question.audioFile)}"></audio>
+                <label class="toggle">
+                  <input type="checkbox" class="repeat-question">
+                  문항 반복
+                </label>
+              </div>
+            ` : ""}
             <ul class="script"></ul>
           </article>
         `)

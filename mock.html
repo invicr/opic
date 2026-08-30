@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OPIC Mock Test</title>
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --panel: #ffffff;
+      --text: #202124;
+      --muted: #646762;
+      --line: #ddded8;
+      --accent: #246b5f;
+      --accent-2: #b64d2f;
+      --chip: #eef3f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .wrap {
+      width: min(940px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top {
+      display: grid;
+      gap: 14px;
+      padding: 28px 0 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle,
+    .status,
+    .question-text {
+      color: var(--muted);
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .page-links,
+    .button-row,
+    .meta-row,
+    .theme-select-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-button,
+    button,
+    select {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 9px 12px;
+      font-size: 14px;
+    }
+
+    button {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    select {
+      min-width: min(100%, 240px);
+    }
+
+    .nav-button:hover,
+    button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    button.primary:hover {
+      color: #fff;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    main {
+      padding: 28px 0 48px;
+    }
+
+    .mock-panel {
+      display: grid;
+      gap: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--accent);
+      padding: 4px 10px;
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .phase {
+      display: grid;
+      gap: 12px;
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+    }
+
+    .phase-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .question-title {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .question-text {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .reveal-panel {
+      display: none;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfbf8;
+      padding: 12px;
+    }
+
+    .reveal-panel.visible {
+      display: grid;
+    }
+
+    .reveal-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .reveal-value {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    .timer {
+      display: grid;
+      place-items: center;
+      min-height: 220px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfbf8;
+    }
+
+    .time {
+      color: var(--accent);
+      font-size: clamp(64px, 18vw, 148px);
+      font-weight: 850;
+      line-height: 1;
+      letter-spacing: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .timer.warning .time {
+      color: var(--accent-2);
+    }
+
+    .answer-review {
+      display: none;
+      width: 100%;
+      gap: 14px;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: start;
+      padding: 18px;
+    }
+
+    .timer.show-answer {
+      place-items: stretch;
+    }
+
+    .timer.show-answer .timer-display {
+      display: none;
+    }
+
+    .timer.show-answer .answer-review {
+      display: grid;
+    }
+
+    .answer-column {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .answer-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .answer-heading {
+      margin: 0;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .answer-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .answer-list li {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    .answer-list p {
+      margin: 0;
+    }
+
+    .answer-list.english {
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 24px, 940px);
+      }
+
+      .mock-panel {
+        padding: 16px;
+      }
+
+      .question-title {
+        font-size: 22px;
+      }
+
+      .timer {
+        min-height: 190px;
+      }
+
+      .answer-review {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <h1>OPIC Mock Test</h1>
+      <p class="subtitle">랜덤 테마와 랜덤 문제를 듣고, 1분 30초 동안 실제 시험처럼 답변합니다.</p>
+      <div class="page-links" aria-label="Practice pages">
+        <a class="nav-button" href="index.html">스크립트 보기</a>
+        <a class="nav-button" href="quiz.html">영작 퀴즈</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="mock-panel" aria-label="Mock test">
+        <div class="meta-row">
+          <span class="tag" id="themeTag">Loading</span>
+          <span class="tag" id="questionTag">Question</span>
+          <span class="status" id="statusText">데이터를 불러오는 중</span>
+        </div>
+
+        <label class="theme-select-row">
+          <span class="phase-label">출제 테마</span>
+          <select id="themeSelect" disabled>
+            <option value="random">랜덤 테마</option>
+          </select>
+        </label>
+
+        <div class="phase">
+          <p class="phase-label">Question</p>
+          <h2 class="question-title" id="questionTitle">잠시만 기다려주세요.</h2>
+          <p class="question-text" id="questionText"></p>
+        </div>
+
+        <div class="button-row">
+          <button type="button" id="revealDetails" disabled>테마/문제 보기</button>
+        </div>
+
+        <div class="reveal-panel" id="themeReveal">
+          <p class="reveal-label">Theme</p>
+          <p class="reveal-value" id="themeRevealText"></p>
+        </div>
+
+        <div class="reveal-panel" id="questionReveal">
+          <p class="reveal-label">Question</p>
+          <p class="reveal-value" id="questionRevealText"></p>
+        </div>
+
+        <audio controls preload="auto" id="questionAudio"></audio>
+
+        <div class="timer" id="timerBox">
+          <div class="timer-display">
+            <div class="time" id="timeLeft">01:30</div>
+            <p class="timer-caption" id="timerCaption">문제를 두 번 들은 뒤 카운트다운이 시작됩니다.</p>
+          </div>
+          <div class="answer-review" id="answerReview">
+            <div class="answer-column">
+              <p class="answer-heading">요약</p>
+              <ul class="answer-list" id="summaryList"></ul>
+            </div>
+            <div class="answer-column">
+              <p class="answer-heading">영어 문장</p>
+              <ul class="answer-list english" id="englishList"></ul>
+            </div>
+            <div class="answer-actions">
+              <button type="button" id="playAnswerAudio" disabled>원래 영어문장 듣기</button>
+              <span class="status" id="answerAudioStatus"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="primary" type="button" id="startMock">시작</button>
+          <button type="button" id="replayQuestion" disabled>문제 다시 듣기</button>
+          <button type="button" id="showAnswer" disabled>답안 보기</button>
+          <button type="button" id="nextQuestion" disabled>답변 완료 / Next</button>
+          <button type="button" id="nextTheme" disabled>다음 테마</button>
+        </div>
+        <audio preload="auto" id="answerAudio"></audio>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const ANSWER_SECONDS = 90;
+    const SECOND_PLAY_DELAY_MS = 2000;
+
+    const state = {
+      library: [],
+      activeTheme: null,
+      activeQuestion: null,
+      selectedThemeId: "random",
+      questionText: "",
+      summaryLines: [],
+      englishLines: [],
+      usedQuestionKeys: new Set(),
+      playCount: 0,
+      countdownTimer: null,
+      secondPlayTimer: null,
+      secondsLeft: ANSWER_SECONDS,
+    };
+
+    const themeTag = document.getElementById("themeTag");
+    const questionTag = document.getElementById("questionTag");
+    const statusText = document.getElementById("statusText");
+    const questionTitle = document.getElementById("questionTitle");
+    const questionText = document.getElementById("questionText");
+    const themeSelect = document.getElementById("themeSelect");
+    const questionAudio = document.getElementById("questionAudio");
+    const answerAudio = document.getElementById("answerAudio");
+    const timerBox = document.getElementById("timerBox");
+    const timeLeft = document.getElementById("timeLeft");
+    const timerCaption = document.getElementById("timerCaption");
+    const summaryList = document.getElementById("summaryList");
+    const englishList = document.getElementById("englishList");
+    const playAnswerAudio = document.getElementById("playAnswerAudio");
+    const answerAudioStatus = document.getElementById("answerAudioStatus");
+    const startMock = document.getElementById("startMock");
+    const replayQuestion = document.getElementById("replayQuestion");
+    const showAnswer = document.getElementById("showAnswer");
+    const nextQuestion = document.getElementById("nextQuestion");
+    const nextTheme = document.getElementById("nextTheme");
+    const revealDetails = document.getElementById("revealDetails");
+    const themeReveal = document.getElementById("themeReveal");
+    const questionReveal = document.getElementById("questionReveal");
+    const themeRevealText = document.getElementById("themeRevealText");
+    const questionRevealText = document.getElementById("questionRevealText");
+
+    function shuffle(items) {
+      const result = [...items];
+      for (let index = result.length - 1; index > 0; index -= 1) {
+        const nextIndex = Math.floor(Math.random() * (index + 1));
+        [result[index], result[nextIndex]] = [result[nextIndex], result[index]];
+      }
+      return result;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function extractAssignedLiteral(source, name) {
+      const marker = `const ${name} = `;
+      const markerIndex = source.indexOf(marker);
+      if (markerIndex === -1) throw new Error(`${name} not found`);
+
+      let index = markerIndex + marker.length;
+      while (/\s/.test(source[index])) index += 1;
+
+      const opener = source[index];
+      const closer = opener === "[" ? "]" : "}";
+      let depth = 0;
+      let quote = "";
+      let escaped = false;
+
+      for (let cursor = index; cursor < source.length; cursor += 1) {
+        const char = source[cursor];
+
+        if (quote) {
+          if (escaped) escaped = false;
+          else if (char === "\\") escaped = true;
+          else if (char === quote) quote = "";
+          continue;
+        }
+
+        if (char === '"' || char === "'") {
+          quote = char;
+          continue;
+        }
+
+        if (char === opener) depth += 1;
+        if (char === closer) depth -= 1;
+
+        if (depth === 0) return source.slice(index, cursor + 1);
+      }
+
+      throw new Error(`${name} literal is incomplete`);
+    }
+
+    function cacheBustedPath(path) {
+      const separator = path.includes("?") ? "&" : "?";
+      return `${path}${separator}v=${Date.now()}`;
+    }
+
+    async function loadIndexData() {
+      const response = await fetch(cacheBustedPath("index.html"), { cache: "no-store" });
+      if (!response.ok) throw new Error("index.html");
+
+      const html = await response.text();
+      const librarySource = extractAssignedLiteral(html, "studyLibrary");
+      state.library = Function(`return (${librarySource});`)()
+        .map((theme) => ({
+          ...theme,
+          questions: theme.questions.filter((question) => question.questionAudioFile),
+        }))
+        .filter((theme) => theme.questions.length);
+    }
+
+    function getQuestionKey(theme, question) {
+      return `${theme.id}:${question.questionAudioFile}`;
+    }
+
+    function getCandidateThemes() {
+      if (state.selectedThemeId === "random") return state.library;
+      return state.library.filter((theme) => theme.id === state.selectedThemeId);
+    }
+
+    function getAvailableThemes() {
+      return getCandidateThemes().filter((theme) =>
+        theme.questions.some((question) => !state.usedQuestionKeys.has(getQuestionKey(theme, question)))
+      );
+    }
+
+    function canMoveToAnotherTheme() {
+      return state.selectedThemeId === "random" && state.library.length > 1;
+    }
+
+    function pickQuestion(options = {}) {
+      let availableThemes = getAvailableThemes();
+
+      if (!availableThemes.length) {
+        state.usedQuestionKeys.clear();
+        availableThemes = getAvailableThemes();
+      }
+
+      if (options.nextTheme && state.activeTheme && canMoveToAnotherTheme()) {
+        const otherThemes = availableThemes.filter((theme) => theme.id !== state.activeTheme.id);
+
+        if (otherThemes.length) {
+          availableThemes = otherThemes;
+        } else {
+          state.usedQuestionKeys = new Set(
+            [...state.usedQuestionKeys].filter((key) => key.startsWith(`${state.activeTheme.id}:`))
+          );
+          const resetOtherThemes = getAvailableThemes().filter((theme) => theme.id !== state.activeTheme.id);
+          if (resetOtherThemes.length) availableThemes = resetOtherThemes;
+        }
+      }
+
+      const theme = shuffle(availableThemes)[0];
+      const questions = theme.questions.filter((question) => !state.usedQuestionKeys.has(getQuestionKey(theme, question)));
+      const question = shuffle(questions)[0];
+
+      state.usedQuestionKeys.add(getQuestionKey(theme, question));
+      return { theme, question };
+    }
+
+    function renderThemeSelect() {
+      const options = [
+        '<option value="random">랜덤 테마</option>',
+        ...state.library.map((theme) => (
+          `<option value="${escapeHtml(theme.id)}">${escapeHtml(theme.title)}</option>`
+        )),
+      ];
+
+      themeSelect.innerHTML = options.join("");
+      themeSelect.value = state.selectedThemeId;
+      themeSelect.disabled = false;
+    }
+
+    async function loadQuestionText(question) {
+      if (!question.questionFile) return question.title;
+
+      try {
+        const response = await fetch(cacheBustedPath(question.questionFile), { cache: "no-store" });
+        if (!response.ok) throw new Error(question.questionFile);
+        return (await response.text()).trim();
+      } catch {
+        return question.title;
+      }
+    }
+
+    function getSummaryFile(question) {
+      return question.summaryFile || question.scriptFile.replace(/script\.txt$/, "summary.txt");
+    }
+
+    async function loadTextLines(file) {
+      const response = await fetch(cacheBustedPath(file), { cache: "no-store" });
+      if (!response.ok) throw new Error(file);
+      return (await response.text()).split(/\r?\n/).filter(Boolean);
+    }
+
+    async function loadSummaryLines(question) {
+      try {
+        const lines = await loadTextLines(getSummaryFile(question));
+        return lines.slice(1);
+      } catch {
+        return ["요약이 없습니다."];
+      }
+    }
+
+    async function loadEnglishLines(question) {
+      try {
+        const lines = await loadTextLines(question.scriptFile);
+        return lines
+          .filter((line) => line.startsWith("EN: "))
+          .map((line) => line.slice(4));
+      } catch {
+        return ["영어 답안을 불러오지 못했습니다."];
+      }
+    }
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const rest = seconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
+    }
+
+    function clearCountdown() {
+      if (state.countdownTimer) {
+        window.clearInterval(state.countdownTimer);
+        state.countdownTimer = null;
+      }
+    }
+
+    function clearSecondPlayTimer() {
+      if (state.secondPlayTimer) {
+        window.clearTimeout(state.secondPlayTimer);
+        state.secondPlayTimer = null;
+      }
+    }
+
+    function stopCurrentAudio() {
+      questionAudio.pause();
+      questionAudio.currentTime = 0;
+      answerAudio.pause();
+      answerAudio.currentTime = 0;
+    }
+
+    function hideReveals() {
+      themeReveal.classList.remove("visible");
+      questionReveal.classList.remove("visible");
+      const hasQuestion = Boolean(state.activeQuestion);
+      revealDetails.disabled = !hasQuestion;
+      revealDetails.textContent = "테마/문제 보기";
+    }
+
+    function setTimer(seconds) {
+      state.secondsLeft = seconds;
+      timerBox.classList.remove("show-answer");
+      timeLeft.textContent = formatTime(seconds);
+      timerBox.classList.toggle("warning", seconds <= 10);
+    }
+
+    function renderAnswerReview() {
+      summaryList.innerHTML = state.summaryLines
+        .map((line) => `<li><p>${escapeHtml(line)}</p></li>`)
+        .join("");
+      englishList.innerHTML = state.englishLines
+        .map((line) => `<li><p>${escapeHtml(line)}</p></li>`)
+        .join("");
+      playAnswerAudio.disabled = !state.activeQuestion?.audioFile;
+      answerAudioStatus.textContent = "";
+    }
+
+    function startCountdown() {
+      clearCountdown();
+      setTimer(ANSWER_SECONDS);
+      statusText.textContent = "답변 시간";
+      timerCaption.textContent = "답변이 끝나면 시간이 남아도 Next로 넘어가세요.";
+      nextQuestion.disabled = false;
+      showAnswer.disabled = false;
+      nextTheme.disabled = !canMoveToAnotherTheme();
+
+      state.countdownTimer = window.setInterval(() => {
+        setTimer(state.secondsLeft - 1);
+
+        if (state.secondsLeft <= 0) {
+          clearCountdown();
+          statusText.textContent = "시간 종료";
+          timerCaption.textContent = "Next를 눌러 다음 문제로 이동하세요.";
+          showAnswer.disabled = false;
+        }
+      }, 1000);
+    }
+
+    function playAudio() {
+      const result = questionAudio.play();
+      if (result && typeof result.catch === "function") {
+        result.catch(() => {
+          statusText.textContent = "자동 재생이 막혔습니다. 오디오 재생 버튼을 눌러주세요.";
+          replayQuestion.disabled = false;
+          nextQuestion.disabled = false;
+          showAnswer.disabled = false;
+          nextTheme.disabled = !canMoveToAnotherTheme();
+        });
+      }
+    }
+
+    function playQuestionTwice() {
+      clearCountdown();
+      clearSecondPlayTimer();
+      state.playCount = 1;
+      setTimer(ANSWER_SECONDS);
+      statusText.textContent = "문제 듣는 중 1/2";
+      timerCaption.textContent = "첫 번째 질문을 듣고 있습니다.";
+      nextQuestion.disabled = true;
+      replayQuestion.disabled = true;
+      showAnswer.disabled = true;
+      nextTheme.disabled = !canMoveToAnotherTheme();
+      questionAudio.currentTime = 0;
+      playAudio();
+    }
+
+    async function loadNextQuestion(options = { nextTheme: true }) {
+      clearCountdown();
+      clearSecondPlayTimer();
+      stopCurrentAudio();
+
+      const selected = pickQuestion(options);
+      state.activeTheme = selected.theme;
+      state.activeQuestion = selected.question;
+      [state.questionText, state.summaryLines, state.englishLines] = await Promise.all([
+        loadQuestionText(selected.question),
+        loadSummaryLines(selected.question),
+        loadEnglishLines(selected.question),
+      ]);
+      renderAnswerReview();
+
+      themeTag.textContent = "Theme Hidden";
+      questionTag.textContent = "Random Question";
+      questionTitle.textContent = "질문 음성을 듣고 답변하세요.";
+      questionText.textContent = "테마와 영어 문제는 필요할 때만 확인하세요.";
+      themeRevealText.textContent = selected.theme.title;
+      questionRevealText.textContent = state.questionText;
+      questionAudio.src = selected.question.questionAudioFile;
+      answerAudio.src = selected.question.audioFile ? cacheBustedPath(selected.question.audioFile) : "";
+      questionAudio.load();
+      answerAudio.load();
+      hideReveals();
+
+      playQuestionTwice();
+    }
+
+    questionAudio.addEventListener("ended", () => {
+      if (state.playCount === 1) {
+        statusText.textContent = "2초 후 다시 재생";
+        timerCaption.textContent = "두 번째 질문 재생을 준비합니다.";
+
+        state.secondPlayTimer = window.setTimeout(() => {
+          state.secondPlayTimer = null;
+          state.playCount = 2;
+          statusText.textContent = "문제 듣는 중 2/2";
+          timerCaption.textContent = "두 번째 질문을 듣고 있습니다.";
+          questionAudio.currentTime = 0;
+          playAudio();
+        }, SECOND_PLAY_DELAY_MS);
+        return;
+      }
+
+      if (state.playCount === 2) {
+        replayQuestion.disabled = false;
+        startCountdown();
+      }
+    });
+
+    startMock.addEventListener("click", () => {
+      startMock.textContent = "다시 시작";
+      loadNextQuestion();
+    });
+
+    themeSelect.addEventListener("change", () => {
+      state.selectedThemeId = themeSelect.value;
+      state.usedQuestionKeys.clear();
+
+      if (!state.activeQuestion) {
+        statusText.textContent = state.selectedThemeId === "random"
+          ? "시작을 누르면 랜덤 문제가 나옵니다."
+          : "시작을 누르면 선택한 테마에서 랜덤 문제가 나옵니다.";
+      }
+    });
+
+    replayQuestion.addEventListener("click", () => {
+      playQuestionTwice();
+    });
+
+    nextQuestion.addEventListener("click", () => {
+      loadNextQuestion({ nextTheme: true });
+    });
+
+    nextTheme.addEventListener("click", () => {
+      loadNextQuestion({ nextTheme: true });
+    });
+
+    showAnswer.addEventListener("click", () => {
+      clearCountdown();
+      stopCurrentAudio();
+      timerBox.classList.add("show-answer");
+      statusText.textContent = "답안 확인";
+      showAnswer.disabled = true;
+      nextQuestion.disabled = false;
+      nextTheme.disabled = !canMoveToAnotherTheme();
+      playAnswerAudio.disabled = !state.activeQuestion?.audioFile;
+    });
+
+    playAnswerAudio.addEventListener("click", () => {
+      if (!state.activeQuestion?.audioFile) return;
+
+      answerAudio.currentTime = 0;
+      answerAudioStatus.textContent = "재생 중";
+      const result = answerAudio.play();
+      if (result && typeof result.catch === "function") {
+        result.catch(() => {
+          answerAudioStatus.textContent = "재생 버튼을 다시 눌러주세요.";
+        });
+      }
+    });
+
+    answerAudio.addEventListener("ended", () => {
+      answerAudioStatus.textContent = "재생 완료";
+    });
+
+    revealDetails.addEventListener("click", () => {
+      themeReveal.classList.add("visible");
+      questionReveal.classList.add("visible");
+      themeTag.textContent = state.activeTheme ? state.activeTheme.title : "Theme";
+      revealDetails.textContent = "테마/문제 표시 중";
+      revealDetails.disabled = true;
+    });
+
+    setTimer(ANSWER_SECONDS);
+
+    loadIndexData()
+      .then(() => {
+        if (!state.library.length) {
+          themeTag.textContent = "No Data";
+          statusText.textContent = "questionAudioFile이 있는 문항이 없습니다.";
+          questionTitle.textContent = "문제 음성을 먼저 추가해주세요.";
+          return;
+        }
+
+        themeTag.textContent = "Ready";
+        questionTag.textContent = "Question";
+        statusText.textContent = "시작을 누르면 랜덤 문제가 나옵니다.";
+        questionTitle.textContent = "시작 버튼을 눌러주세요.";
+        questionText.textContent = "";
+        renderThemeSelect();
+        hideReveals();
+      })
+      .catch(() => {
+        themeTag.textContent = "Error";
+        statusText.textContent = "데이터를 불러오지 못했습니다.";
+        questionTitle.textContent = "로컬 서버나 배포된 페이지에서 다시 열어주세요.";
+      });
+  </script>
+</body>
+</html>

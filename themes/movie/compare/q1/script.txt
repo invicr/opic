@@ -3,8 +3,8 @@ EN: Well... / I think movies / have changed a lot.
 KR: 음... / 나는 생각합니다 영화들이 / 많이 변했다고.
 EN: When I was a kid, / computer graphics didn't look / very real.
 KR: 내가 아이였을 때, / 컴퓨터 그래픽은 보이지 않았습니다 / 아주 진짜처럼.
-EN: I mean, back then, you could tell it was fake.
-KR: 내 말은, 그때는, 당신은 알 수 있었습니다 그것이 가짜였다는 것을.
+EN: I mean, / back then, / it looked pretty fake.
+KR: 내 말은, / 그때는, / 그것은 꽤 가짜처럼 보였습니다.
 EN: But these days, / computer graphics / are much better than ever.
 KR: 하지만 요즘에는, / 컴퓨터 그래픽은 / 이전보다 훨씬 더 좋습니다.
 EN: For example, / when I first watched Iron Man, / the suit looked so real.

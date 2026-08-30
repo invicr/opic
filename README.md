@@ -6,6 +6,7 @@
 
 - `index.html`: 주제별 스크립트와 음성 학습 페이지
 - `quiz.html`: 랜덤 테마 영작 퀴즈 페이지
+- `mock.html`: 랜덤 테마 문제 음성을 듣고 답변 시간을 재는 모의고사 페이지
 - `script.txt`: 최근 추가한 질문과 답변 스크립트 원본
 - `themes/self-introduction/regular/q1/`: 자기소개
 - `themes/park/describe/q1/`: 공원 묘사
@@ -40,6 +41,7 @@
 - `themes/vacation-at-home/compare/q1/`: 휴가를 보내는 방식 변화
 - `themes/vacation-at-home/importance/q1/`: 휴가의 이점과 중요성
 - `themes/vacation-at-home/experience/q1/`: 최근 기억에 남는 집에서의 휴가
+- `themes/vacation-at-home/experience/q2/`: 최근에 집에서 보낸 휴가
 - `themes/travel/describe/q1/`: 국내 여행 어디 좋아해? 설명
 - `themes/travel/planning/q1/`: 여행 준비 단계 설명
 - `themes/travel/experience/q1/`: 어렸을 때 여행 경험
@@ -92,6 +94,8 @@
 
 각 문항 폴더는 `script.txt`와 `audio.wav`를 포함합니다.
 `script.txt`는 첫 줄에 질문 제목을 두고, 그 아래는 영어 문장과 영어 어순 한국어 해석을 `EN:` / `KR:`로 짝지어 작성합니다.
+스토리 암기용 요약이 필요하면 같은 문항 폴더에 `summary.txt`를 추가합니다. 첫 줄에는 질문 제목을 두고, 그 아래에 기억할 흐름을 한 줄씩 작성합니다.
+모의고사 질문 음성이 필요하면 같은 문항 폴더에 `question.txt`와 `question.wav`를 추가합니다.
 
 ```text
 질문 제목
@@ -108,6 +112,9 @@ themes/
   music/
     describe/q1/script.txt
     describe/q1/audio.wav
+    describe/q1/summary.txt
+    describe/q1/question.txt
+    describe/q1/question.wav
   travel/
     experience/q1/script.txt
     experience/q1/audio.wav
@@ -120,6 +127,16 @@ themes/
 - `테마 전체 듣기`: 현재 선택한 테마의 문항 오디오를 위에서 아래 순서대로 재생합니다.
 - `전체 반복`: 테마의 마지막 문항까지 재생한 뒤 다시 첫 문항부터 반복합니다.
 - `문항 반복`: 각 문항 카드에서 해당 오디오만 반복 재생합니다.
+
+## 로컬 실행
+
+루트 HTML 파일이 바뀔 때 서버를 자동 재기동하려면 아래 명령을 사용합니다.
+
+```bash
+python3 dev_server.py
+```
+
+기본 주소는 `http://127.0.0.1:8000/`입니다.
 
 ## Google AI Studio Prompt
 
