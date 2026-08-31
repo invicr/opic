@@ -532,11 +532,35 @@
       );
     }
 
+    function getUnusedQuestions(theme) {
+      return theme.questions.filter((question) => !state.usedQuestionKeys.has(getQuestionKey(theme, question)));
+    }
+
+    function clearThemeQuestionHistory(theme) {
+      state.usedQuestionKeys = new Set(
+        [...state.usedQuestionKeys].filter((key) => !key.startsWith(`${theme.id}:`))
+      );
+    }
+
     function canMoveToAnotherTheme() {
       return state.selectedThemeId === "random" && state.library.length > 1;
     }
 
     function pickQuestion(options = {}) {
+      if (options.sameTheme && state.activeTheme) {
+        const theme = state.activeTheme;
+        let questions = getUnusedQuestions(theme);
+
+        if (!questions.length) {
+          clearThemeQuestionHistory(theme);
+          questions = getUnusedQuestions(theme);
+        }
+
+        const question = shuffle(questions)[0];
+        state.usedQuestionKeys.add(getQuestionKey(theme, question));
+        return { theme, question };
+      }
+
       let availableThemes = getAvailableThemes();
 
       if (!availableThemes.length) {
@@ -559,7 +583,7 @@
       }
 
       const theme = shuffle(availableThemes)[0];
-      const questions = theme.questions.filter((question) => !state.usedQuestionKeys.has(getQuestionKey(theme, question)));
+      const questions = getUnusedQuestions(theme);
       const question = shuffle(questions)[0];
 
       state.usedQuestionKeys.add(getQuestionKey(theme, question));
@@ -796,7 +820,7 @@
     });
 
     nextQuestion.addEventListener("click", () => {
-      loadNextQuestion({ nextTheme: true });
+      loadNextQuestion({ sameTheme: true });
     });
 
     nextTheme.addEventListener("click", () => {
